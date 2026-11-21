@@ -1,0 +1,73 @@
+{
+  "security_framework": "Zero-Trust Agentic Guard (ZTAG)",
+  "version": "1.4.0",
+  "enforcement_mode": "STRICT_ACTIVE",
+  "secret_redaction": {
+    "enabled": true,
+    "patterns": [
+      {
+        "name": "Generic API Key / Token",
+        "regex": "(?i)(api[_-]?key|secret|token|password|auth|bearer)\\s*[:=]\\s*['\"][A-Za-z0-9_\\-\\.~+=]{8,}['\"]",
+        "replacement": "[REDACTED_SECRET]"
+      },
+      {
+        "name": "GitHub Personal Access Token",
+        "regex": "gh[pousr]_[A-Za-z0-9_]{36,255}",
+        "replacement": "[REDACTED_GH_TOKEN]"
+      },
+      {
+        "name": "AWS Access Key ID",
+        "regex": "(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}",
+        "replacement": "[REDACTED_AWS_KEY]"
+      },
+      {
+        "name": "Private Key Block",
+        "regex": "-----BEGIN [A-Z ]+PRIVATE KEY-----[\\s\\S]*?-----END [A-Z ]+PRIVATE KEY-----",
+        "replacement": "[REDACTED_PRIVATE_KEY]"
+      }
+    ]
+  },
+  "command_guardrails": {
+    "denied_patterns": [
+      "rm -rf /",
+      "format [A-Z]:",
+      "del /f /s /q C:\\Windows",
+      "powershell -encodedCommand",
+      ":(){ :|:& };:",
+      "curl .* | sh",
+      "chmod 777"
+    ],
+    "allowed_workspace_roots": [
+      "d:\\Talentechno"
+    ],
+    "network_egress_policy": "ALLOW_WHITELISTED_ONLY"
+  },
+  "role_based_access_control": {
+    "orchestrator_mind": {
+      "privilege_level": "ADMIN",
+      "allowed_mcp": ["*"],
+      "can_delegate": true
+    },
+    "frontend_agent": {
+      "privilege_level": "SPECIALIST",
+      "allowed_mcp": ["puppeteer", "filesystem_secure", "memory_knowledge_graph", "github"],
+      "restricted_paths": ["orchestrator/security_policy.json"]
+    },
+    "backend_agent": {
+      "privilege_level": "SPECIALIST",
+      "allowed_mcp": ["postgres", "docker", "filesystem_secure", "memory_knowledge_graph", "github"],
+      "restricted_paths": ["*.env", "secrets/*"]
+    },
+    "qa_agent": {
+      "privilege_level": "VALIDATOR",
+      "allowed_mcp": ["puppeteer", "sentry", "filesystem_secure", "memory_knowledge_graph"],
+      "write_allowed": false
+    },
+    "security_auditor": {
+      "privilege_level": "AUDITOR",
+      "allowed_mcp": ["security_guard_semgrep", "filesystem_secure", "memory_knowledge_graph"],
+      "veto_power": true
+    }
+  }
+}
+

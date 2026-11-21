@@ -1,0 +1,41 @@
+[
+  {
+    "id": "vid-1",
+    "title": "Scaling Enterprise AI & Cloud Teams at Speed",
+    "client_name": "Vinod K.",
+    "client_role": "Chief Technology Officer",
+    "company": "Fintech Solutions India",
+    "youtube_id": "M7lc1UVf-VE",
+    "youtube_url": "https://www.youtube.com/watch?v=M7lc1UVf-VE",
+    "thumbnail": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+    "quote": "Talentechno placed 8 staff cloud architects in record 3 weeks. Their post-placement support ensured 100% team retention.",
+    "rating": 5,
+    "created_at": "2026-11-15T10:00:00Z"
+  },
+  {
+    "id": "vid-2",
+    "title": "From Seed to Series A: Engineering Talent That Delivers",
+    "client_name": "Sandhya R.",
+    "client_role": "Co-Founder & VP Engineering",
+    "company": "Cognitive Scale AI",
+    "youtube_id": "ysz5S6PUM-U",
+    "youtube_url": "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+    "thumbnail": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    "quote": "Finding authentic senior full-stack talent was our biggest bottleneck until we partnered with Talentechno.",
+    "rating": 5,
+    "created_at": "2026-11-16T12:30:00Z"
+  },
+  {
+    "id": "vid-3",
+    "title": "Strategic HR Consulting & Org Design for Modern Tech",
+    "client_name": "Ramesh Varma",
+    "client_role": "Head of People & Operations",
+    "company": "CyberShield Networks",
+    "youtube_id": "L_LUpnjgPso",
+    "youtube_url": "https://www.youtube.com/watch?v=L_LUpnjgPso",
+    "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    "quote": "The collaborative interview loop and compensation benchmarks provided by Talentechno streamlined our entire tech department.",
+    "rating": 5,
+    "created_at": "2026-11-18T09:15:00Z"
+  }
+]

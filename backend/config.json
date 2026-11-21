@@ -1,0 +1,43 @@
+{
+  "server": {
+    "port": 5000,
+    "corsOrigins": ["*"]
+  },
+  "security": {
+    "adminSecretRoute": "/_tg_gate_7a92b",
+    "gateToken": "talen_sec_key_2026",
+    "honeypotMode": "tarpit_delay",
+    "decoyRoutes": [
+      "/admin",
+      "/admin/login",
+      "/administrator",
+      "/wp-admin",
+      "/wp-login.php",
+      "/login",
+      "/backend",
+      "/dashboard",
+      "/cpanel",
+      "/panel",
+      "/phpmyadmin",
+      "/api/admin"
+    ],
+    "tarpitDelayMs": 1500,
+    "maxLoginAttempts": 5,
+    "lockoutMinutes": 15
+  },
+  "auth": {
+    "adminEmail": "security.admin@talentechno.com",
+    "authMethod": "separate_mail_otp_or_password",
+    "tokenExpiryHours": 24
+  },
+  "database": {
+    "provider": "supabase",
+    "fallbackToLocal": true,
+    "localFilePath": "../data/submissions.json"
+  },
+  "storage": {
+    "provider": "cloudflare_r2",
+    "fallbackToLocal": true,
+    "localUploadPath": "../assets/uploads"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json.schemastore.org/mcp-config.json",
+  "version": "2.0.0",
+  "orchestration_mind": {
+    "name": "OmniStack-Orchestrator-Mind",
+    "description": "Full-Stack Enterprise Team MCP Suite with Zero-Trust Security & Dynamic Auto-Save",
+    "target_team": "Full Stack Engineering (Frontend, Backend, DevOps, QA, Security)"
+  },
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "category": "Version Control & Collaboration",
+      "capabilities": ["repo_management", "pull_requests", "issue_tracking", "branch_protection", "code_review"],
+      "security_profile": "medium-read-write"
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${DATABASE_URL}"],
+      "category": "Database & Persistence",
+      "capabilities": ["schema_inspection", "safe_queries", "migration_planning", "index_analysis"],
+      "security_profile": "high-restricted-dml"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "category": "Frontend & E2E Testing",
+      "capabilities": ["ui_automation", "visual_regression", "screenshot_capture", "console_log_monitoring", "performance_metrics"],
+      "security_profile": "sandboxed-browser"
+    },
+    "docker": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-v", "/var/run/docker.sock:/var/run/docker.sock", "mcp/docker"],
+      "category": "DevOps & Containerization",
+      "capabilities": ["container_lifecycle", "image_builds", "compose_orchestration", "health_checks", "log_tailing"],
+      "security_profile": "isolated-socket"
+    },
+    "memory_knowledge_graph": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "category": "Auto-Saving Working Mind",
+      "capabilities": ["entity_memory", "relation_graph", "working_context_sync", "cross_session_retrieval"],
+      "security_profile": "local-encrypted"
+    },
+    "filesystem_secure": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "d:\\Talentechno"],
+      "category": "Workspace & Storage",
+      "capabilities": ["directory_traversal", "safe_file_ops", "diff_generation", "checksum_verification"],
+      "security_profile": "jailed-workspace"
+    },
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sentry"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}"
+      },
+      "category": "Observability & Error Monitoring",
+      "capabilities": ["issue_triaging", "stacktrace_analysis", "release_tracking"],
+      "security_profile": "read-only-telemetry"
+    },
+    "security_guard_semgrep": {
+      "command": "python",
+      "args": ["-m", "semgrep", "lsp"],
+      "category": "Code Security & Vulnerability Analysis",
+      "capabilities": ["sast_scanning", "secret_leak_detection", "owasp_top_10_checks"],
+      "security_profile": "strict-auditor"
+    }
+  }
+}
+

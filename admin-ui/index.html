@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talentechno Command Core | Secure Admin Portal</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05070d;
+      --surface: rgba(11, 18, 33, 0.85);
+      --surface-card: rgba(16, 26, 48, 0.9);
+      --border: rgba(56, 189, 248, 0.18);
+      --border-glow: rgba(56, 189, 248, 0.5);
+      --cyan: #00f2fe;
+      --cyan-dim: #0396ff;
+      --purple: #9d4edd;
+      --purple-glow: #c77dff;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #f43f5e;
+      --gold: #D4AF37;
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(157, 78, 221, 0.06) 0%, transparent 40%),
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    }
+
+    header {
+      background: rgba(8, 12, 22, 0.9);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-group { display: flex; align-items: center; gap: 14px; }
+    .brand-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-family: 'Space Grotesk', sans-serif; font-size: 19px;
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+    }
+    .brand-title h1 { font-size: 18px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.5px; }
+    .brand-title p { font-size: 11px; color: var(--text-dim); }
+
+    .header-actions { display: flex; align-items: center; gap: 16px; }
+    .live-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--green);
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0% { transform: scale(0.9); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.7; } }
+
+    .btn {
+      padding: 9px 20px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; border: 1px solid transparent; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: linear-gradient(180deg, #FDF4D4 0%, #E8C86A 32%, #D4AF37 58%, #BA8514 84%, #8B6109 100%);
+      color: #05070d;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 
+        0 8px 20px -3px rgba(212, 175, 55, 0.45),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
+        inset 0 -1.5px 2px rgba(139, 97, 9, 0.4);
+    }
+    .btn-primary:hover {
+      box-shadow: 
+        0 12px 28px -3px rgba(212, 175, 55, 0.65),
+        inset 0 1.5px 1px rgba(255, 255, 255, 1);
+      transform: translateY(-2px) scale(1.02);
+    }
+    .btn-outline { background: rgba(255, 255, 255, 0.04); border-color: var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.08); }
+    .btn-danger { background: rgba(244, 63, 94, 0.15); border-color: rgba(244, 63, 94, 0.4); color: var(--red); }
+    .btn-danger:hover { background: rgba(244, 63, 94, 0.3); }
+
+    .app-container { max-width: 1400px; width: 100%; margin: 0 auto; padding: 24px; flex: 1; display: flex; flex-direction: column; gap: 24px; }
+
+    .tabs-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; }
+    .tab-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .tab-btn {
+      padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--text-dim);
+      background: transparent; border: 1px solid transparent; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    }
+    .tab-btn.active { color: #fff; background: rgba(212, 175, 55, 0.15); border-color: var(--gold); box-shadow: 0 0 16px rgba(212, 175, 55, 0.2); }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px; backdrop-filter: blur(12px); }
+    .kpi-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); display: flex; justify-content: space-between; }
+    .kpi-value { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 800; color: #fff; }
+
+    .toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; }
+    .filter-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .filter-btn { padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-dim); cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active { background: var(--gold); color: #05070d; border-color: var(--gold); }
+    .search-input { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 8px 14px; color: #fff; font-size: 13px; outline: none; min-width: 260px; }
+    .search-input:focus { border-color: var(--gold); }
+
+    .table-container { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow-x: auto; backdrop-filter: blur(14px); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; min-width: 800px; }
+    th { background: rgba(255, 255, 255, 0.03); padding: 14px 18px; font-weight: 700; color: var(--text-dim); border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+    td { padding: 16px 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); color: var(--text); vertical-align: middle; }
+    tr:hover td { background: rgba(212, 175, 55, 0.04); }
+
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .badge-new { background: rgba(0, 242, 254, 0.15); color: var(--cyan); border: 1px solid rgba(0, 242, 254, 0.3); }
+    .badge-in_review { background: rgba(245, 158, 11, 0.15); color: var(--yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-contacted { background: rgba(168, 85, 247, 0.15); color: var(--purple-glow); border: 1px solid rgba(168, 85, 247, 0.3); }
+    .badge-converted { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-archived { background: rgba(100, 116, 139, 0.15); color: var(--text-muted); border: 1px solid rgba(100, 116, 139, 0.3); }
+
+    .modal-overlay { position: fixed; inset: 0; background: rgba(4, 7, 14, 0.85); backdrop-filter: blur(14px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-card { background: #090e1b; border: 1px solid var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2); border-radius: 20px; width: 100%; max-width: 650px; padding: 32px; position: relative; max-height: 90vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px; }
+    .modal-close { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+    .upload-zone { border: 2px dashed rgba(212, 175, 55, 0.3); background: rgba(212, 175, 55, 0.03); border-radius: 16px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s; }
+    .upload-zone:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.08); }
+    .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
+    .media-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.2s; }
+    .media-thumb { width: 100%; height: 140px; object-fit: cover; background: #020408; }
+    .media-meta { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+
+    #auth-screen { position: fixed; inset: 0; background: #05070d; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 60%); }
+    .login-box { width: 100%; max-width: 440px; background: rgba(12, 19, 36, 0.95); border: 1px solid var(--gold); border-radius: 24px; padding: 40px 32px; backdrop-filter: blur(20px); box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2); }
+  </style>
+</head>
+<body>
+
+  <!-- 1. SEPARATE ADMIN EMAIL AUTHENTICATION SCREEN -->
+  <div id="auth-screen">
+    <div class="login-box">
+      <div style="text-align: center; margin-bottom: 28px;">
+        <div class="brand-icon" style="margin: 0 auto 16px; width: 48px; height: 48px; font-size: 24px;">T</div>
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 22px;">Command Core</h2>
+        <p style="font-size: 13px; color: var(--text-dim); margin-top: 4px;">Separate Admin Email Authentication</p>
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 4px; border-radius: 8px;">
+        <button id="btn-mode-otp" class="btn" style="flex: 1; justify-content: center; background: rgba(212, 175, 55, 0.15); color: var(--gold);" onclick="switchAuthMode('otp')">Security OTP</button>
+        <button id="btn-mode-pass" class="btn" style="flex: 1; justify-content: center; background: transparent; color: var(--text-dim);" onclick="switchAuthMode('password')">Passphrase</button>
+      </div>
+
+      <div id="otp-mode-form">
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Separate Admin Email</label>
+          <input type="email" id="login-email-otp" class="search-input" style="width: 100%;" value="security.admin@talentechno.com">
+        </div>
+        <button id="btn-request-code" class="btn btn-primary" style="width: 100%; justify-content: center; margin-bottom: 16px;" onclick="requestAdminOTP()">
+          Dispatch Verification Code
+        </button>
+        <div id="otp-input-group" style="display: none; margin-bottom: 16px;">
+          <label style="display: block; font-size: 12px; color: var(--gold); margin-bottom: 6px;">Enter 6-Digit Passcode</label>
+          <input type="text" id="login-otp-code" class="search-input" style="width: 100%; font-size: 20px; letter-spacing: 6px; text-align: center;" placeholder="000000" maxlength="6">
+          <div id="dev-otp-preview" style="font-size: 12px; color: var(--green); margin-top: 6px;"></div>
+          <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 14px;" onclick="verifyAdminOTP()">
+            Authenticate Session
+          </button>
+        </div>
+      </div>
+
+      <div id="pass-mode-form" style="display: none;">
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Admin Email</label>
+          <input type="email" id="login-email-pass" class="search-input" style="width: 100%;" value="security.admin@talentechno.com">
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Master Passphrase</label>
+          <input type="password" id="login-password-input" class="search-input" style="width: 100%;" value="TalentechnoSecure2026!">
+        </div>
+        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="loginWithPassword()">
+          Unlock Admin Portal
+        </button>
+      </div>
+
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 11px; color: var(--text-muted); text-align: center;">
+        🛡️ Anti-Gobuster Protection Active &bull; Decoy Honeypots Engaged
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. TOP COMMAND HEADER -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-icon">T</div>
+      <div class="brand-title">
+        <h1>Talentechno Command Core</h1>
+        <p>Supabase Database &bull; Cloudflare R2 Media &bull; YouTube Video Engine &bull; Realtime Stream</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="live-badge">
+        <div class="pulse-dot"></div>
+        <span id="realtime-status-text">LIVE REALTIME SYNC (SSE)</span>
+      </div>
+      <a href="/" target="_blank" class="btn btn-outline">
+        <span>🌐 View Live Site</span>
+      </a>
+      <button class="btn btn-danger" onclick="logoutAdmin()">
+        <span>Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3. MAIN DASHBOARD CONTENT -->
+  <main class="app-container">
+
+    <!-- KPI Metric Cards -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>Total Inquiries</span>
+          <span>📁</span>
+        </div>
+        <div class="kpi-value" id="kpi-total">0</div>
+        <div style="font-size: 12px; color: var(--text-dim);" id="kpi-db-status">Loading DB...</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>New / Unhandled</span>
+          <span style="color: var(--cyan);">●</span>
+        </div>
+        <div class="kpi-value" style="color: var(--cyan);" id="kpi-new">0</div>
+        <div style="font-size: 12px; color: var(--text-dim);">Requires recruiter action</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>Video Reviews</span>
+          <span style="color: var(--gold);">▶</span>
+        </div>
+        <div class="kpi-value" style="color: var(--gold);" id="kpi-videos">3</div>
+        <div style="font-size: 12px; color: var(--text-dim);">Live YouTube client stories</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">
+          <span>Scanners Blocked</span>
+          <span style="color: var(--yellow);">🛡️</span>
+        </div>
+        <div class="kpi-value" style="color: var(--yellow);" id="kpi-scanners">0</div>
+        <div style="font-size: 12px; color: var(--text-dim);">Gobusters & probes tarpitted</div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-bar">
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchMainTab('submissions')">
+          <span>📩 Contact Forms & Leads</span>
+          <span class="badge badge-new" id="tab-unread-badge">0</span>
+        </button>
+        <button class="tab-btn" onclick="switchMainTab('videos')">
+          <span>🎬 YouTube Video Reviews (CRUD)</span>
+        </button>
+        <button class="tab-btn" onclick="switchMainTab('r2-media')">
+          <span>☁️ Cloudflare R2 Media Vault</span>
+        </button>
+        <button class="tab-btn" onclick="switchMainTab('security')">
+          <span>🛡️ Anti-Gobuster Radar</span>
+        </button>
+      </div>
+
+      <div>
+        <button class="btn btn-outline" onclick="exportSubmissionsCSV()">Export Leads CSV</button>
+      </div>
+    </div>
+
+    <!-- TAB 1: SUBMISSIONS MANAGEMENT (CRUD) -->
+    <section id="tab-submissions" style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="toolbar">
+        <div class="filter-group">
+          <button class="filter-btn active" onclick="applyStatusFilter('all', this)">All</button>
+          <button class="filter-btn" onclick="applyStatusFilter('new', this)">New</button>
+          <button class="filter-btn" onclick="applyStatusFilter('contacted', this)">Contacted</button>
+          <button class="filter-btn" onclick="applyStatusFilter('in_review', this)">In Review</button>
+          <button class="filter-btn" onclick="applyStatusFilter('converted', this)">Converted</button>
+          <button class="filter-btn" onclick="applyStatusFilter('archived', this)">Archived</button>
+        </div>
+        <div>
+          <input type="text" id="search-input" class="search-input" placeholder="Search by name, email, role, phone..." oninput="handleSearch(this.value)">
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Date / Time</th>
+              <th>Inquirer</th>
+              <th>Contact Details</th>
+              <th>Service & Target Role</th>
+              <th>Status</th>
+              <th>Recruiter</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="submissions-tbody">
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-dim);">Connecting to database...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 2: YOUTUBE VIDEO REVIEWS (CRUD) -->
+    <section id="tab-videos" style="display: none; flex-direction: column; gap: 20px;">
+      <div class="glossy-card" style="padding: 24px; background: var(--surface);">
+        <h3 style="font-size: 16px; margin-bottom: 14px; color: var(--gold);">+ Add New YouTube Review Video</h3>
+        <form id="add-video-form" onsubmit="handleCreateVideo(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) 1fr auto; gap: 12px; align-items: flex-end;">
+          <div>
+            <label style="display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Video Title</label>
+            <input type="text" id="v-title" class="search-input" style="width: 100%;" placeholder="e.g. Scaling AI Teams" required>
+          </div>
+          <div>
+            <label style="display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Client Name & Role</label>
+            <input type="text" id="v-client" class="search-input" style="width: 100%;" placeholder="e.g. Vinod (CTO)" required>
+          </div>
+          <div>
+            <label style="display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Company Name</label>
+            <input type="text" id="v-company" class="search-input" style="width: 100%;" placeholder="e.g. Fintech Solutions">
+          </div>
+          <div>
+            <label style="display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">YouTube URL or Video ID</label>
+            <input type="text" id="v-url" class="search-input" style="width: 100%;" placeholder="https://youtube.com/watch?v=..." required>
+          </div>
+          <div>
+            <label style="display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">Review Quote</label>
+            <input type="text" id="v-quote" class="search-input" style="width: 100%;" placeholder="Short impactful quote">
+          </div>
+          <button type="submit" class="btn btn-primary" style="padding: 10px 18px;">Publish Video</button>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Thumbnail</th>
+              <th>Video Title</th>
+              <th>Client / Executive</th>
+              <th>Company</th>
+              <th>YouTube Link</th>
+              <th style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="videos-tbody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 3: CLOUDFLARE R2 MEDIA VAULT (CRUD) -->
+    <section id="tab-r2-media" style="display: none; flex-direction: column; gap: 20px;">
+      <div class="upload-zone" onclick="document.getElementById('r2-file-input').click()">
+        <input type="file" id="r2-file-input" style="display: none;" accept="image/*" onchange="uploadR2Image(this.files[0])">
+        <div style="font-size: 36px; margin-bottom: 8px;">☁️</div>
+        <h3 style="font-size: 16px; margin-bottom: 4px;">Upload Image to Cloudflare R2 Storage</h3>
+        <p style="font-size: 13px; color: var(--text-dim);">Drag & drop or click to upload PNG, JPG, WEBP, SVG, or AVIF (Up to 15MB)</p>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 16px; font-family: 'Space Grotesk', sans-serif;">R2 Asset Library</h3>
+        <button class="btn btn-outline" onclick="loadR2Images()">Refresh Gallery</button>
+      </div>
+
+      <div class="media-grid" id="r2-media-gallery">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- TAB 4: ANTI-GOBUSTER & SECURITY RADAR -->
+    <section id="tab-security" style="display: none; flex-direction: column; gap: 16px;">
+      <div class="toolbar" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.2);">
+        <div>
+          <h4 style="color: var(--yellow); font-size: 15px; margin-bottom: 4px;">🛡️ Active Scanner Shield (Anti-Gobuster Architecture)</h4>
+          <p style="font-size: 12px; color: var(--text-dim);">
+            Automated tools (Gobuster, ffuf, Feroxbuster) probing standard routes (<code>/admin</code>, <code>/wp-admin</code>, <code>/login</code>) receive artificial 1.5s tarpit delays and decoy 404 responses.
+          </p>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Probed Target Path</th>
+              <th>Client IP</th>
+              <th>User Agent</th>
+              <th>Defense Action</th>
+            </tr>
+          </thead>
+          <tbody id="security-probes-tbody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- DETAIL MODAL FOR SUBMISSIONS -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-new" id="modal-status-badge">New</span>
+          <h2 style="font-size: 20px; font-family: 'Space Grotesk', sans-serif; margin-top: 8px;" id="modal-title-name">Candidate Name</h2>
+          <p style="font-size: 12px; color: var(--text-dim);" id="modal-timestamp">Timestamp</p>
+        </div>
+        <button class="modal-close" onclick="closeDetailModal()">&times;</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: rgba(255,255,255,0.02); padding: 14px; border-radius: 10px;">
+          <div>
+            <div style="font-size: 11px; color: var(--text-muted);">Email</div>
+            <div style="font-weight: 600;" id="modal-email">-</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: var(--text-muted);">Phone Number</div>
+            <div style="font-weight: 600;" id="modal-phone">-</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: var(--text-muted);">Target Role / Stack</div>
+            <div style="font-weight: 600; color: var(--cyan);" id="modal-role">-</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; color: var(--text-muted);">Hiring Service</div>
+            <div style="font-weight: 600;" id="modal-service">-</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 6px;">Client / Candidate Inquiry Message:</div>
+          <div style="background: rgba(255,255,255,0.04); padding: 14px; border-radius: 8px; font-size: 14px; line-height: 1.6;" id="modal-message">
+            Message
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 4px;">Update Status</label>
+            <select id="modal-edit-status" class="search-input" style="width: 100%; background: #0c1424;">
+              <option value="new">New Inquiry</option>
+              <option value="in_review">In Review</option>
+              <option value="contacted">Contacted</option>
+              <option value="converted">Converted Client</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 4px;">Assigned Recruiter</label>
+            <input type="text" id="modal-edit-recruiter" class="search-input" style="width: 100%;" placeholder="e.g. Lead Tech Recruiter">
+          </div>
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 4px;">Internal Recruiter Notes</label>
+          <textarea id="modal-edit-notes" class="search-input" style="width: 100%; height: 80px;" placeholder="Add private feedback, salary ranges, interview dates..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+          <button class="btn btn-danger" onclick="deleteCurrentSubmission()">Delete Inquiry</button>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline" onclick="closeDetailModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveSubmissionUpdates()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APPLICATION CORE -->
+  <script>
+    let authToken = localStorage.getItem('tg_admin_token') || '';
+    let currentSubmissions = [];
+    let currentVideos = [];
+    let activeFilter = 'all';
+    let currentEditId = null;
+    let sseEventSource = null;
+
+    function playChime() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+        osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch (e) {}
+    }
+
+    function switchAuthMode(mode) {
+      if (mode === 'otp') {
+        document.getElementById('otp-mode-form').style.display = 'block';
+        document.getElementById('pass-mode-form').style.display = 'none';
+        document.getElementById('btn-mode-otp').style.background = 'rgba(212, 175, 55, 0.15)';
+        document.getElementById('btn-mode-otp').style.color = 'var(--gold)';
+        document.getElementById('btn-mode-pass').style.background = 'transparent';
+        document.getElementById('btn-mode-pass').style.color = 'var(--text-dim)';
+      } else {
+        document.getElementById('otp-mode-form').style.display = 'none';
+        document.getElementById('pass-mode-form').style.display = 'block';
+        document.getElementById('btn-mode-pass').style.background = 'rgba(212, 175, 55, 0.15)';
+        document.getElementById('btn-mode-pass').style.color = 'var(--gold)';
+        document.getElementById('btn-mode-otp').style.background = 'transparent';
+        document.getElementById('btn-mode-otp').style.color = 'var(--text-dim)';
+      }
+    }
+
+    async function requestAdminOTP() {
+      const email = document.getElementById('login-email-otp').value.trim();
+      const btn = document.getElementById('btn-request-code');
+      btn.disabled = true;
+      btn.innerText = 'Generating Passcode...';
+
+      try {
+        const res = await fetch('/api/auth/request-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('otp-input-group').style.display = 'block';
+          btn.style.display = 'none';
+          if (data.devPasscodePreview) {
+            document.getElementById('dev-otp-preview').innerText = `🔐 Passcode preview: ${data.devPasscodePreview}`;
+            document.getElementById('login-otp-code').value = data.devPasscodePreview;
+          }
+        } else {
+          alert(data.message || 'Error requesting security code.');
+          btn.disabled = false;
+          btn.innerText = 'Dispatch Verification Code';
+        }
+      } catch (err) {
+        alert('Failed to connect to backend server.');
+        btn.disabled = false;
+        btn.innerText = 'Dispatch Verification Code';
+      }
+    }
+
+    async function verifyAdminOTP() {
+      const email = document.getElementById('login-email-otp').value.trim();
+      const code = document.getElementById('login-otp-code').value.trim();
+      const res = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, code })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setLoggedIn(data.token);
+      } else {
+        alert(data.message || 'Passcode invalid.');
+      }
+    }
+
+    async function loginWithPassword() {
+      const email = document.getElementById('login-email-pass').value.trim();
+      const password = document.getElementById('login-password-input').value;
+      const res = await fetch('/api/auth/login-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setLoggedIn(data.token);
+      } else {
+        alert(data.message || 'Authentication rejected.');
+      }
+    }
+
+    function setLoggedIn(token) {
+      authToken = token;
+      localStorage.setItem('tg_admin_token', token);
+      document.getElementById('auth-screen').style.display = 'none';
+      initAdminPanel();
+    }
+
+    function logoutAdmin() {
+      fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      localStorage.removeItem('tg_admin_token');
+      authToken = '';
+      if (sseEventSource) sseEventSource.close();
+      document.getElementById('auth-screen').style.display = 'flex';
+    }
+
+    async function checkExistingSession() {
+      if (!authToken) {
+        document.getElementById('auth-screen').style.display = 'flex';
+        return;
+      }
+      try {
+        const res = await fetch('/api/auth/me', {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await res.json();
+        if (data.authenticated) {
+          document.getElementById('auth-screen').style.display = 'none';
+          initAdminPanel();
+        } else {
+          document.getElementById('auth-screen').style.display = 'flex';
+        }
+      } catch (err) {
+        document.getElementById('auth-screen').style.display = 'flex';
+      }
+    }
+
+    function initAdminPanel() {
+      loadStats();
+      loadSubmissions();
+      loadVideos();
+      connectRealtimeStream();
+      loadR2Images();
+      loadSecurityProbes();
+    }
+
+    function connectRealtimeStream() {
+      if (sseEventSource) sseEventSource.close();
+      sseEventSource = new EventSource(`/api/realtime/stream?token=${encodeURIComponent(authToken)}`);
+      sseEventSource.onmessage = (event) => {
+        try {
+          const payload = JSON.parse(event.data);
+          if (payload.type === 'NEW_SUBMISSION') {
+            playChime();
+            currentSubmissions.unshift(payload.payload);
+            renderSubmissionsTable(currentSubmissions, payload.payload.id);
+            loadStats();
+          } else if (payload.type === 'UPDATE_SUBMISSION') {
+            const idx = currentSubmissions.findIndex(i => i.id === payload.payload.id);
+            if (idx !== -1) { currentSubmissions[idx] = payload.payload; renderSubmissionsTable(currentSubmissions); }
+            loadStats();
+          } else if (payload.type === 'DELETE_SUBMISSION') {
+            currentSubmissions = currentSubmissions.filter(i => i.id !== payload.payload.id);
+            renderSubmissionsTable(currentSubmissions);
+            loadStats();
+          } else if (payload.type === 'NEW_VIDEO' || payload.type === 'UPDATE_VIDEO' || payload.type === 'DELETE_VIDEO') {
+            loadVideos();
+          } else if (payload.type === 'SCANNER_ALERT') {
+            loadSecurityProbes();
+          }
+        } catch (e) {}
+      };
+      sseEventSource.onerror = () => {
+        document.getElementById('realtime-status-text').innerText = 'RECONNECTING REALTIME...';
+      };
+      sseEventSource.onopen = () => {
+        document.getElementById('realtime-status-text').innerText = 'LIVE REALTIME SYNC (SSE)';
+      };
+    }
+
+    async function loadSubmissions() {
+      try {
+        const res = await fetch(`/api/admin/submissions?status=${activeFilter}`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await res.json();
+        if (data.success) {
+          currentSubmissions = data.items || [];
+          renderSubmissionsTable(currentSubmissions);
+        }
+      } catch (err) {}
+    }
+
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/admin/stats', {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await res.json();
+        if (data.success) {
+          const s = data.stats;
+          document.getElementById('kpi-total').innerText = s.total || 0;
+          document.getElementById('kpi-new').innerText = s.new || 0;
+          document.getElementById('tab-unread-badge').innerText = s.new || 0;
+          document.getElementById('kpi-db-status').innerText = `Storage: ${s.storageMode}`;
+        }
+      } catch (e) {}
+    }
+
+    function renderSubmissionsTable(items, highlightId = null) {
+      const tbody = document.getElementById('submissions-tbody');
+      if (!items || items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-dim);">No inquiries found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = items.map(item => {
+        const dateStr = new Date(item.created_at).toLocaleString('en-IN', {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+        const isHighlight = item.id === highlightId ? 'style="background: rgba(212, 175, 55, 0.2);"' : '';
+        const badgeClass = `badge-${item.status || 'new'}`;
+
+        return `
+          <tr ${isHighlight} style="cursor: pointer;" onclick="openDetailModal('${item.id}')">
+            <td style="color: var(--text-dim); font-size: 12px; white-space: nowrap;">${dateStr}</td>
+            <td>
+              <div style="font-weight: 700; color: #fff;">${escapeHtml(item.first_name)} ${escapeHtml(item.last_name || '')}</div>
+              <div style="font-size: 11px; color: var(--text-muted);">${item.source || 'Website'}</div>
+            </td>
+            <td>
+              <div><a href="mailto:${item.email}" style="color: var(--gold); text-decoration: none;" onclick="event.stopPropagation()">${escapeHtml(item.email)}</a></div>
+              <div style="font-size: 12px; color: var(--text-dim);">${escapeHtml(item.phone)}</div>
+            </td>
+            <td>
+              <div style="font-weight: 600; color: #fff;">${escapeHtml(item.target_role || 'General Inquiry')}</div>
+              <div style="font-size: 11px; color: var(--text-muted); text-transform: capitalize;">${escapeHtml(item.service || 'Recruitment')}</div>
+            </td>
+            <td>
+              <span class="badge ${badgeClass}">${item.status || 'new'}</span>
+            </td>
+            <td style="color: var(--text-dim); font-size: 12px;">
+              ${escapeHtml(item.assigned_recruiter || 'Unassigned')}
+            </td>
+            <td style="text-align: right;" onclick="event.stopPropagation()">
+              <button class="btn btn-outline" style="padding: 4px 10px; font-size: 11px;" onclick="openDetailModal('${item.id}')">View</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function applyStatusFilter(status, btn) {
+      activeFilter = status;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadSubmissions();
+    }
+
+    function handleSearch(query) {
+      if (!query.trim()) {
+        renderSubmissionsTable(currentSubmissions);
+        return;
+      }
+      const s = query.toLowerCase();
+      const filtered = currentSubmissions.filter(i => 
+        (i.first_name && i.first_name.toLowerCase().includes(s)) ||
+        (i.last_name && i.last_name.toLowerCase().includes(s)) ||
+        (i.email && i.email.toLowerCase().includes(s)) ||
+        (i.phone && i.phone.includes(s)) ||
+        (i.target_role && i.target_role.toLowerCase().includes(s))
+      );
+      renderSubmissionsTable(filtered);
+    }
+
+    function openDetailModal(id) {
+      const item = currentSubmissions.find(i => i.id === id);
+      if (!item) return;
+      currentEditId = id;
+      document.getElementById('modal-title-name').innerText = `${item.first_name} ${item.last_name || ''}`;
+      document.getElementById('modal-email').innerText = item.email;
+      document.getElementById('modal-phone').innerText = item.phone;
+      document.getElementById('modal-role').innerText = item.target_role || 'Not specified';
+      document.getElementById('modal-service').innerText = item.service || 'Recruitment';
+      document.getElementById('modal-message').innerText = item.message || 'No additional message provided.';
+      document.getElementById('modal-timestamp').innerText = `Submitted on ${new Date(item.created_at).toLocaleString()}`;
+      const badge = document.getElementById('modal-status-badge');
+      badge.className = `badge badge-${item.status || 'new'}`;
+      badge.innerText = item.status || 'new';
+      document.getElementById('modal-edit-status').value = item.status || 'new';
+      document.getElementById('modal-edit-recruiter').value = item.assigned_recruiter || '';
+      document.getElementById('modal-edit-notes').value = item.internal_notes || '';
+      document.getElementById('detail-modal').classList.add('active');
+    }
+
+    function closeDetailModal() {
+      document.getElementById('detail-modal').classList.remove('active');
+      currentEditId = null;
+    }
+
+    async function saveSubmissionUpdates() {
+      if (!currentEditId) return;
+      const updates = {
+        status: document.getElementById('modal-edit-status').value,
+        assigned_recruiter: document.getElementById('modal-edit-recruiter').value.trim(),
+        internal_notes: document.getElementById('modal-edit-notes').value.trim()
+      };
+      const res = await fetch(`/api/admin/submissions/${currentEditId}`, {
+        method: 'PATCH',
+        headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates)
+      });
+      const data = await res.json();
+      if (data.success) { closeDetailModal(); loadSubmissions(); }
+    }
+
+    async function deleteCurrentSubmission() {
+      if (!currentEditId) return;
+      if (!confirm('Are you sure you want to permanently delete this inquiry?')) return;
+      const res = await fetch(`/api/admin/submissions/${currentEditId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      const data = await res.json();
+      if (data.success) { closeDetailModal(); loadSubmissions(); }
+    }
+
+    // ==========================================
+    // YOUTUBE VIDEO REVIEWS CRUD
+    // ==========================================
+    async function loadVideos() {
+      try {
+        const res = await fetch('/api/videos');
+        const data = await res.json();
+        if (data.success) {
+          currentVideos = data.videos || [];
+          document.getElementById('kpi-videos').innerText = currentVideos.length;
+          renderVideosTable(currentVideos);
+        }
+      } catch (e) {}
+    }
+
+    function renderVideosTable(videos) {
+      const tbody = document.getElementById('videos-tbody');
+      if (!videos || videos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 30px; color: var(--text-dim);">No video reviews added yet. Add one above!</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = videos.map(v => `
+        <tr>
+          <td><img src="${v.thumbnail}" style="width: 80px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border);" onerror="this.src='https://placehold.co/80x50'"></td>
+          <td><div style="font-weight: 700;">${escapeHtml(v.title)}</div></td>
+          <td>${escapeHtml(v.client_name)} (${escapeHtml(v.client_role)})</td>
+          <td>${escapeHtml(v.company)}</td>
+          <td><a href="${v.youtube_url}" target="_blank" style="color: var(--gold); text-decoration: none;">Watch on YouTube ↗</a></td>
+          <td style="text-align: right;">
+            <button class="btn btn-danger" style="padding: 4px 10px; font-size: 11px;" onclick="deleteVideo('${v.id}')">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function handleCreateVideo(e) {
+      e.preventDefault();
+      const payload = {
+        title: document.getElementById('v-title').value.trim(),
+        client_name: document.getElementById('v-client').value.trim(),
+        company: document.getElementById('v-company').value.trim(),
+        youtube_url: document.getElementById('v-url').value.trim(),
+        quote: document.getElementById('v-quote').value.trim()
+      };
+
+      const res = await fetch('/api/admin/videos', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${authToken}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('add-video-form').reset();
+        loadVideos();
+        alert('YouTube review video published successfully to live frontend!');
+      }
+    }
+
+    async function deleteVideo(id) {
+      if (!confirm('Delete this review video from the website?')) return;
+      const res = await fetch(`/api/admin/videos/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      const data = await res.json();
+      if (data.success) loadVideos();
+    }
+
+    // ==========================================
+    // CLOUDFLARE R2 CRUD
+    // ==========================================
+    async function loadR2Images() {
+      try {
+        const res = await fetch('/api/admin/r2/files', {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await res.json();
+        if (data.success) {
+          const gallery = document.getElementById('r2-media-gallery');
+          const files = data.files || [];
+          if (files.length === 0) {
+            gallery.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-dim);">No images uploaded to Cloudflare R2 yet.</div>`;
+            return;
+          }
+          gallery.innerHTML = files.map(f => `
+            <div class="media-card">
+              <img src="${f.url}" class="media-thumb" alt="${escapeHtml(f.key)}" onerror="this.src='https://placehold.co/400x300/0a1020/D4AF37?text=Image'">
+              <div class="media-meta">
+                <div style="font-size: 12px; font-weight: 600; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${escapeHtml(f.key)}</div>
+                <div style="font-size: 11px; color: var(--text-muted);">${(f.size / 1024).toFixed(1)} KB</div>
+                <div style="display: flex; gap: 8px; margin-top: 6px;">
+                  <button class="btn btn-outline" style="flex: 1; padding: 4px; font-size: 11px;" onclick="copyToClipboard('${f.url}')">Copy URL</button>
+                  <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteR2Image('${f.key}')">🗑️</button>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (e) {}
+    }
+
+    async function uploadR2Image(file) {
+      if (!file) return;
+      const formData = new FormData();
+      formData.append('image', file);
+      const res = await fetch('/api/admin/r2/upload', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${authToken}` },
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        loadR2Images();
+        alert('Image uploaded to storage successfully!');
+      }
+    }
+
+    async function deleteR2Image(key) {
+      if (!confirm(`Delete image "${key}"?`)) return;
+      const res = await fetch(`/api/admin/r2/files/${encodeURIComponent(key)}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      const data = await res.json();
+      if (data.success) loadR2Images();
+    }
+
+    async function loadSecurityProbes() {
+      try {
+        const res = await fetch('/api/admin/security/scanners', {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('kpi-scanners').innerText = data.totalBlocked || 0;
+          const tbody = document.getElementById('security-probes-tbody');
+          const probes = data.probes || [];
+          if (probes.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 20px; color: var(--text-dim);">No scanner attacks detected yet. Decoy honeypots active.</td></tr>`;
+            return;
+          }
+          tbody.innerHTML = probes.map(p => `
+            <tr>
+              <td style="font-size: 12px; color: var(--text-dim);">${new Date(p.timestamp).toLocaleTimeString()}</td>
+              <td style="color: var(--yellow); font-family: monospace;">${escapeHtml(p.path)}</td>
+              <td><code>${escapeHtml(p.ip)}</code></td>
+              <td style="font-size: 11px; color: var(--text-dim); max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(p.userAgent)}</td>
+              <td><span class="badge badge-in_review">1.5s Tarpit + 404</span></td>
+            </tr>
+          `).join('');
+        }
+      } catch (e) {}
+    }
+
+    function switchMainTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-submissions').style.display = 'none';
+      document.getElementById('tab-videos').style.display = 'none';
+      document.getElementById('tab-r2-media').style.display = 'none';
+      document.getElementById('tab-security').style.display = 'none';
+
+      if (tab === 'submissions') {
+        document.getElementById('tab-submissions').style.display = 'flex';
+      } else if (tab === 'videos') {
+        document.getElementById('tab-videos').style.display = 'flex';
+        loadVideos();
+      } else if (tab === 'r2-media') {
+        document.getElementById('tab-r2-media').style.display = 'flex';
+        loadR2Images();
+      } else if (tab === 'security') {
+        document.getElementById('tab-security').style.display = 'flex';
+        loadSecurityProbes();
+      }
+      event.currentTarget.classList.add('active');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[m]);
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      alert('Copied URL to clipboard:\n' + text);
+    }
+
+    function exportSubmissionsCSV() {
+      if (!currentSubmissions.length) return alert('No data to export.');
+      const headers = ['ID', 'Date', 'First Name', 'Last Name', 'Email', 'Phone', 'Service', 'Target Role', 'Status', 'Message'];
+      const rows = currentSubmissions.map(i => [
+        i.id,
+        new Date(i.created_at).toISOString(),
+        `"${(i.first_name || '').replace(/"/g, '""')}"`,
+        `"${(i.last_name || '').replace(/"/g, '""')}"`,
+        `"${(i.email || '').replace(/"/g, '""')}"`,
+        `"${(i.phone || '').replace(/"/g, '""')}"`,
+        `"${(i.service || '').replace(/"/g, '""')}"`,
+        `"${(i.target_role || '').replace(/"/g, '""')}"`,
+        i.status || 'new',
+        `"${(i.message || '').replace(/"/g, '""')}"`
+      ]);
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const link = document.createElement('a');
+      link.setAttribute('href', encodeURI(csvContent));
+      link.setAttribute('download', `talentechno_leads_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    checkExistingSession();
+  </script>
+</body>
+</html>
