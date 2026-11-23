@@ -1,7 +1,7 @@
 {
   "name": "talentechno-backend",
   "version": "1.0.0",
-  "description": "Talentechno IT Recruiter - Secure Admin Backend & Supabase/Cloudflare R2 API",
+  "description": "Talentechno IT Recruiter - Public API Server with Supabase & Cloudflare R2",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,11 +9,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.750.0",
-    "@aws-sdk/s3-request-presigner": "^3.750.0",
     "@supabase/supabase-js": "^2.48.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "multer": "^1.4.5-lts.1"
+    "express": "^4.21.2"
   }
 }

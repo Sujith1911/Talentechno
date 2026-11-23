@@ -64,7 +64,7 @@ CREATE POLICY "Allow public insert into submissions"
     TO anon, authenticated, service_role
     WITH CHECK (true);
 
--- Allow full access to service_role (Admin API backend)
+-- Allow full access to service_role (Backend API)
 CREATE POLICY "Allow full access to service_role"
     ON public.contact_submissions
     FOR ALL

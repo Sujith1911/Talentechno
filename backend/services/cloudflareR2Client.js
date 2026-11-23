@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { S3Client, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } = require('@aws-sdk/client-s3');
+const { S3Client, ListObjectsV2Command } = require('@aws-sdk/client-s3');
 
 class CloudflareR2Service {
   constructor() {
@@ -41,61 +41,7 @@ class CloudflareR2Service {
     }
   }
 
-  // --- UPLOAD IMAGE ---
-  async uploadImage(fileBuffer, originalFilename, mimeType) {
-    const extension = path.extname(originalFilename) || '.png';
-    const cleanBase = path.basename(originalFilename, extension).replace(/[^a-zA-Z0-9_-]/g, '_');
-    const key = `talentechno_${Date.now()}_${cleanBase}${extension}`;
-
-    if (this.isR2Configured) {
-      try {
-        const command = new PutObjectCommand({
-          Bucket: this.bucketName,
-          Key: key,
-          Body: fileBuffer,
-          ContentType: mimeType,
-          Metadata: {
-            uploadedBy: 'talentechno_admin',
-            originalName: originalFilename
-          }
-        });
-
-        await this.s3Client.send(command);
-
-        const publicUrl = this.publicDomain 
-          ? `${this.publicDomain.replace(/\/$/, '')}/${key}`
-          : `https://${this.bucketName}.${this.accountId}.r2.cloudflarestorage.com/${key}`;
-
-        return {
-          success: true,
-          key,
-          filename: originalFilename,
-          url: publicUrl,
-          size: fileBuffer.length,
-          mimeType,
-          storage: 'Cloudflare R2'
-        };
-      } catch (err) {
-        console.error('[R2] Upload error to Cloudflare, falling back to local:', err.message);
-      }
-    }
-
-    // Local file fallback
-    const targetPath = path.join(this.localUploadDir, key);
-    fs.writeFileSync(targetPath, fileBuffer);
-
-    return {
-      success: true,
-      key,
-      filename: originalFilename,
-      url: `/assets/uploads/${key}`,
-      size: fileBuffer.length,
-      mimeType,
-      storage: 'Local Storage (assets/uploads)'
-    };
-  }
-
-  // --- LIST IMAGES ---
+  // --- LIST IMAGES (Public Media Showcase) ---
   async listImages() {
     if (this.isR2Configured) {
       try {
@@ -141,31 +87,6 @@ class CloudflareR2Service {
     });
 
     return { files, storage: 'Local Storage' };
-  }
-
-  // --- DELETE IMAGE ---
-  async deleteImage(key) {
-    if (this.isR2Configured) {
-      try {
-        const command = new DeleteObjectCommand({
-          Bucket: this.bucketName,
-          Key: key
-        });
-        await this.s3Client.send(command);
-        return { success: true, key, storage: 'Cloudflare R2' };
-      } catch (err) {
-        console.error('[R2] Delete error from Cloudflare:', err.message);
-      }
-    }
-
-    // Delete local file
-    const targetPath = path.join(this.localUploadDir, key);
-    if (fs.existsSync(targetPath)) {
-      fs.unlinkSync(targetPath);
-      return { success: true, key, storage: 'Local Storage' };
-    }
-
-    return { success: false, message: 'File not found' };
   }
 }
 
