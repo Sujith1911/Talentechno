@@ -5,6 +5,3 @@ Disallow: /administrator
 Disallow: /login
 Disallow: /backend
 Allow: /
-
-# Note: Secret admin gateway routes are deliberately omitted from robots.txt
-# to avoid leaking URL presence to wordlist generators.

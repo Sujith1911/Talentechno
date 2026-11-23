@@ -1,5 +1,25 @@
 [
   {
+    "id": "70fafad2-3248-4def-a323-4f76bb771cc2",
+    "created_at": "2026-11-23T02:47:34.745Z",
+    "updated_at": "2026-11-23T02:47:34.745Z",
+    "first_name": "Test",
+    "last_name": "Candidate",
+    "email": "test@talentechno.com",
+    "phone": "+91 9030888469",
+    "service": "recruitment",
+    "target_role": "Senior Full-Stack Engineer",
+    "message": "Testing public contact inquiry form submission.",
+    "status": "new",
+    "priority": "medium",
+    "assigned_recruiter": null,
+    "internal_notes": "",
+    "is_starred": false,
+    "ip_address": "::1",
+    "user_agent": "Python-urllib/3.14",
+    "source": "website_portal"
+  },
+  {
     "id": "28a44c5f-a426-49fa-b5a7-5d44a10b3462",
     "created_at": "2026-11-19T13:22:43.983Z",
     "updated_at": "2026-11-19T13:22:45.210Z",
