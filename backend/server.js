@@ -25,13 +25,19 @@ app.use('/js', express.static(path.join(__dirname, '..', 'js')));
 // ==============================================================================
 app.post('/api/submissions', async (req, res) => {
   try {
-    const { first_name, last_name, email, phone, service, target_role, message } = req.body;
+    let { first_name, last_name, name, email, phone, service, target_role, message, company } = req.body;
+
+    if (!first_name && name) {
+      const parts = String(name).trim().split(/\s+/);
+      first_name = parts[0] || 'Client';
+      last_name = parts.slice(1).join(' ') || '';
+    }
 
     if (!first_name || !email || !phone) {
       return res.status(400).json({
         success: false,
         error: 'VALIDATION_ERROR',
-        message: 'First Name, Email, and Phone number are required fields.'
+        message: 'Name, Email, and Phone number are required fields.'
       });
     }
 
