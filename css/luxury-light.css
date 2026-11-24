@@ -11,17 +11,17 @@
 
 :root,
 [data-theme="dark"] {
-  /* Minimal Deep Obsidian Canvas Base (Low Subtle Purple) */
-  --bg-canvas: #060309;
-  --bg-secondary: #0C0614;
-  --bg-nav: rgba(18, 9, 32, 0.45);
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --bg-card-solid: #0F081A;
+  /* Rich Cosmic Purple Canvas Base (Luminous Purple on Background) */
+  --bg-canvas: #090412;
+  --bg-secondary: #120722;
+  --bg-nav: rgba(255, 255, 255, 0.03);
+  --bg-card: rgba(255, 255, 255, 0.02);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
+  --bg-card-solid: #0A0514;
 
-  /* Refined Ethereal Purple & Soft Violet Hierarchy */
+  /* Rich Purple Palette for the Background Environment */
   --accent-primary: #A855F7;
-  --accent-light: #F3E8FF;
+  --accent-light: #E9D5FF;
   --accent-glow: #C084FC;
   --accent-vivid: #D946EF;
   --accent-dark: #6B21A8;
@@ -29,45 +29,46 @@
 
   /* Gradients */
   --grad-primary: linear-gradient(135deg, #FAF5FF 0%, #E9D5FF 30%, #C084FC 60%, #9333EA 88%, #6B21A8 100%);
-  --grad-soft: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(126, 34, 206, 0.03) 100%);
-  --grad-card: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 100%);
-  --grad-card-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.035) 100%);
+  --grad-soft: linear-gradient(135deg, rgba(168, 85, 247, 0.22) 0%, rgba(126, 34, 206, 0.06) 100%);
+  --grad-card: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --grad-card-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.025) 100%);
 
-  /* Text & Contrast */
+  /* Text & Contrast (Pure Diamond White on Cards - NO PURPLE ON CARD) */
   --text-main: #FFFFFF;
-  --text-secondary: #D8B4FE;
-  --text-muted: #9CA3AF;
-  --text-accent: #F3E8FF;
+  --text-secondary: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.52);
+  --text-accent: #FFFFFF;
 
-  /* Ultra-Glossy Crystal Borders & Highlights */
-  --border-glass: rgba(255, 255, 255, 0.15);
-  --border-glass-glow: rgba(255, 255, 255, 0.38);
+  /* Ultra-Glossy Crystal White Borders & Highlights (NO PURPLE ON CARD) */
+  --border-glass: rgba(255, 255, 255, 0.16);
+  --border-glass-glow: rgba(255, 255, 255, 0.45);
   --border-subtle: rgba(255, 255, 255, 0.08);
 
   /* Shadows */
-  --shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 14px 40px -6px rgba(0, 0, 0, 0.50);
-  --shadow-lg: 0 30px 80px -15px rgba(0, 0, 0, 0.70);
+  --shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 14px 40px -6px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 35px 85px -15px rgba(0, 0, 0, 0.75);
   --shadow-glass: 0 25px 60px rgba(0, 0, 0, 0.65);
 
-  /* Ethereal Low-Purple Ambient Background Mesh */
+  /* Rich Translucent Purple Ambient Mesh on Background */
   --ambient-mesh: 
-    radial-gradient(at 15% 15%, rgba(147, 51, 234, 0.08) 0%, transparent 65%),
-    radial-gradient(at 85% 15%, rgba(126, 34, 206, 0.06) 0%, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(6, 3, 9, 0.98) 0%, transparent 85%),
-    radial-gradient(at 75% 85%, rgba(168, 85, 247, 0.05) 0%, transparent 60%);
+    radial-gradient(at 15% 15%, rgba(147, 51, 234, 0.32) 0%, transparent 60%),
+    radial-gradient(at 85% 15%, rgba(168, 85, 247, 0.26) 0%, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(9, 4, 18, 0.80) 0%, transparent 80%),
+    radial-gradient(at 18% 85%, rgba(126, 34, 206, 0.30) 0%, transparent 60%),
+    radial-gradient(at 82% 85%, rgba(217, 70, 239, 0.24) 0%, transparent 55%);
 
-  /* Moving Physics Orbs (Ultra-Soft Translucent Glow) */
-  --orb-1-grad: radial-gradient(circle, rgba(168, 85, 247, 0.16) 0%, rgba(126, 34, 206, 0.05) 45%, transparent 70%);
-  --orb-2-grad: radial-gradient(circle, rgba(192, 132, 252, 0.13) 0%, rgba(88, 28, 135, 0.04) 45%, transparent 70%);
-  --orb-3-grad: radial-gradient(circle, rgba(217, 70, 239, 0.10) 0%, rgba(107, 33, 168, 0.03) 45%, transparent 70%);
-  --star-color: #F3E8FF;
-  --star-glow: rgba(216, 180, 254, 0.6);
+  /* Moving Physics Orbs (Rich Translucent Purple on Background) */
+  --orb-1-grad: radial-gradient(circle, rgba(168, 85, 247, 0.38) 0%, rgba(126, 34, 206, 0.18) 45%, transparent 70%);
+  --orb-2-grad: radial-gradient(circle, rgba(192, 132, 252, 0.32) 0%, rgba(88, 28, 135, 0.14) 45%, transparent 70%);
+  --orb-3-grad: radial-gradient(circle, rgba(217, 70, 239, 0.28) 0%, rgba(107, 33, 168, 0.12) 45%, transparent 70%);
+  --star-color: #F8FAFC;
+  --star-glow: rgba(255, 255, 255, 0.85);
 
-  --btn-text-color: #06020A;
-  --badge-bg: rgba(255, 255, 255, 0.05);
-  --badge-border: rgba(255, 255, 255, 0.20);
-  --badge-text: #F3E8FF;
+  --btn-text-color: #FFFFFF;
+  --badge-bg: rgba(255, 255, 255, 0.06);
+  --badge-border: rgba(255, 255, 255, 0.22);
+  --badge-text: #FFFFFF;
 }
 
 [data-theme="light"] {
@@ -75,8 +76,8 @@
   --bg-canvas: #FAFAF8;
   --bg-secondary: #F4F5F7;
   --bg-nav: rgba(255, 255, 255, 0.70);
-  --bg-card: rgba(255, 255, 255, 0.55);
-  --bg-card-hover: rgba(255, 255, 255, 0.80);
+  --bg-card: rgba(255, 255, 255, 0.50);
+  --bg-card-hover: rgba(255, 255, 255, 0.75);
   --bg-card-solid: #FFFFFF;
 
   /* Preserved Luxury Gold Hierarchy */
@@ -90,8 +91,8 @@
   /* Gradients */
   --grad-primary: linear-gradient(180deg, #FDF4D4 0%, #E8C86A 32%, #D4AF37 58%, #BA8514 84%, #8B6109 100%);
   --grad-soft: linear-gradient(135deg, rgba(245, 222, 152, 0.20) 0%, rgba(212, 175, 55, 0.04) 100%);
-  --grad-card: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 252, 245, 0.40) 100%);
-  --grad-card-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 253, 248, 0.55) 100%);
+  --grad-card: linear-gradient(135deg, rgba(255, 255, 255, 0.70) 0%, rgba(255, 252, 245, 0.35) 100%);
+  --grad-card-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 253, 248, 0.50) 100%);
 
   /* Text & Contrast */
   --text-main: #0B1329;
@@ -112,15 +113,15 @@
 
   /* Minimal Translucent Ambient Mesh */
   --ambient-mesh: 
-    radial-gradient(at 15% 15%, rgba(248, 238, 214, 0.45) 0%, transparent 65%),
-    radial-gradient(at 85% 15%, rgba(212, 175, 55, 0.10) 0%, transparent 60%),
-    radial-gradient(at 50% 50%, rgba(250, 250, 248, 0.94) 0%, transparent 85%),
-    radial-gradient(at 75% 85%, rgba(245, 222, 152, 0.14) 0%, transparent 60%);
+    radial-gradient(at 15% 15%, rgba(248, 238, 214, 0.55) 0%, transparent 65%),
+    radial-gradient(at 85% 15%, rgba(212, 175, 55, 0.16) 0%, transparent 60%),
+    radial-gradient(at 50% 50%, rgba(250, 250, 248, 0.90) 0%, transparent 85%),
+    radial-gradient(at 75% 85%, rgba(245, 222, 152, 0.22) 0%, transparent 60%);
 
   /* Moving Physics Orbs (Light Theme Champagne Gold) */
-  --orb-1-grad: radial-gradient(circle, rgba(245, 222, 152, 0.24) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 70%);
-  --orb-2-grad: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(197, 160, 89, 0.05) 45%, transparent 70%);
-  --orb-3-grad: radial-gradient(circle, rgba(232, 200, 106, 0.18) 0%, rgba(140, 101, 20, 0.04) 45%, transparent 70%);
+  --orb-1-grad: radial-gradient(circle, rgba(245, 222, 152, 0.35) 0%, rgba(212, 175, 55, 0.14) 45%, transparent 70%);
+  --orb-2-grad: radial-gradient(circle, rgba(212, 175, 55, 0.26) 0%, rgba(197, 160, 89, 0.10) 45%, transparent 70%);
+  --orb-3-grad: radial-gradient(circle, rgba(232, 200, 106, 0.28) 0%, rgba(140, 101, 20, 0.08) 45%, transparent 70%);
   --star-color: #C5A059;
   --star-glow: rgba(212, 175, 55, 0.5);
 
@@ -181,12 +182,13 @@ body {
   top: 0;
   left: 0;
   border-radius: 50%;
-  filter: blur(135px);
-  -webkit-filter: blur(135px);
+  filter: blur(100px);
+  -webkit-filter: blur(100px);
   pointer-events: none;
   will-change: transform;
   transform: translate3d(0, 0, 0);
-  opacity: 0.58;
+  opacity: 0.78;
+  mix-blend-mode: screen;
   transition: opacity 0.5s ease;
 }
 
@@ -255,15 +257,15 @@ body {
 
 .landing-card-glass {
   background: var(--grad-card);
-  border: 1px solid var(--border-glass);
+  border: 1px solid rgba(255, 255, 255, 0.20);
   border-radius: 38px;
   padding: clamp(38px, 6vw, 70px) clamp(24px, 5vw, 66px);
-  backdrop-filter: blur(36px) saturate(190%);
-  -webkit-backdrop-filter: blur(36px) saturate(190%);
+  backdrop-filter: blur(45px) saturate(175%);
+  -webkit-backdrop-filter: blur(45px) saturate(175%);
   box-shadow: 
-    0 35px 85px -15px rgba(0, 0, 0, 0.72),
-    inset 0 1.5px 1px rgba(255, 255, 255, 0.45),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.40);
+    0 40px 90px -15px rgba(0, 0, 0, 0.80),
+    inset 0 2px 1.5px rgba(255, 255, 255, 0.60),
+    inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.50);
   max-width: 960px;
   width: 100%;
   position: relative;
@@ -271,7 +273,7 @@ body {
   transition: all 0.35s var(--ease-elastic);
 }
 
-/* High-Gloss Convex Angled Specular Sheen Overlay */
+/* High-Gloss Convex Angled Specular Sheen Overlay (Pure White - NO PURPLE ON CARD) */
 .landing-card-glass::after {
   content: '';
   position: absolute;
@@ -279,21 +281,21 @@ body {
   left: 0;
   right: 0;
   height: 55%;
-  background: linear-gradient(125deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 100%);
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 42%, transparent 100%);
   border-radius: 38px 38px 140px 140px / 38px 38px 45px 45px;
   pointer-events: none;
   z-index: 1;
 }
 
-/* Top Rim Crystal Glint Highlight */
+/* Top Rim Crystal Glint Highlight (Pure Diamond White Glint - NO PURPLE ON CARD) */
 .landing-card-glass::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 12%;
-  right: 12%;
+  left: 10%;
+  right: 10%;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.80), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
   z-index: 2;
 }
 
@@ -306,9 +308,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--badge-bg);
-  border: 1px solid var(--badge-border);
-  color: var(--badge-text);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  color: #FFFFFF;
   font-family: var(--font-heading);
   font-size: 11.5px;
   font-weight: 750;
@@ -317,6 +319,9 @@ body {
   padding: 6px 18px;
   border-radius: 30px;
   margin-bottom: 24px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.40);
 }
 
 .typewriter-quote-box {
@@ -333,15 +338,16 @@ body {
   font-weight: 800;
   line-height: 1.18;
   letter-spacing: -1.2px;
-  color: var(--text-main);
+  color: #FFFFFF;
   max-width: 820px;
 }
 
 .typewriter-text {
-  background: var(--grad-primary);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 60%, #E2E8F0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
+  text-shadow: 0 4px 24px rgba(255, 255, 255, 0.20);
 }
 
 .typewriter-cursor {
@@ -349,8 +355,8 @@ body {
   width: 3px;
   height: 0.9em;
   vertical-align: -0.05em;
-  background-color: var(--accent-glow);
-  box-shadow: 0 0 12px var(--accent-glow);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.95);
   margin-left: 6px;
   animation: blinkCursor 0.9s infinite ease;
 }
@@ -363,13 +369,13 @@ body {
 .typewriter-author-tag {
   font-size: 14.5px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.65);
   letter-spacing: 0.5px;
   margin-bottom: 40px;
 }
 
 .typewriter-author-tag strong {
-  color: var(--text-secondary);
+  color: #FFFFFF;
   font-weight: 700;
 }
 
@@ -569,7 +575,8 @@ body {
 .logo-badge {
   width: 42px;
   height: 42px;
-  background: var(--grad-primary);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -577,10 +584,17 @@ body {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 22px;
-  color: var(--btn-text-color);
-  box-shadow: 0 6px 18px rgba(168, 85, 247, 0.4);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3), inset 0 1.5px 1px rgba(255, 255, 255, 0.6);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] .logo-badge {
+  background: var(--grad-primary);
+  color: var(--btn-text-color);
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.4);
 }
 
 .logo-badge::after {
@@ -753,22 +767,31 @@ body {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  background: var(--grad-primary);
-  color: var(--btn-text-color);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.12) 60%, rgba(255, 255, 255, 0.05) 100%);
+  color: #FFFFFF;
   font-family: var(--font-body);
   font-weight: 750;
-  font-size: 14px;
-  letter-spacing: 0.2px;
-  padding: 12px 24px;
+  font-size: 14.5px;
+  letter-spacing: 0.3px;
+  padding: 13px 28px;
   border-radius: 30px;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-sm), inset 0 1.5px 1px rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 2px 1.5px rgba(255, 255, 255, 0.90), inset 0 -1px 1px rgba(0, 0, 0, 0.30);
   transition: all 0.3s var(--ease-elastic);
   z-index: 1;
+}
+
+[data-theme="light"] .btn-primary {
+  background: var(--grad-primary);
+  color: var(--btn-text-color);
+  border-color: rgba(255, 255, 255, 0.70);
+  box-shadow: var(--shadow-sm), inset 0 1.5px 1px rgba(255, 255, 255, 0.95);
 }
 
 /* Specular Convex Reflection Sheen */
@@ -787,8 +810,14 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-md), inset 0 2px 2px rgba(255, 255, 255, 1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.18) 60%, rgba(255, 255, 255, 0.08) 100%);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), inset 0 2.5px 2px rgba(255, 255, 255, 1);
   border-color: #FFFFFF;
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background: var(--grad-primary);
+  box-shadow: var(--shadow-md), inset 0 2px 2px rgba(255, 255, 255, 1);
 }
 
 .btn-primary:active {
@@ -800,22 +829,29 @@ body {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
+  color: #FFFFFF;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 14px;
-  padding: 11px 24px;
+  font-size: 14.5px;
+  letter-spacing: 0.3px;
+  padding: 13px 28px;
   border-radius: 30px;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   cursor: pointer;
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1.5px 1px rgba(255, 255, 255, 0.40);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1.5px 1px rgba(255, 255, 255, 0.45);
   transition: all 0.3s var(--ease-elastic);
   position: relative;
   overflow: hidden;
+}
+
+[data-theme="light"] .btn-outline {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.65);
+  border-color: var(--border-glass);
 }
 
 .btn-outline::before {
@@ -825,17 +861,23 @@ body {
   left: 0;
   right: 0;
   height: 48%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 80%, transparent 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.02) 80%, transparent 100%);
   border-radius: 28px 28px 80px 80px / 28px 28px 20px 20px;
   pointer-events: none;
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.50);
   transform: translateY(-2px);
   color: #FFFFFF;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.60);
+}
+
+[data-theme="light"] .btn-outline:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glass-glow);
+  color: #0B1329;
 }
 
 /* Theme Switcher Toggle */
