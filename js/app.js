@@ -1,14 +1,14 @@
 /**
  * TALENTECHNO - EXECUTIVE APPLICATION SCRIPT
- * Dual-Theme Engine (Translucent Glossy Purple Dark & Luxury Light)
- * Island Navbar Adaptability • Rolling Quotes • Low-CPU Transitions • Interactive Modals
+ * Minimal Translucent Physics Engine • Low-CPU Starlight • Typescript Quote Animation
+ * Dual Theme Engine (Translucent Glossy Purple Dark & Preserved Luxury Light)
  */
 
 (function () {
   'use strict';
 
   // ---------------------------------------------------------------------------
-  // 1. DUAL THEME ENGINE (Dark default: Translucent Glossy Purple)
+  // 1. DUAL THEME ENGINE (Dark default: Minimal Translucent Glossy Purple)
   // ---------------------------------------------------------------------------
   const STORAGE_KEY = 'talentechno_theme';
   const htmlEl = document.documentElement;
@@ -18,8 +18,7 @@
     if (saved === 'light' || saved === 'dark') {
       return saved;
     }
-    // Default to 'dark' (Translucent Glossy Purple) per user requirement
-    return 'dark';
+    return 'dark'; // Minimal Translucent Purple default
   }
 
   function applyTheme(theme) {
@@ -42,15 +41,15 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>`;
-        btn.setAttribute('title', 'Switch to Preserved Light Theme');
-        btn.setAttribute('aria-label', 'Switch to Preserved Light Theme');
+        btn.setAttribute('title', 'Switch to Preserved Luxury Light Theme');
+        btn.setAttribute('aria-label', 'Switch to Preserved Luxury Light Theme');
       } else {
         btn.innerHTML = `
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>`;
-        btn.setAttribute('title', 'Switch to Translucent Glossy Purple Dark Theme');
-        btn.setAttribute('aria-label', 'Switch to Translucent Glossy Purple Dark Theme');
+        btn.setAttribute('title', 'Switch to Minimal Translucent Purple Dark Theme');
+        btn.setAttribute('aria-label', 'Switch to Minimal Translucent Purple Dark Theme');
       }
     });
   }
@@ -65,13 +64,252 @@
         const active = htmlEl.getAttribute('data-theme') || 'dark';
         const next = active === 'dark' ? 'light' : 'dark';
         applyTheme(next);
-        showToast(next === 'dark' ? 'Switched to Glossy Purple Dark Theme' : 'Switched to Preserved Luxury Light Theme');
+        showToast(next === 'dark' ? 'Switched to Minimal Translucent Purple' : 'Switched to Preserved Luxury Light');
       }
     });
   }
 
   // ---------------------------------------------------------------------------
-  // 2. CURVED-EDGE TRANSPARENT NAVBAR (AUTO-ADAPTABILITY ON SCROLL)
+  // 2. NATURAL PHYSICS MOVING TRANSLUCENT LIGHT (LOW CPU)
+  // ---------------------------------------------------------------------------
+  function initNaturalPhysicsLights() {
+    const container = document.querySelector('.physics-ambient-container');
+    if (!container) return;
+
+    const orbEls = container.querySelectorAll('.physics-orb');
+    if (!orbEls.length) return;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    // Window resize handler
+    window.addEventListener(
+      'resize',
+      () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+      },
+      { passive: true }
+    );
+
+    // Mouse tracking for subtle interactive gravitational drift
+    let mouse = { x: width / 2, y: height / 2, active: false };
+    window.addEventListener(
+      'mousemove',
+      (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      },
+      { passive: true }
+    );
+
+    // Initial state for each translucent light orb
+    const orbs = Array.from(orbEls).map((el, i) => {
+      const size = i === 0 ? 520 : i === 1 ? 480 : 440;
+      const radius = size / 2;
+      return {
+        el,
+        x: (width * (i + 1)) / (orbEls.length + 1) - radius,
+        y: (height * (i + 1)) / (orbEls.length + 1) - radius,
+        vx: (Math.random() - 0.5) * 0.9,
+        vy: (Math.random() - 0.5) * 0.9,
+        radius,
+        baseSpeed: 0.65 + i * 0.2
+      };
+    });
+
+    let isRunning = true;
+
+    // Pause physics calculations when the browser tab is hidden (Zero CPU wasted)
+    document.addEventListener('visibilitychange', () => {
+      isRunning = !document.hidden;
+      if (isRunning) {
+        requestAnimationFrame(physicsStep);
+      }
+    });
+
+    function physicsStep() {
+      if (!isRunning) return;
+
+      for (let i = 0; i < orbs.length; i++) {
+        const orb = orbs[i];
+
+        // 1. Position update
+        orb.x += orb.vx;
+        orb.y += orb.vy;
+
+        // 2. Soft elastic boundary bounce with viewport padding
+        const minX = -orb.radius * 0.4;
+        const maxX = width - orb.radius * 1.6;
+        const minY = -orb.radius * 0.4;
+        const maxY = height - orb.radius * 1.6;
+
+        if (orb.x <= minX) {
+          orb.x = minX;
+          orb.vx = Math.abs(orb.vx) * 0.96;
+        } else if (orb.x >= maxX) {
+          orb.x = maxX;
+          orb.vx = -Math.abs(orb.vx) * 0.96;
+        }
+
+        if (orb.y <= minY) {
+          orb.y = minY;
+          orb.vy = Math.abs(orb.vy) * 0.96;
+        } else if (orb.y >= maxY) {
+          orb.y = maxY;
+          orb.vy = -Math.abs(orb.vy) * 0.96;
+        }
+
+        // 3. Gentle harmonic noise drift (keeps motion organic and continuous)
+        orb.vx += (Math.random() - 0.5) * 0.04;
+        orb.vy += (Math.random() - 0.5) * 0.04;
+
+        // 4. Subtle mouse reactivity
+        if (mouse.active) {
+          const centerX = orb.x + orb.radius;
+          const centerY = orb.y + orb.radius;
+          const dx = mouse.x - centerX;
+          const dy = mouse.y - centerY;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist > 50 && dist < 450) {
+            // Soft repulsive pressure from cursor
+            const force = (450 - dist) / 450;
+            orb.vx -= (dx / dist) * force * 0.08;
+            orb.vy -= (dy / dist) * force * 0.08;
+          }
+        }
+
+        // 5. Speed clamping (keeps motion graceful and low-energy)
+        const speed = Math.hypot(orb.vx, orb.vy);
+        const maxSpeed = 1.35;
+        const minSpeed = 0.35;
+        if (speed > maxSpeed) {
+          orb.vx = (orb.vx / speed) * maxSpeed;
+          orb.vy = (orb.vy / speed) * maxSpeed;
+        } else if (speed < minSpeed) {
+          orb.vx = (orb.vx / (speed || 1)) * minSpeed;
+          orb.vy = (orb.vy / (speed || 1)) * minSpeed;
+        }
+
+        // 6. GPU-accelerated transform application
+        orb.el.style.transform = `translate3d(${orb.x.toFixed(1)}px, ${orb.y.toFixed(1)}px, 0)`;
+      }
+
+      requestAnimationFrame(physicsStep);
+    }
+
+    requestAnimationFrame(physicsStep);
+  }
+
+  // ---------------------------------------------------------------------------
+  // 3. LOW-CPU TRANSLUCENT STARS EFFECT
+  // ---------------------------------------------------------------------------
+  function initStarsEffect() {
+    const starsContainer = document.querySelector('.stars-container');
+    if (!starsContainer) return;
+
+    // Create 38 subtle low-CPU starlight particles
+    const starCount = 38;
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.className = 'star-particle';
+
+      const x = (Math.random() * 100).toFixed(2);
+      const y = (Math.random() * 100).toFixed(2);
+      const size = (1.5 + Math.random() * 2.2).toFixed(1);
+      const delay = (Math.random() * 5).toFixed(2);
+      const duration = (3.5 + Math.random() * 3.5).toFixed(2);
+
+      star.style.left = `${x}%`;
+      star.style.top = `${y}%`;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.animationDelay = `${delay}s`;
+      star.style.animationDuration = `${duration}s`;
+
+      fragment.appendChild(star);
+    }
+
+    starsContainer.appendChild(fragment);
+  }
+
+  // ---------------------------------------------------------------------------
+  // 4. TYPESCRIPTING / TYPEWRITER ANIMATION OF TALENTECHNO'S QUOTE
+  // ---------------------------------------------------------------------------
+  const quotes = [
+    {
+      text: "Connecting Tech Talent with Tomorrow's Innovations.",
+      author: "Talentechno Mission"
+    },
+    {
+      text: "Hyderabad's Premier IT Recruitment & Executive Search Partner.",
+      author: "Verified Industry Leadership"
+    },
+    {
+      text: "Precision Engineering Talent Delivered Within 48 Hours.",
+      author: "Guaranteed Turnaround"
+    },
+    {
+      text: "Bridging High-Impact Tech Minds with Visionary Enterprises.",
+      author: "500+ Placed Tech Specialists"
+    }
+  ];
+
+  function initTypewriterAnimation() {
+    const textEl = document.querySelector('.typewriter-text');
+    const authorEl = document.querySelector('.typewriter-author-tag');
+    if (!textEl) return;
+
+    let quoteIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+
+    function tick() {
+      const currentQuote = quotes[quoteIndex];
+      const fullText = currentQuote.text;
+
+      if (authorEl && authorEl.textContent !== currentQuote.author) {
+        authorEl.innerHTML = `— <strong>${currentQuote.author}</strong>`;
+      }
+
+      if (isDeleting) {
+        // Deleting characters
+        textEl.textContent = fullText.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        // Typing characters
+        textEl.textContent = fullText.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      // Typing speed: natural slight randomness
+      let typeSpeed = isDeleting ? 30 : 65 + Math.random() * 35;
+
+      if (!isDeleting && charIndex === fullText.length) {
+        // Finished typing quote - pause and celebrate
+        typeSpeed = 3600; // Hold full quote for 3.6s
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        // Finished deleting - move to next quote
+        isDeleting = false;
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+        typeSpeed = 450; // Short pause before next quote
+      }
+
+      setTimeout(tick, typeSpeed);
+    }
+
+    // Start typing after initial load
+    setTimeout(tick, 500);
+  }
+
+  // ---------------------------------------------------------------------------
+  // 5. CURVED-EDGE TRANSPARENT NAVBAR (AUTO-ADAPTABILITY)
   // ---------------------------------------------------------------------------
   function initNavbar() {
     const navbar = document.querySelector('.navbar-island');
@@ -85,7 +323,7 @@
         if (!ticking) {
           window.requestAnimationFrame(() => {
             const scrollY = window.scrollY || window.pageYOffset;
-            if (scrollY > 30) {
+            if (scrollY > 25) {
               navbar.classList.add('scrolled');
             } else {
               navbar.classList.remove('scrolled');
@@ -100,69 +338,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 3. MOBILE DRAWER NAVIGATION
-  // ---------------------------------------------------------------------------
-  function initMobileDrawer() {
-    const mobileToggle = document.querySelector('.mobile-toggle-btn');
-    const drawerOverlay = document.querySelector('.mobile-drawer-overlay');
-    const drawer = document.querySelector('.mobile-drawer');
-    const drawerClose = document.querySelector('.mobile-drawer-close');
-
-    if (!mobileToggle || !drawer || !drawerOverlay) return;
-
-    function openDrawer() {
-      drawerOverlay.classList.add('open');
-      drawer.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeDrawer() {
-      drawerOverlay.classList.remove('open');
-      drawer.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    mobileToggle.addEventListener('click', openDrawer);
-    drawerOverlay.addEventListener('click', closeDrawer);
-    if (drawerClose) {
-      drawerClose.addEventListener('click', closeDrawer);
-    }
-
-    // Close on clicking internal links
-    const drawerLinks = drawer.querySelectorAll('a');
-    drawerLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        closeDrawer();
-      });
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && drawer.classList.contains('open')) {
-        closeDrawer();
-      }
-    });
-  }
-
-  // ---------------------------------------------------------------------------
-  // 4. ROLLING QUOTE ACCREDITATION TICKER
-  // ---------------------------------------------------------------------------
-  function initRollingQuotes() {
-    const strip = document.querySelector('.rolling-quote-strip');
-    const track = document.querySelector('.rolling-quote-track');
-    if (!strip || !track) return;
-
-    // Pause on hover
-    strip.addEventListener('mouseenter', () => {
-      track.style.animationPlayState = 'paused';
-    });
-    strip.addEventListener('mouseleave', () => {
-      track.style.animationPlayState = 'running';
-    });
-  }
-
-  // ---------------------------------------------------------------------------
-  // 5. MODAL SYSTEM (QUOTE & ENQUIRY)
+  // 6. MODAL SYSTEM FOR THE 2 BUTTONS ("GET A QUOTE" & "ENQUIRE NOW")
   // ---------------------------------------------------------------------------
   function initModal() {
     const modalOverlay = document.getElementById('quote-enquiry-modal');
@@ -178,7 +354,7 @@
     function openModal(type = 'quote') {
       if (type === 'enquire') {
         if (modalTitle) modalTitle.textContent = 'Enquire with Talentechno';
-        if (modalSubtitle) modalSubtitle.textContent = 'Have a staffing question or custom request? Our tech recruiters will reach out within 2 hours.';
+        if (modalSubtitle) modalSubtitle.textContent = 'Have a recruitment question or urgent staffing query? We respond within 2 hours.';
         if (modalTypeInput) modalTypeInput.value = 'General Enquiry';
         if (submitBtn) submitBtn.textContent = 'Submit Enquiry';
       } else {
@@ -191,7 +367,6 @@
       modalOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';
 
-      // Focus first input
       setTimeout(() => {
         const firstInput = modalOverlay.querySelector('input:not([type="hidden"])');
         if (firstInput) firstInput.focus();
@@ -203,7 +378,7 @@
       document.body.style.overflow = '';
     }
 
-    // Open triggers
+    // Button triggers
     document.addEventListener('click', (e) => {
       const quoteTrigger = e.target.closest('[data-modal-action="quote"]');
       if (quoteTrigger) {
@@ -234,7 +409,7 @@
       }
     });
 
-    // Form Submission to /api/submissions
+    // Submissions handling
     if (form) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -276,11 +451,11 @@
           });
 
           if (response.ok) {
-            showToast('✓ Request successfully submitted! Our team will contact you promptly.');
+            showToast('✓ Request received! Our talent team will contact you promptly.');
             form.reset();
             closeModal();
           } else {
-            showToast('Submission recorded. Our team will contact you at ' + payload.email);
+            showToast('Request recorded. Our team will contact you at ' + payload.email);
             form.reset();
             closeModal();
           }
@@ -298,71 +473,6 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 6. LIVE CANDIDATE STREAM ROTATOR (Hero Translucent Card)
-  // ---------------------------------------------------------------------------
-  const candidateProfiles = [
-    {
-      role: 'Staff Full-Stack Architect (Cloud Native)',
-      exp: '9+ Years Exp • Hyderabad / Hybrid',
-      skills: ['React', 'Node.js', 'Go', 'AWS Kubernetes', 'Microservices'],
-      summary: 'Architected high-throughput payment pipelines handling 45k ops/sec. Available within 15 days notice.'
-    },
-    {
-      role: 'Principal AI / LLM Infrastructure Engineer',
-      exp: '7+ Years Exp • Bangalore / Remote',
-      skills: ['Python', 'PyTorch', 'vLLM', 'LangChain', 'CUDA Ops'],
-      summary: 'Fine-tuned enterprise LLMs for BFSI compliance with 99.4% accuracy. Ready for immediate technical interview.'
-    },
-    {
-      role: 'Lead Cloud DevOps & Platform Specialist',
-      exp: '8+ Years Exp • Hyderabad / On-site',
-      skills: ['Terraform', 'Kubernetes', 'GCP', 'ArgoCD', 'Zero-Trust'],
-      summary: 'Reduced CI/CD build deployment cycle from 42 mins to 6 mins for series-C SaaS enterprise.'
-    },
-    {
-      role: 'Senior Java Backend Engineer (Distributed Systems)',
-      exp: '6+ Years Exp • Hyderabad / Hybrid',
-      skills: ['Java 21', 'Spring Boot', 'Kafka', 'PostgreSQL', 'Docker'],
-      summary: 'Built event-driven microservices processing 12M daily records with 99.99% uptime.'
-    }
-  ];
-
-  function initCandidateRotator() {
-    const cardEl = document.querySelector('.live-candidate-slot');
-    if (!cardEl) return;
-
-    let currentIndex = 0;
-
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % candidateProfiles.length;
-      const candidate = candidateProfiles[currentIndex];
-
-      cardEl.style.opacity = '0';
-      cardEl.style.transform = 'translateY(6px)';
-      cardEl.style.transition = 'all 0.3s ease';
-
-      setTimeout(() => {
-        const titleEl = cardEl.querySelector('.slot-title');
-        const descEl = cardEl.querySelector('.slot-desc');
-        const tagEl = cardEl.querySelector('.slot-tag');
-        const skillsEl = cardEl.querySelector('.slot-skills');
-
-        if (titleEl) titleEl.textContent = candidate.role;
-        if (tagEl) tagEl.textContent = candidate.exp;
-        if (descEl) descEl.textContent = candidate.summary;
-        if (skillsEl) {
-          skillsEl.innerHTML = candidate.skills
-            .map((skill) => `<span class="skill-tag">${skill}</span>`)
-            .join('');
-        }
-
-        cardEl.style.opacity = '1';
-        cardEl.style.transform = 'translateY(0)';
-      }, 300);
-    }, 4500);
-  }
-
-  // ---------------------------------------------------------------------------
   // 7. TOAST NOTIFICATION SYSTEM
   // ---------------------------------------------------------------------------
   function showToast(message) {
@@ -376,7 +486,7 @@
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = `
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
         <polyline points="22 4 12 14.01 9 11.01"></polyline>
       </svg>
@@ -393,24 +503,15 @@
     }, 4000);
   }
 
-  // Inject spinner animation style if missing
-  const styleEl = document.createElement('style');
-  styleEl.textContent = `
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
-  `;
-  document.head.appendChild(styleEl);
-
   // ---------------------------------------------------------------------------
   // INITIALIZATION ON DOM READY
   // ---------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initNaturalPhysicsLights();
+    initStarsEffect();
+    initTypewriterAnimation();
     initNavbar();
-    initMobileDrawer();
-    initRollingQuotes();
     initModal();
-    initCandidateRotator();
   });
 })();

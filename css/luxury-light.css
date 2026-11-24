@@ -11,15 +11,15 @@
 
 :root,
 [data-theme="dark"] {
-  /* Translucent Glossy Purple Canvas Base */
-  --bg-canvas: #0C0714;
-  --bg-secondary: #140A22;
-  --bg-nav: rgba(20, 10, 36, 0.68);
-  --bg-card: rgba(30, 15, 52, 0.52);
-  --bg-card-hover: rgba(45, 22, 78, 0.68);
-  --bg-card-solid: #170C28;
+  /* Minimal Translucent Purple Canvas Base */
+  --bg-canvas: #090510;
+  --bg-secondary: #10081C;
+  --bg-nav: rgba(16, 8, 28, 0.65);
+  --bg-card: rgba(24, 12, 42, 0.42);
+  --bg-card-hover: rgba(38, 18, 66, 0.58);
+  --bg-card-solid: #120920;
 
-  /* Glossy Purple & Neon Hierarchy */
+  /* Minimal Glossy Purple & Neon Hierarchy */
   --accent-primary: #A855F7;
   --accent-light: #E9D5FF;
   --accent-glow: #C084FC;
@@ -29,9 +29,9 @@
 
   /* Gradients */
   --grad-primary: linear-gradient(135deg, #F5D0FE 0%, #D8B4FE 25%, #A855F7 58%, #7E22CE 84%, #581C87 100%);
-  --grad-soft: linear-gradient(135deg, rgba(168, 85, 247, 0.22) 0%, rgba(126, 34, 206, 0.06) 100%);
-  --grad-card: linear-gradient(145deg, rgba(38, 18, 66, 0.58) 0%, rgba(18, 9, 32, 0.42) 100%);
-  --grad-card-hover: linear-gradient(145deg, rgba(54, 26, 92, 0.72) 0%, rgba(28, 14, 50, 0.58) 100%);
+  --grad-soft: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(126, 34, 206, 0.05) 100%);
+  --grad-card: linear-gradient(145deg, rgba(32, 14, 56, 0.52) 0%, rgba(15, 7, 26, 0.38) 100%);
+  --grad-card-hover: linear-gradient(145deg, rgba(46, 20, 80, 0.65) 0%, rgba(22, 10, 40, 0.50) 100%);
 
   /* Text & Contrast */
   --text-main: #F8FAFC;
@@ -40,27 +40,33 @@
   --text-accent: #E9D5FF;
 
   /* Borders & Glows */
-  --border-glass: rgba(192, 132, 252, 0.22);
-  --border-glass-glow: rgba(216, 180, 254, 0.5);
-  --border-subtle: rgba(168, 85, 247, 0.14);
+  --border-glass: rgba(192, 132, 252, 0.20);
+  --border-glass-glow: rgba(216, 180, 254, 0.45);
+  --border-subtle: rgba(168, 85, 247, 0.12);
 
   /* Shadows */
-  --shadow-sm: 0 4px 18px rgba(107, 33, 168, 0.25);
-  --shadow-md: 0 14px 40px -6px rgba(107, 33, 168, 0.38);
-  --shadow-lg: 0 28px 70px -10px rgba(107, 33, 168, 0.48);
-  --shadow-glass: 0 20px 50px rgba(6, 2, 12, 0.65);
+  --shadow-sm: 0 4px 18px rgba(107, 33, 168, 0.20);
+  --shadow-md: 0 14px 40px -6px rgba(107, 33, 168, 0.32);
+  --shadow-lg: 0 28px 70px -10px rgba(107, 33, 168, 0.40);
+  --shadow-glass: 0 20px 50px rgba(6, 2, 12, 0.60);
 
-  /* Background Ambient Mesh */
+  /* Minimal Translucent Ambient Mesh */
   --ambient-mesh: 
-    radial-gradient(at 15% 15%, rgba(168, 85, 247, 0.28) 0%, transparent 50%),
-    radial-gradient(at 85% 10%, rgba(126, 34, 206, 0.32) 0%, transparent 45%),
-    radial-gradient(at 50% 50%, rgba(14, 7, 24, 0.94) 0%, transparent 70%),
-    radial-gradient(at 82% 85%, rgba(217, 70, 239, 0.18) 0%, transparent 52%),
-    radial-gradient(at 18% 90%, rgba(88, 28, 135, 0.3) 0%, transparent 48%);
+    radial-gradient(at 20% 20%, rgba(168, 85, 247, 0.14) 0%, transparent 60%),
+    radial-gradient(at 80% 20%, rgba(126, 34, 206, 0.10) 0%, transparent 55%),
+    radial-gradient(at 50% 60%, rgba(9, 5, 16, 0.95) 0%, transparent 80%),
+    radial-gradient(at 75% 85%, rgba(217, 70, 239, 0.08) 0%, transparent 60%);
+
+  /* Moving Physics Orbs (Minimal Translucent Purple) */
+  --orb-1-grad: radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, rgba(126, 34, 206, 0.10) 50%, transparent 75%);
+  --orb-2-grad: radial-gradient(circle, rgba(192, 132, 252, 0.20) 0%, rgba(88, 28, 135, 0.08) 50%, transparent 75%);
+  --orb-3-grad: radial-gradient(circle, rgba(217, 70, 239, 0.16) 0%, rgba(107, 33, 168, 0.06) 50%, transparent 75%);
+  --star-color: #E9D5FF;
+  --star-glow: rgba(192, 132, 252, 0.6);
 
   --btn-text-color: #0A0412;
-  --badge-bg: rgba(168, 85, 247, 0.18);
-  --badge-border: rgba(192, 132, 252, 0.4);
+  --badge-bg: rgba(168, 85, 247, 0.15);
+  --badge-border: rgba(192, 132, 252, 0.35);
   --badge-text: #E9D5FF;
 }
 
@@ -68,9 +74,9 @@
   /* Preserved Alabaster White & Champagne Base */
   --bg-canvas: #FAFAF8;
   --bg-secondary: #F4F5F7;
-  --bg-nav: rgba(255, 255, 255, 0.84);
-  --bg-card: rgba(255, 255, 255, 0.88);
-  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-nav: rgba(255, 255, 255, 0.82);
+  --bg-card: rgba(255, 255, 255, 0.84);
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
   --bg-card-solid: #FFFFFF;
 
   /* Preserved Luxury Gold Hierarchy */
@@ -83,9 +89,9 @@
 
   /* Gradients */
   --grad-primary: linear-gradient(180deg, #FDF4D4 0%, #E8C86A 32%, #D4AF37 58%, #BA8514 84%, #8B6109 100%);
-  --grad-soft: linear-gradient(135deg, rgba(245, 222, 152, 0.35) 0%, rgba(212, 175, 55, 0.08) 100%);
-  --grad-card: linear-gradient(155deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 240, 0.85) 100%);
-  --grad-card-hover: linear-gradient(155deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 252, 246, 0.95) 100%);
+  --grad-soft: linear-gradient(135deg, rgba(245, 222, 152, 0.30) 0%, rgba(212, 175, 55, 0.06) 100%);
+  --grad-card: linear-gradient(155deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 250, 240, 0.82) 100%);
+  --grad-card-hover: linear-gradient(155deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 252, 246, 0.92) 100%);
 
   /* Text & Contrast */
   --text-main: #0B1329;
@@ -94,27 +100,33 @@
   --text-accent: #8C6514;
 
   /* Borders & Glows */
-  --border-glass: rgba(212, 175, 55, 0.32);
-  --border-glass-glow: rgba(212, 175, 55, 0.65);
-  --border-subtle: rgba(226, 232, 240, 0.85);
+  --border-glass: rgba(212, 175, 55, 0.28);
+  --border-glass-glow: rgba(212, 175, 55, 0.58);
+  --border-subtle: rgba(226, 232, 240, 0.82);
 
   /* Shadows */
-  --shadow-sm: 0 4px 16px rgba(197, 160, 89, 0.15);
-  --shadow-md: 0 12px 36px rgba(197, 160, 89, 0.22);
-  --shadow-lg: 0 24px 60px rgba(197, 160, 89, 0.28);
+  --shadow-sm: 0 4px 16px rgba(197, 160, 89, 0.14);
+  --shadow-md: 0 12px 36px rgba(197, 160, 89, 0.20);
+  --shadow-lg: 0 24px 60px rgba(197, 160, 89, 0.25);
   --shadow-glass: 0 16px 40px rgba(15, 23, 42, 0.05);
 
-  /* Background Ambient Mesh */
+  /* Minimal Translucent Ambient Mesh */
   --ambient-mesh: 
-    radial-gradient(at 12% 12%, rgba(248, 238, 214, 0.6) 0%, transparent 55%),
-    radial-gradient(at 88% 8%, rgba(212, 175, 55, 0.16) 0%, transparent 48%),
-    radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.9) 0%, transparent 70%),
-    radial-gradient(at 82% 82%, rgba(245, 222, 152, 0.25) 0%, transparent 52%),
-    radial-gradient(at 18% 92%, rgba(197, 160, 89, 0.14) 0%, transparent 48%);
+    radial-gradient(at 20% 20%, rgba(248, 238, 214, 0.50) 0%, transparent 60%),
+    radial-gradient(at 80% 20%, rgba(212, 175, 55, 0.12) 0%, transparent 55%),
+    radial-gradient(at 50% 60%, rgba(255, 255, 255, 0.92) 0%, transparent 80%),
+    radial-gradient(at 75% 85%, rgba(245, 222, 152, 0.18) 0%, transparent 60%);
+
+  /* Moving Physics Orbs (Light Theme Champagne Gold) */
+  --orb-1-grad: radial-gradient(circle, rgba(245, 222, 152, 0.36) 0%, rgba(212, 175, 55, 0.12) 50%, transparent 75%);
+  --orb-2-grad: radial-gradient(circle, rgba(212, 175, 55, 0.24) 0%, rgba(197, 160, 89, 0.08) 50%, transparent 75%);
+  --orb-3-grad: radial-gradient(circle, rgba(232, 200, 106, 0.26) 0%, rgba(140, 101, 20, 0.06) 50%, transparent 75%);
+  --star-color: #C5A059;
+  --star-glow: rgba(212, 175, 55, 0.5);
 
   --btn-text-color: #FFFFFF;
-  --badge-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 235, 205, 0.55) 100%);
-  --badge-border: rgba(212, 175, 55, 0.42);
+  --badge-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 235, 205, 0.50) 100%);
+  --badge-border: rgba(212, 175, 55, 0.38);
   --badge-text: #8C6514;
 }
 
@@ -153,30 +165,229 @@ body {
   min-height: 100vh;
 }
 
-/* Low-CPU GPU-accelerated ambient glowing orb */
-.ambient-glow-orb {
+/* --------------------------------------------------------------------------
+   NATURAL PHYSICS TRANSLUCENT LIGHT ORBS & STARS EFFECT (LOW CPU)
+   -------------------------------------------------------------------------- */
+.physics-ambient-container {
   position: fixed;
-  border-radius: 50%;
-  filter: blur(120px);
-  -webkit-filter: blur(120px);
+  inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.4;
-  will-change: transform;
+  overflow: hidden;
 }
-.orb-top-right {
-  top: -80px;
-  right: -60px;
+
+.physics-orb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  filter: blur(85px);
+  -webkit-filter: blur(85px);
+  pointer-events: none;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.72;
+  transition: opacity 0.5s ease;
+}
+
+.physics-orb-1 {
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  background: var(--orb-1-grad);
 }
-.orb-bottom-left {
-  bottom: -60px;
-  left: -80px;
-  width: 580px;
-  height: 580px;
-  background: radial-gradient(circle, var(--accent-dark) 0%, transparent 70%);
+
+.physics-orb-2 {
+  width: 480px;
+  height: 480px;
+  background: var(--orb-2-grad);
+}
+
+.physics-orb-3 {
+  width: 440px;
+  height: 440px;
+  background: var(--orb-3-grad);
+}
+
+/* Subtle Low-CPU Twinkling Starfield */
+.stars-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.star-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--star-color);
+  box-shadow: 0 0 6px var(--star-glow);
+  will-change: opacity, transform;
+  pointer-events: none;
+  animation: starTwinkle 4s infinite ease-in-out;
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(0.75);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.35);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CENTERED LANDING HERO: TYPEWRITER QUOTE & 2 BUTTONS
+   -------------------------------------------------------------------------- */
+.landing-hero-center {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  padding: 30px 20px 40px;
+}
+
+.landing-card-glass {
+  background: var(--grad-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 36px;
+  padding: clamp(38px, 6vw, 68px) clamp(24px, 5vw, 64px);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  max-width: 960px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s var(--ease-elastic);
+}
+
+.landing-card-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+}
+
+.typewriter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--badge-text);
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 6px 18px;
+  border-radius: 30px;
+  margin-bottom: 24px;
+}
+
+.typewriter-quote-box {
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.typewriter-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 4.8vw, 56px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -1.2px;
+  color: var(--text-main);
+  max-width: 820px;
+}
+
+.typewriter-text {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  vertical-align: -0.05em;
+  background-color: var(--accent-glow);
+  box-shadow: 0 0 12px var(--accent-glow);
+  margin-left: 6px;
+  animation: blinkCursor 0.9s infinite ease;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-author-tag {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 40px;
+}
+
+.typewriter-author-tag strong {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+/* Exactly 2 Buttons */
+.landing-2-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.landing-2-buttons .btn-primary,
+.landing-2-buttons .btn-outline {
+  min-width: 210px;
+  padding: 15px 34px;
+  font-size: 15.5px;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 640px) {
+  .landing-hero-center {
+    min-height: calc(100vh - 80px);
+    padding: 20px 16px 30px;
+  }
+  .landing-card-glass {
+    padding: 36px 18px;
+    border-radius: 28px;
+  }
+  .typewriter-quote-box {
+    min-height: 120px;
+  }
+  .landing-2-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 14px;
+  }
+  .landing-2-buttons .btn-primary,
+  .landing-2-buttons .btn-outline {
+    width: 100%;
+    min-width: unset;
+  }
 }
 
 .content-container {
