@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 2. Static Assets Serving
-app.use('/assets/uploads', express.static(path.join(__dirname, '..', 'assets', 'uploads')));
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 app.use('/css', express.static(path.join(__dirname, '..', 'css')));
 app.use('/js', express.static(path.join(__dirname, '..', 'js')));
 
