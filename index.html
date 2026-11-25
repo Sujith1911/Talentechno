@@ -46,7 +46,98 @@
     </nav>
   </header>
 
-  <!-- 2. FIRST LANDING PAGE: COMPLETELY TRANSPARENT CARD ON PURE SOLID BACKGROUND -->
+  <!-- 0. LIGHTWEIGHT TECH & TALENT NEURAL BACKGROUND (AI/ML • DATA SCIENCE • HIRING NEXUS) -->
+  <div class="tech-neural-bg" aria-hidden="true">
+    <!-- Cyber Synaptic Grid (CSS Matrix) -->
+    <div class="cyber-grid-plane"></div>
+
+    <!-- Vector Neural Nexus: Nodes & Synapses representing AI/ML, Data Science, and Tech Hiring -->
+    <svg class="neural-lattice-svg" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="synapse-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="var(--neural-synapse-start)" stop-opacity="0.6"/>
+          <stop offset="50%" stop-color="var(--neural-synapse-mid)" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="var(--neural-synapse-end)" stop-opacity="0.3"/>
+        </linearGradient>
+        <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="var(--neural-node-color)" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="var(--neural-node-color)" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Neural Synaptic Lines Connecting Tech & AI Talent Clusters -->
+      <g class="neural-synapses" stroke="url(#synapse-grad-1)" stroke-width="1.2">
+        <!-- Left Cluster: AI / LLM & Data Science -->
+        <line x1="180" y1="230" x2="380" y2="330" stroke-dasharray="4 6"/>
+        <line x1="120" y1="460" x2="300" y2="540" stroke-dasharray="4 6"/>
+        <line x1="380" y1="330" x2="300" y2="540"/>
+        <line x1="180" y1="230" x2="120" y2="460"/>
+        <line x1="380" y1="330" x2="520" y2="280"/>
+
+        <!-- Interconnecting High-Speed Synapses (Hiring Bridge) -->
+        <path d="M 520 280 Q 720 180 920 280" stroke="var(--neural-synapse-mid)" stroke-width="1.5" stroke-dasharray="3 5" fill="none"/>
+        <path d="M 380 640 Q 720 730 1060 640" stroke="var(--neural-synapse-mid)" stroke-width="1.5" stroke-dasharray="3 5" fill="none"/>
+
+        <!-- Right Cluster: Cloud, MLOps, Tech Talent Pool -->
+        <line x1="920" y1="280" x2="1060" y2="330"/>
+        <line x1="1060" y1="330" x2="1280" y2="230" stroke-dasharray="4 6"/>
+        <line x1="1060" y1="330" x2="1180" y2="530"/>
+        <line x1="1280" y1="230" x2="1320" y2="460"/>
+        <line x1="1320" y1="460" x2="1180" y2="530" stroke-dasharray="4 6"/>
+        <line x1="1180" y1="530" x2="1060" y2="640"/>
+        <line x1="300" y1="540" x2="380" y2="640"/>
+      </g>
+
+      <!-- Tech Domain Nodes with Badges & Text -->
+      <g class="neural-nodes">
+        <!-- Node 1: AI / LLM Models -->
+        <circle cx="180" cy="230" r="5" fill="var(--neural-node-color)"/>
+        <circle cx="180" cy="230" r="14" fill="url(#node-glow)"/>
+        <text x="195" y="234" class="node-label">AI • LLMs</text>
+
+        <!-- Node 2: Data Science -->
+        <circle cx="120" cy="460" r="4.5" fill="var(--neural-node-color)"/>
+        <circle cx="120" cy="460" r="12" fill="url(#node-glow)"/>
+        <text x="35" y="464" class="node-label">Data Science</text>
+
+        <!-- Node 3: Neural Core -->
+        <circle cx="380" cy="330" r="6" fill="var(--neural-node-color)"/>
+        <circle cx="380" cy="330" r="18" fill="url(#node-glow)"/>
+        <text x="395" y="334" class="node-label">Neural Core</text>
+
+        <!-- Node 4: Distributed Systems -->
+        <circle cx="300" cy="540" r="4" fill="var(--neural-node-color)"/>
+        <text x="190" y="544" class="node-label">Distributed Cloud</text>
+
+        <!-- Node 5: Hiring Bridge -->
+        <circle cx="520" cy="280" r="5" fill="var(--neural-node-color)"/>
+        <circle cx="920" cy="280" r="5" fill="var(--neural-node-color)"/>
+
+        <!-- Node 6: Tech Talent Pool -->
+        <circle cx="1060" cy="330" r="6" fill="var(--neural-node-color)"/>
+        <circle cx="1060" cy="330" r="18" fill="url(#node-glow)"/>
+        <text x="1075" y="334" class="node-label">Tech Talent Pool</text>
+
+        <!-- Node 7: MLOps Architecture -->
+        <circle cx="1280" cy="230" r="5" fill="var(--neural-node-color)"/>
+        <circle cx="1280" cy="230" r="14" fill="url(#node-glow)"/>
+        <text x="1205" y="215" class="node-label">MLOps</text>
+
+        <!-- Node 8: Executive Search -->
+        <circle cx="1320" cy="460" r="4.5" fill="var(--neural-node-color)"/>
+        <text x="1335" y="464" class="node-label">Executive IT</text>
+
+        <!-- Node 9: Scale-Out Engineering -->
+        <circle cx="1180" cy="530" r="4" fill="var(--neural-node-color)"/>
+        <text x="1195" y="534" class="node-label">Scale-Out</text>
+      </g>
+    </svg>
+
+    <!-- Focal Ambient Glow (Soft Purple in Dark Theme, Soft Gold in Light Theme) -->
+    <div class="tech-ambient-glow"></div>
+  </div>
+
+  <!-- 2. FIRST LANDING PAGE: COMPLETELY TRANSPARENT CARD ON THEMED BACKGROUND -->
   <main class="content-container">
     <section class="landing-hero-center">
       <div class="landing-card-glass">
