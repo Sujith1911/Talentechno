@@ -336,6 +336,96 @@
   }
 
   // ---------------------------------------------------------------------------
+  // 5. NATURAL PHYSICS GAZE ENGINE (LOW CPU • GPU ACCELERATED • AUTO-ADAPTABLE)
+  // ---------------------------------------------------------------------------
+  function initGazePhysics() {
+    const stage = document.getElementById('gaze-stage');
+    const nucleus = document.getElementById('tech-nucleus');
+    const card = document.getElementById('gaze-card');
+    if (!stage || !nucleus || !card) return;
+
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isMouseActive = false;
+    let lastInteractionTime = 0;
+    let isRunning = true;
+
+    // Track cursor gaze on desktop
+    window.addEventListener(
+      'mousemove',
+      (e) => {
+        const halfW = window.innerWidth / 2;
+        const halfH = window.innerHeight / 2;
+        targetX = (e.clientX - halfW) / halfW; // -1 to +1
+        targetY = (e.clientY - halfH) / halfH; // -1 to +1
+        isMouseActive = true;
+        lastInteractionTime = performance.now();
+      },
+      { passive: true }
+    );
+
+    // Track touch gaze on mobile / tablet
+    window.addEventListener(
+      'touchmove',
+      (e) => {
+        if (!e.touches.length) return;
+        const touch = e.touches[0];
+        const halfW = window.innerWidth / 2;
+        const halfH = window.innerHeight / 2;
+        targetX = ((touch.clientX - halfW) / halfW) * 0.7;
+        targetY = ((touch.clientY - halfH) / halfH) * 0.7;
+        isMouseActive = true;
+        lastInteractionTime = performance.now();
+      },
+      { passive: true }
+    );
+
+    // Pause physics calculations when the browser tab is hidden (Zero CPU wasted)
+    document.addEventListener('visibilitychange', () => {
+      isRunning = !document.hidden;
+      if (isRunning) {
+        requestAnimationFrame(physicsStep);
+      }
+    });
+
+    function physicsStep(timestamp) {
+      if (!isRunning) return;
+
+      // When mouse is idle for > 2.2s, blend into natural organic sine wave drift
+      const elapsedSinceInteraction = timestamp - lastInteractionTime;
+      if (!isMouseActive || elapsedSinceInteraction > 2200) {
+        const t = timestamp * 0.0012;
+        targetX = Math.sin(t) * 0.35 + Math.cos(t * 0.7) * 0.15;
+        targetY = Math.cos(t * 0.85) * 0.25 + Math.sin(t * 0.5) * 0.1;
+      }
+
+      // Smooth inertia spring damping (lerp)
+      currentX += (targetX - currentX) * 0.055;
+      currentY += (targetY - currentY) * 0.055;
+
+      // 1. Physical Tech Nucleus (Background: stronger parallax shift & tilt)
+      const nucX = (currentX * 20).toFixed(2);
+      const nucY = (currentY * 15).toFixed(2);
+      const nucRotX = (-currentY * 8.5).toFixed(2);
+      const nucRotY = (currentX * 10.5).toFixed(2);
+      nucleus.style.transform = `translate(-50%, -50%) translate3d(${nucX}px, ${nucY}px, 0) rotateX(${nucRotX}deg) rotateY(${nucRotY}deg)`;
+
+      // 2. Front Transparent Glass Card (Foreground: subtle counter-parallax & gaze tilt)
+      const cardX = (-currentX * 5).toFixed(2);
+      const cardY = (-currentY * 3.5).toFixed(2);
+      const cardRotX = (-currentY * 4).toFixed(2);
+      const cardRotY = (currentX * 5).toFixed(2);
+      card.style.transform = `translate3d(${cardX}px, ${cardY}px, 0) rotateX(${cardRotX}deg) rotateY(${cardRotY}deg)`;
+
+      requestAnimationFrame(physicsStep);
+    }
+
+    requestAnimationFrame(physicsStep);
+  }
+
+  // ---------------------------------------------------------------------------
   // INITIALIZATION ON DOM READY
   // ---------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
@@ -343,5 +433,6 @@
     initTypewriterAnimation();
     initNavbar();
     initModal();
+    initGazePhysics();
   });
 })();

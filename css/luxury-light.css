@@ -11,9 +11,9 @@
 
 :root,
 [data-theme="dark"] {
-  /* Rich Cyber Purple & Tech Canvas Base */
-  --bg-canvas: #070210;
-  --bg-secondary: #0D0518;
+  /* Rich Cyber Void Base */
+  --bg-canvas: #05020A;
+  --bg-secondary: #0A0314;
   --bg-nav: rgba(255, 255, 255, 0.04);
   --bg-card: transparent;
   --bg-card-hover: rgba(255, 255, 255, 0.02);
@@ -40,8 +40,8 @@
   --text-accent: #FFFFFF;
 
   /* Ultra-Glossy Crystal White Borders & Highlights */
-  --border-glass: rgba(255, 255, 255, 0.18);
-  --border-glass-glow: rgba(255, 255, 255, 0.50);
+  --border-glass: rgba(255, 255, 255, 0.20);
+  --border-glass-glow: rgba(255, 255, 255, 0.55);
   --border-subtle: rgba(255, 255, 255, 0.10);
 
   /* Shadows */
@@ -50,20 +50,20 @@
   --shadow-lg: 0 35px 85px -15px rgba(0, 0, 0, 0.75);
   --shadow-glass: 0 25px 60px rgba(0, 0, 0, 0.65);
 
-  /* Tech AI/ML & Data Science Purple Ambient Mesh */
-  --ambient-mesh: 
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(147, 51, 234, 0.24) 0%, rgba(107, 33, 168, 0.12) 36%, rgba(59, 7, 100, 0.05) 60%, transparent 85%),
-    radial-gradient(circle at 15% 20%, rgba(192, 132, 252, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(217, 70, 239, 0.10) 0%, transparent 50%);
+  /* Subdued Controlled Ambient Mesh (Low Lighting) */
+  --ambient-mesh: radial-gradient(ellipse 65% 45% at 50% 50%, rgba(91, 33, 182, 0.14) 0%, transparent 65%);
 
-  /* Tech Neural Lattice Colors */
-  --cyber-grid-line: rgba(168, 85, 247, 0.08);
-  --neural-synapse-start: #C084FC;
-  --neural-synapse-mid: #A855F7;
-  --neural-synapse-end: #7E22CE;
-  --neural-node-color: #E9D5FF;
-  --neural-text-color: rgba(233, 213, 255, 0.65);
-  --tech-glow-color: rgba(168, 85, 247, 0.28);
+  /* Physical 3D Liquid Tech Core (Purple Palette) */
+  --nucleus-body-grad: radial-gradient(circle at 35% 28%, #FAF5FF 0%, #D8B4FE 12%, #A855F7 30%, #7E22CE 52%, #4C1D95 75%, #1F0738 100%);
+  --nucleus-shadow: 0 18px 45px rgba(25, 4, 45, 0.65), 0 0 20px rgba(126, 34, 206, 0.20), inset 0 2px 6px rgba(255, 255, 255, 0.70), inset 0 -3px 10px rgba(147, 51, 234, 0.35);
+  --nucleus-rim-color: rgba(192, 132, 252, 0.45);
+  --nucleus-lobe-grad: radial-gradient(circle at 35% 30%, #F5EEFF 0%, #C084FC 26%, #7E22CE 60%, #3B0764 100%);
+  --nucleus-lobe-shadow: 0 12px 28px rgba(45, 6, 75, 0.55), inset 0 1.5px 5px rgba(255, 255, 255, 0.60);
+  --gyro-ring-color: rgba(192, 132, 252, 0.32);
+  --gyro-ring-subtle: rgba(168, 85, 247, 0.16);
+  --satellite-color: #38BDF8;
+  --satellite-glow: rgba(56, 189, 248, 0.75);
+  --glint-color: #E9D5FF;
 
   --btn-text-color: #FFFFFF;
   --badge-bg: transparent;
@@ -72,7 +72,7 @@
 }
 
 [data-theme="light"] {
-  /* Warm Luxury Champagne Gold & Tech Canvas Base */
+  /* Warm Luxury Champagne Gold & Alabaster Base */
   --bg-canvas: #FAF8F2;
   --bg-secondary: #F3EFE6;
   --bg-nav: rgba(255, 255, 255, 0.85);
@@ -101,8 +101,8 @@
   --text-accent: #8C6514;
 
   /* Borders & Glows */
-  --border-glass: rgba(0, 0, 0, 0.14);
-  --border-glass-glow: rgba(0, 0, 0, 0.30);
+  --border-glass: rgba(0, 0, 0, 0.15);
+  --border-glass-glow: rgba(0, 0, 0, 0.32);
   --border-subtle: rgba(0, 0, 0, 0.08);
 
   /* Shadows */
@@ -111,20 +111,20 @@
   --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.10);
   --shadow-glass: 0 16px 40px rgba(0, 0, 0, 0.03);
 
-  /* Tech AI/ML & Data Science Gold Ambient Mesh */
-  --ambient-mesh: 
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(245, 222, 152, 0.32) 0%, rgba(212, 175, 55, 0.15) 36%, rgba(202, 138, 4, 0.04) 60%, transparent 85%),
-    radial-gradient(circle at 15% 20%, rgba(234, 179, 8, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.12) 0%, transparent 50%);
+  /* Subdued Controlled Ambient Mesh (Low Lighting) */
+  --ambient-mesh: radial-gradient(ellipse 65% 45% at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 65%);
 
-  /* Tech Neural Lattice Colors */
-  --cyber-grid-line: rgba(197, 160, 89, 0.12);
-  --neural-synapse-start: #D4AF37;
-  --neural-synapse-mid: #C5A059;
-  --neural-synapse-end: #8C6514;
-  --neural-node-color: #8C6514;
-  --neural-text-color: rgba(113, 63, 18, 0.70);
-  --tech-glow-color: rgba(212, 175, 55, 0.22);
+  /* Physical 3D Liquid Tech Core (Gold Palette) */
+  --nucleus-body-grad: radial-gradient(circle at 35% 28%, #FFFFFA 0%, #FEF08A 12%, #FBBF24 30%, #D97706 55%, #92400E 76%, #451A03 100%);
+  --nucleus-shadow: 0 18px 45px rgba(120, 53, 15, 0.30), 0 0 20px rgba(217, 119, 6, 0.15), inset 0 2px 6px rgba(255, 255, 255, 0.85), inset 0 -3px 10px rgba(245, 158, 11, 0.25);
+  --nucleus-rim-color: rgba(253, 224, 71, 0.50);
+  --nucleus-lobe-grad: radial-gradient(circle at 35% 30%, #FEF9C3 0%, #F59E0B 30%, #B45309 65%, #451A03 100%);
+  --nucleus-lobe-shadow: 0 12px 28px rgba(120, 53, 15, 0.25), inset 0 1.5px 5px rgba(255, 255, 255, 0.75);
+  --gyro-ring-color: rgba(180, 83, 9, 0.30);
+  --gyro-ring-subtle: rgba(217, 119, 6, 0.15);
+  --satellite-color: #D97706;
+  --satellite-glow: rgba(217, 119, 6, 0.65);
+  --glint-color: #D4AF37;
 
   --btn-text-color: #FFFFFF;
   --badge-bg: transparent;
@@ -167,66 +167,9 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   TECH & TALENT NEURAL BACKGROUND (AI/ML • DATA SCIENCE • HIRING NEXUS)
-   Lightweight SVG & CSS Grid - 100% GPU Accelerated, Zero JS/CPU Overhead
-   -------------------------------------------------------------------------- */
-.tech-neural-bg {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.cyber-grid-plane {
-  position: absolute;
-  inset: 0;
-  background-size: 50px 50px;
-  background-image: 
-    linear-gradient(to right, var(--cyber-grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--cyber-grid-line) 1px, transparent 1px);
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 25%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 25%, transparent 75%);
-  opacity: 0.85;
-}
-
-.neural-lattice-svg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1440px;
-  height: 100%;
-  opacity: 0.65;
-  filter: drop-shadow(0 0 8px var(--tech-glow-color));
-}
-
-.node-label {
-  font-family: var(--font-heading);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  fill: var(--neural-text-color);
-  text-transform: uppercase;
-  pointer-events: none;
-  user-select: none;
-}
-
-.tech-ambient-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(880px, 92vw);
-  height: 500px;
-  background: radial-gradient(ellipse at center, var(--tech-glow-color) 0%, transparent 68%);
-  pointer-events: none;
-  filter: blur(60px);
-}
-
-/* --------------------------------------------------------------------------
-   3. FIRST LANDING HERO CENTER STAGE
+   3. PHYSICAL 3D TECH GAZE STAGE & GYRO-NEXUS STRUCTURE
+   Natural Inertia Physics • Interactive Gaze Parallax • Subdued Luxury Lighting
+   Auto-Adjustable Across All Device Resolutions • 100% GPU / Low CPU
    -------------------------------------------------------------------------- */
 .landing-hero-center {
   min-height: calc(100vh - 100px);
@@ -237,7 +180,245 @@ body {
   text-align: center;
   position: relative;
   z-index: 10;
-  padding: 20px 20px 30px;
+  padding: 20px 16px 30px;
+  overflow: visible;
+}
+
+.physical-gaze-stage {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+/* 1. Physical 3D Tech Nucleus (Layer 1 - Behind Card with Gaze Parallax) */
+.physical-tech-nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(340px, 72vw, 680px);
+  height: clamp(240px, 44vw, 380px);
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 0.08s ease-out;
+}
+
+/* Sculpted Organic Physical Liquid Body (Subdued Low-Contrast Lighting) */
+.physical-liquid-core {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.core-body {
+  position: absolute;
+  width: 82%;
+  height: 78%;
+  border-radius: 46% 54% 52% 48% / 48% 52% 48% 52%;
+  background: var(--nucleus-body-grad);
+  box-shadow: var(--nucleus-shadow);
+  opacity: 0.94;
+  will-change: transform;
+  animation: coreMorph 9s ease-in-out infinite alternate;
+}
+
+@keyframes coreMorph {
+  0% {
+    border-radius: 46% 54% 52% 48% / 48% 52% 48% 52%;
+    transform: scale(0.98) rotate(-0.5deg);
+  }
+  50% {
+    border-radius: 53% 47% 46% 54% / 54% 46% 54% 46%;
+    transform: scale(1.02) rotate(1deg);
+  }
+  100% {
+    border-radius: 46% 54% 52% 48% / 48% 52% 48% 52%;
+    transform: scale(0.98) rotate(-0.5deg);
+  }
+}
+
+/* Physical Specular Liquid Crescent Highlight (Authentic Volume) */
+.core-specular-crescent {
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 62%;
+  height: 38%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.20) 42%, transparent 70%);
+  transform: rotate(-18deg);
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+/* Subsurface Rim Reflection */
+.core-rim-reflex {
+  position: absolute;
+  bottom: 10%;
+  right: 18%;
+  width: 65%;
+  height: 34%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, var(--nucleus-rim-color) 0%, transparent 68%);
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+/* Dimensional Organic Cluster Lobes */
+.lobe-orbit {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--nucleus-lobe-grad);
+  box-shadow: var(--nucleus-lobe-shadow);
+  will-change: transform;
+}
+
+.lobe-w {
+  width: 32%;
+  height: 52%;
+  left: 2%;
+  top: 24%;
+  animation: lobeSway1 7s ease-in-out infinite alternate;
+}
+
+.lobe-e {
+  width: 34%;
+  height: 56%;
+  right: 1%;
+  top: 22%;
+  animation: lobeSway2 8s ease-in-out infinite alternate;
+}
+
+.lobe-n {
+  width: 44%;
+  height: 40%;
+  top: 2%;
+  left: 28%;
+  animation: lobeSway3 6.5s ease-in-out infinite alternate;
+}
+
+.lobe-s {
+  width: 46%;
+  height: 42%;
+  bottom: 2%;
+  left: 27%;
+  animation: lobeSway1 7.5s ease-in-out infinite alternate;
+}
+
+@keyframes lobeSway1 {
+  0% { transform: translate(0, 0) scale(0.97); }
+  50% { transform: translate(-3px, 4px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(0.97); }
+}
+
+@keyframes lobeSway2 {
+  0% { transform: translate(0, 0) scale(1.02); }
+  50% { transform: translate(4px, -3px) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1.02); }
+}
+
+@keyframes lobeSway3 {
+  0% { transform: translate(0, 0) scale(0.98); }
+  50% { transform: translate(2px, -4px) scale(1.04); }
+  100% { transform: translate(0, 0) scale(0.98); }
+}
+
+/* 2. Physical Gyro-Orbit Rings (Tech Talent & Synaptic AI Gyroscope) */
+.gyro-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.gyro-ring-primary {
+  width: 104%;
+  height: 110%;
+  border: 1px dashed var(--gyro-ring-color);
+  transform: translate(-50%, -50%) rotateX(68deg) rotateY(15deg);
+  animation: gyroSpin 32s linear infinite;
+}
+
+.gyro-ring-secondary {
+  width: 114%;
+  height: 98%;
+  border: 1px dashed var(--gyro-ring-subtle);
+  transform: translate(-50%, -50%) rotateX(62deg) rotateY(-25deg);
+  animation: gyroSpinRev 40s linear infinite;
+}
+
+@keyframes gyroSpin {
+  from { transform: translate(-50%, -50%) rotateX(68deg) rotateY(15deg) rotateZ(0deg); }
+  to { transform: translate(-50%, -50%) rotateX(68deg) rotateY(15deg) rotateZ(360deg); }
+}
+
+@keyframes gyroSpinRev {
+  from { transform: translate(-50%, -50%) rotateX(62deg) rotateY(-25deg) rotateZ(360deg); }
+  to { transform: translate(-50%, -50%) rotateX(62deg) rotateY(-25deg) rotateZ(0deg); }
+}
+
+/* Orbiting Talent Satellites (Physical Tech Data Spheres) */
+.talent-satellite {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--satellite-color);
+  box-shadow: 0 0 10px var(--satellite-glow);
+}
+
+.sat-1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
+.sat-2 { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+.sat-3 { top: 50%; left: 0; transform: translate(-50%, -50%); }
+.sat-4 { top: 50%; right: 0; transform: translate(50%, -50%); }
+
+/* 4-Point Tech Sparkle Glints (From reference image) */
+.tech-sparkle-glint {
+  position: absolute;
+  color: var(--glint-color);
+  font-size: 26px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 8px var(--glint-color));
+  animation: glintPulse 4s ease-in-out infinite alternate;
+}
+
+.glint-br {
+  bottom: -15px;
+  right: -15px;
+  font-size: 32px;
+  animation-delay: 0.3s;
+}
+
+.glint-tl {
+  top: -12px;
+  left: -8px;
+  font-size: 20px;
+  animation-delay: 1.8s;
+  opacity: 0.7;
+}
+
+@keyframes glintPulse {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0.45; }
+  50% { transform: scale(1.2) rotate(12deg); opacity: 0.95; }
+  100% { transform: scale(0.8) rotate(0deg); opacity: 0.45; }
 }
 
 /* --------------------------------------------------------------------------
@@ -250,7 +431,9 @@ body {
   border: 1px solid var(--border-glass);
   border-radius: 28px;
   padding: 38px 46px;
-  box-shadow: none;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
   max-width: 780px;
   width: 100%;
   height: 480px;
@@ -258,6 +441,15 @@ body {
   max-height: 480px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  box-sizing: border-box;
+  will-change: transform;
+  transition: border-color 0.3s ease, transform 0.08s ease-out;
+}
   align-items: center;
   justify-content: center;
   position: relative;
@@ -424,13 +616,21 @@ body {
 @media (max-width: 640px) {
   .landing-hero-center {
     min-height: calc(100vh - 80px);
-    padding: 20px 16px 30px;
+    padding: 16px 12px 24px;
+  }
+  .physical-gaze-stage {
+    min-height: 520px;
+  }
+  .physical-tech-nucleus {
+    width: 90vw;
+    height: 320px;
   }
   .landing-card-glass {
     height: 520px;
     min-height: 520px;
     max-height: 520px;
-    padding: 30px 18px;
+    padding: 28px 16px;
+    border-radius: 24px;
   }
   .typewriter-quote-box {
     height: 150px;
@@ -452,7 +652,18 @@ body {
   .landing-2-buttons .btn-outline {
     width: 100%;
     min-width: unset;
-    padding: 12px 20px;
+    padding: 13px 20px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .physical-tech-nucleus {
+    width: clamp(480px, 78vw, 620px);
+    height: 350px;
+  }
+  .landing-card-glass {
+    max-width: 700px;
+    height: 480px;
   }
 }
 
