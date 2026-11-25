@@ -395,6 +395,7 @@
     // Collections
     let streams = [];
     let particles = [];
+    let trailSparks = [];
 
     function resize() {
       width = window.innerWidth;
@@ -415,34 +416,40 @@
     function initEntities() {
       streams = [];
       particles = [];
+      trailSparks = [];
 
       // Scale stream count and particle count across entire screen boundaries (boundary-to-boundary)
-      const streamCount = Math.max(7, Math.min(Math.round(width / 125), 18));
-      const particleCount = Math.max(38, Math.min(Math.round(width / 20), 95));
+      const streamCount = Math.max(8, Math.min(Math.round(width / 115), 20));
+      const particleCount = Math.max(45, Math.min(Math.round(width / 18), 110));
 
-      // 1. Initialize Ascending Light Beams & Circuit Traces (Distributed across full width)
+      // 1. Initialize Ascending Light Beams with Real-Time Trailing Physics
       const slotW = width / streamCount;
       for (let i = 0; i < streamCount; i++) {
-        const isCurved = i % 3 === 0; // Every 3rd stream has a smooth circuit bezier bend
+        const isCurved = i % 3 === 0; // Smooth circuit bezier bend
         const streamX = i * slotW + Math.random() * slotW; // Even distribution from left to right boundaries
         streams.push({
           x: streamX,
           y: Math.random() * (height + 200),
-          length: 90 + Math.random() * 140,
-          speed: 1.3 + Math.random() * 1.5,
-          thickness: 1.1 + Math.random() * 1.2,
+          speed: 1.1 + Math.random() * 1.4,
+          thickness: 0.75 + Math.random() * 0.65, // Micro refined thickness
           isCurved: isCurved,
           curveDir: Math.random() > 0.5 ? 1 : -1,
-          curveAmount: 25 + Math.random() * 45,
+          curveAmount: 18 + Math.random() * 32,
+          swayPhase: Math.random() * Math.PI * 2,
+          swaySpeed: 0.015 + Math.random() * 0.02,
+          swayAmp: isCurved ? (0.45 + Math.random() * 0.65) : (0.12 + Math.random() * 0.2),
           colorType: (i % 4 === 0) ? 'accent' : (i % 2 === 0 ? 'primary' : 'secondary'),
-          headRadius: 2.2 + Math.random() * 2.0,
-          headGlow: 8 + Math.random() * 12,
+          headRadius: 1.0 + Math.random() * 0.75, // Micro head radius
+          headGlow: 4.5 + Math.random() * 5.5,
           forceX: 0,
-          pulsePhase: Math.random() * Math.PI * 2
+          pulsePhase: Math.random() * Math.PI * 2,
+          trail: [], // Real-time breadcrumb history with decay & disappearance
+          maxTrailPoints: 24 + Math.floor(Math.random() * 18),
+          shedTimer: Math.random() * 10
         });
       }
 
-      // 2. Initialize Floating Data Particles & Micro-Glyphs (Full boundary coverage)
+      // 2. Initialize Micro-Scale Data Particles & Micro-Glyphs (Boundary-to-boundary)
       const types = ['dot', 'dot', 'ring', 'ring', 'square', 'bokeh'];
       for (let i = 0; i < particleCount; i++) {
         const type = types[Math.floor(Math.random() * types.length)];
@@ -450,19 +457,20 @@
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          baseVy: -(0.35 + Math.random() * 0.85) * depth,
+          baseVy: -(0.32 + Math.random() * 0.75) * depth,
           vx: 0,
           vy: 0,
           forceX: 0,
           forceY: 0,
           type: type,
-          size: type === 'bokeh' ? (5 + Math.random() * 4) : (type === 'ring' ? (2.8 + Math.random() * 2.2) : (1.2 + Math.random() * 2.2)),
+          // Reduced micro particle dimensions:
+          size: type === 'bokeh' ? (2.0 + Math.random() * 2.2) : (type === 'ring' ? (1.2 + Math.random() * 0.9) : (0.75 + Math.random() * 0.75)),
           depth: depth,
-          alpha: type === 'bokeh' ? (0.12 + Math.random() * 0.22) : (0.4 + Math.random() * 0.55),
+          alpha: type === 'bokeh' ? (0.10 + Math.random() * 0.18) : (0.35 + Math.random() * 0.50),
           colorType: (i % 5 === 0) ? 'accent' : (i % 3 === 0 ? 'white' : 'primary'),
           waveOffset: Math.random() * Math.PI * 2,
           waveSpeed: 0.015 + Math.random() * 0.025,
-          waveAmp: 0.25 + Math.random() * 0.6
+          waveAmp: 0.20 + Math.random() * 0.45
         });
       }
     }
@@ -589,7 +597,7 @@
         ctx.stroke();
       }
 
-      // 2. Update & Draw Ascending Light Beams & Circuit Traces
+      // 2. Update & Draw Ascending Light Beams with Real-Time Trailing Physics & Disappearance
       for (let i = 0; i < streams.length; i++) {
         const st = streams[i];
 
@@ -599,79 +607,134 @@
           const dy = st.y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < mouse.radius && dist > 1) {
-            const force = (1 - dist / mouse.radius) * 2.4;
+            const force = (1 - dist / mouse.radius) * 2.2;
             st.forceX += (dx / dist) * force;
           }
         }
 
-        // Apply physical damping & gravity
+        // Apply physical damping, sway & mobile gyroscope tilt
         st.forceX *= Math.pow(0.90, dt);
-        st.x += (st.forceX + gravityX * 0.6) * dt;
+        st.swayPhase += st.swaySpeed * dt;
+        const swayOffset = Math.sin(st.swayPhase) * st.swayAmp;
+        st.x += (st.forceX + swayOffset + gravityX * 0.5) * dt;
         st.y -= st.speed * dt;
 
-        // Wrap around vertically
-        if (st.y < -st.length - 40) {
-          st.y = height + Math.random() * 80;
+        // Wrap around vertically when off-screen top
+        if (st.y < -40) {
+          st.y = height + 40 + Math.random() * 60;
           st.x = Math.random() * width;
           st.forceX = 0;
+          st.trail = [];
+        }
+
+        // Keep inside screen width with soft wrap
+        if (st.x < -30) st.x = width + 20;
+        if (st.x > width + 30) st.x = -20;
+
+        // Record real-time breadcrumb point for trailing physics
+        st.trail.unshift({
+          x: st.x,
+          y: st.y,
+          alpha: 1.0,
+          vx: (Math.random() - 0.5) * 0.12,
+          vy: 0.12 * dt
+        });
+
+        if (st.trail.length > st.maxTrailPoints) {
+          st.trail.pop();
         }
 
         const colorBase = palette[st.colorType] || palette.primary;
         const headColor = palette.white;
-        const trailStartY = st.y + st.length;
 
-        // Draw Stream Trail
-        if (st.isCurved) {
-          // Smooth Bezier Circuit Trace Bend (as seen in reference image)
-          const bendX = st.x + st.curveDir * st.curveAmount;
-          const midY = st.y + st.length * 0.55;
+        // Update trail points with physical dissipation & trail disappearance
+        for (let t = st.trail.length - 1; t >= 0; t--) {
+          const pt = st.trail[t];
+          pt.alpha *= Math.pow(0.925, dt); // Progressive decay & disappearance
+          pt.x += pt.vx * dt;
+          pt.y += pt.vy * dt;
+          if (pt.alpha < 0.02) {
+            st.trail.splice(t, 1);
+          }
+        }
 
-          const grad = ctx.createLinearGradient(st.x, trailStartY, st.x, st.y);
-          grad.addColorStop(0, colorBase + '0)');
-          grad.addColorStop(0.3, colorBase + '0.15)');
-          grad.addColorStop(0.85, colorBase + '0.65)');
-          grad.addColorStop(1, colorBase + '0.95)');
-
-          ctx.strokeStyle = grad;
-          ctx.lineWidth = st.thickness;
-          ctx.beginPath();
-          ctx.moveTo(st.x, trailStartY);
-          ctx.quadraticCurveTo(bendX, midY, st.x, st.y);
-          ctx.stroke();
-        } else {
-          // Direct Vertical Fiber Stream
-          const grad = ctx.createLinearGradient(st.x, trailStartY, st.x, st.y);
+        // Draw Stream Dynamic Trailing Path (Spline with decaying alpha & thickness)
+        if (st.trail.length > 2) {
+          const tailPt = st.trail[st.trail.length - 1];
+          const grad = ctx.createLinearGradient(st.x, tailPt.y, st.x, st.y);
           grad.addColorStop(0, colorBase + '0)');
           grad.addColorStop(0.35, colorBase + '0.12)');
-          grad.addColorStop(0.8, colorBase + '0.60)');
-          grad.addColorStop(1, colorBase + '0.95)');
+          grad.addColorStop(0.75, colorBase + '0.50)');
+          grad.addColorStop(1, colorBase + '0.90)');
+
+          ctx.beginPath();
+          ctx.moveTo(st.trail[0].x, st.trail[0].y);
+          for (let t = 1; t < st.trail.length - 1; t++) {
+            const xc = (st.trail[t].x + st.trail[t + 1].x) / 2;
+            const yc = (st.trail[t].y + st.trail[t + 1].y) / 2;
+            ctx.quadraticCurveTo(st.trail[t].x, st.trail[t].y, xc, yc);
+          }
+          ctx.lineTo(tailPt.x, tailPt.y);
 
           ctx.strokeStyle = grad;
           ctx.lineWidth = st.thickness;
-          ctx.beginPath();
-          ctx.moveTo(st.x, trailStartY);
-          ctx.lineTo(st.x, st.y);
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
           ctx.stroke();
         }
 
-        // Draw Glowing Stream Head Particle
-        const pulse = 1 + Math.sin(timestamp * 0.004 + st.pulsePhase) * 0.25;
+        // Real-Time Trail Micro-Spark Shedding
+        st.shedTimer += dt;
+        if (st.shedTimer > 9 && Math.random() < 0.28 && trailSparks.length < 50) {
+          st.shedTimer = 0;
+          trailSparks.push({
+            x: st.x + (Math.random() - 0.5) * 2,
+            y: st.y + Math.random() * 8,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: 0.25 + Math.random() * 0.4,
+            alpha: 0.75,
+            size: 0.6 + Math.random() * 0.6,
+            colorType: st.colorType
+          });
+        }
+
+        // Draw Micro Radiant Stream Head Particle
+        const pulse = 1 + Math.sin(timestamp * 0.005 + st.pulsePhase) * 0.22;
         const currentHeadR = st.headRadius * pulse;
 
-        // Radial Halo
+        // Subtle Radial Halo Glow
         const glowGrad = ctx.createRadialGradient(st.x, st.y, 0, st.x, st.y, st.headGlow * pulse);
-        glowGrad.addColorStop(0, colorBase + '0.8)');
-        glowGrad.addColorStop(0.4, colorBase + '0.3)');
+        glowGrad.addColorStop(0, colorBase + '0.75)');
+        glowGrad.addColorStop(0.45, colorBase + '0.22)');
         glowGrad.addColorStop(1, colorBase + '0)');
         ctx.fillStyle = glowGrad;
         ctx.beginPath();
         ctx.arc(st.x, st.y, st.headGlow * pulse, 0, Math.PI * 2);
         ctx.fill();
 
-        // Solid Radiant Core
+        // High-Luminance Micro Core
         ctx.fillStyle = headColor + '0.95)';
         ctx.beginPath();
         ctx.arc(st.x, st.y, currentHeadR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 2.5 Update & Draw Dispersing Micro Trail Sparks
+      for (let s = trailSparks.length - 1; s >= 0; s--) {
+        const sp = trailSparks[s];
+        sp.x += sp.vx * dt;
+        sp.y += sp.vy * dt;
+        sp.alpha *= Math.pow(0.91, dt); // Progressive decay
+
+        if (sp.alpha < 0.02 || sp.y > height + 20) {
+          trailSparks.splice(s, 1);
+          continue;
+        }
+
+        const colorBase = palette[sp.colorType] || palette.primary;
+        ctx.fillStyle = colorBase + sp.alpha + ')';
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -855,6 +918,236 @@
   }
 
   // ---------------------------------------------------------------------------
+  // 7. CYBERNETIC HOLOGRAPHIC HAND WORKS SHOWCASE (CASE STUDIES PROJECTOR)
+  // ---------------------------------------------------------------------------
+  const caseStudies = [
+    {
+      id: 'genai',
+      badge: 'GenAI & Autonomous Engineering Pod',
+      title: '24-Member Specialized LLM Team in 48 Hours',
+      client: 'Silicon Valley AI Unicorn',
+      metrics: [
+        { label: 'Turnaround', value: '48 Hours' },
+        { label: 'Roles Vetted', value: '24 Engineers' },
+        { label: 'Offer Acceptance', value: '100%' },
+        { label: '12M Retention', value: '98.5%' }
+      ],
+      desc: 'Rapidly assembled a dedicated squad of PyTorch, Triton, LangChain, and Distributed Training specialists to build multi-agent enterprise workflows. Zero renege, fully integrated across global timezones.'
+    },
+    {
+      id: 'cloud',
+      badge: 'Cloud Modernization & DevOps Scale',
+      title: '40+ Certified Kubernetes & Cloud Architects',
+      client: 'Global FinTech Banking Infrastructure',
+      metrics: [
+        { label: 'Team Scaled', value: '42 Architects' },
+        { label: 'SLA Met', value: '99.99%' },
+        { label: 'Migration Speed', value: '3.5 Months' },
+        { label: 'Cost Savings', value: '38%' }
+      ],
+      desc: 'Sourced multi-cloud architects (AWS/GCP/Terraform) with strict zero-trust security clearance. Reduced legacy infrastructure downtime by 99.8% and streamlined automated CI/CD pipelines.'
+    },
+    {
+      id: 'leadership',
+      badge: 'Executive Technology Leadership',
+      title: 'VP of Engineering & Principal Data Scientists',
+      client: 'High-Growth Hyderabad Tech Center',
+      metrics: [
+        { label: 'Placements', value: '6 C-Level Leads' },
+        { label: 'Confidentiality', value: '100%' },
+        { label: 'Tenure Avg', value: '3.4 Years' },
+        { label: 'Talent Pool', value: 'Top 1.5%' }
+      ],
+      desc: 'Closed high-stakes executive leadership roles in Hyderabad. Curated candidates with proven experience leading 150+ engineer orgs and shipping mission-critical deep learning infrastructure.'
+    },
+    {
+      id: 'odc',
+      badge: 'Offshore Development Center (ODC)',
+      title: '120-Engineer Turnkey ODC & BOT Model',
+      client: 'European SaaS Enterprise',
+      metrics: [
+        { label: 'Pod Scale', value: '120 Developers' },
+        { label: 'Setup Time', value: '21 Days' },
+        { label: 'Cost Efficiency', value: '62%' },
+        { label: 'IP Protection', value: 'ISO 27001' }
+      ],
+      desc: 'Delivered a dedicated Offshore Development Center in Hyderabad with plug-and-play engineering pods, comprehensive IT security, HR infrastructure, and seamless BOT (Build-Operate-Transfer) execution.'
+    }
+  ];
+
+  function initWorksShowcase() {
+    const container = document.getElementById('works-showcase');
+    if (!container) return;
+
+    const tabs = container.querySelectorAll('.works-tab-btn');
+    const badgeEl = container.querySelector('.projected-badge');
+    const titleEl = container.querySelector('.projected-title');
+    const clientEl = container.querySelector('.projected-client');
+    const descEl = container.querySelector('.projected-desc');
+    const metricsGrid = container.querySelector('.projected-metrics-grid');
+    const hologramCard = container.querySelector('.projected-hologram-card');
+
+    function selectCase(index) {
+      const data = caseStudies[index];
+      if (!data) return;
+
+      tabs.forEach((tab, idx) => {
+        tab.classList.toggle('active', idx === index);
+      });
+
+      if (hologramCard) {
+        hologramCard.classList.add('switching');
+        setTimeout(() => {
+          if (badgeEl) badgeEl.textContent = data.badge;
+          if (titleEl) titleEl.textContent = data.title;
+          if (clientEl) clientEl.textContent = 'Client: ' + data.client;
+          if (descEl) descEl.textContent = data.desc;
+          if (metricsGrid) {
+            metricsGrid.innerHTML = data.metrics.map(m => `
+              <div class="projected-metric-item">
+                <span class="projected-metric-val">${m.value}</span>
+                <span class="projected-metric-label">${m.label}</span>
+              </div>
+            `).join('');
+          }
+          hologramCard.classList.remove('switching');
+        }, 160);
+      }
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectCase(index));
+    });
+
+    // Auto rotate every 7 seconds when not hovered
+    let activeIdx = 0;
+    let autoInterval = setInterval(() => {
+      activeIdx = (activeIdx + 1) % caseStudies.length;
+      selectCase(activeIdx);
+    }, 7000);
+
+    container.addEventListener('mouseenter', () => clearInterval(autoInterval));
+  }
+
+  // ---------------------------------------------------------------------------
+  // 8. ON-SCROLL SERVICES REVEAL OBSERVER
+  // ---------------------------------------------------------------------------
+  function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal-on-scroll');
+    if (!reveals.length) return;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -30px 0px'
+      });
+
+      reveals.forEach((el, idx) => {
+        el.style.setProperty('--reveal-delay', `${(idx % 3) * 0.12}s`);
+        observer.observe(el);
+      });
+    } else {
+      reveals.forEach(el => el.classList.add('revealed'));
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 9. OPEN-SOURCE VISUAL CAPTCHA WIDGET
+  // ---------------------------------------------------------------------------
+  async function fetchCaptcha(formOrWidget) {
+    try {
+      const resp = await fetch('/api/captcha');
+      const data = await resp.json();
+      if (data && data.success) {
+        const img = formOrWidget.querySelector('.captcha-img');
+        const tokenInput = formOrWidget.querySelector('.captcha-token-input');
+        const answerInput = formOrWidget.querySelector('.captcha-answer-input');
+
+        if (img) img.src = data.image;
+        if (tokenInput) tokenInput.value = data.token;
+        if (answerInput) answerInput.value = '';
+      }
+    } catch (err) {
+      console.warn('Captcha load issue:', err);
+    }
+  }
+
+  function initCaptchaWidget() {
+    const widgets = document.querySelectorAll('.captcha-widget-wrap');
+    widgets.forEach((wrap) => {
+      fetchCaptcha(wrap);
+
+      const refreshBtn = wrap.querySelector('.captcha-refresh-btn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          refreshBtn.classList.add('spinning');
+          fetchCaptcha(wrap).finally(() => {
+            setTimeout(() => refreshBtn.classList.remove('spinning'), 400);
+          });
+        });
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // 10. SERVICES PAGE CONTACT FORM HANDLER
+  // ---------------------------------------------------------------------------
+  function initServicesContactForm() {
+    const form = document.getElementById('services-contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const origText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Verifying & Submitting...</span>`;
+      }
+
+      const formData = new FormData(form);
+      const payload = {};
+      formData.forEach((value, key) => { payload[key] = value; });
+
+      try {
+        const resp = await fetch('/api/submissions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await resp.json();
+
+        if (result.success) {
+          showToast('✅ Inquiry received! Our Hyderabad team will contact you within 24 hours.');
+          form.reset();
+          const wrap = form.querySelector('.captcha-widget-wrap');
+          if (wrap) fetchCaptcha(wrap);
+        } else {
+          showToast(`⚠️ ${result.message || 'Submission failed. Please check inputs.'}`);
+          if (result.error === 'CAPTCHA_INVALID') {
+            const wrap = form.querySelector('.captcha-widget-wrap');
+            if (wrap) fetchCaptcha(wrap);
+          }
+        }
+      } catch (err) {
+        showToast('❌ Network error. Please try again or WhatsApp +91 9030888469.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
+        }
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------------------
   // INITIALIZATION ON DOM READY
   // ---------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
@@ -864,5 +1157,9 @@
     initModal();
     initSynapticParticles();
     initCardGazeParallax();
+    initWorksShowcase();
+    initScrollReveal();
+    initCaptchaWidget();
+    initServicesContactForm();
   });
 })();

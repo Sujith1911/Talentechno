@@ -6,6 +6,7 @@ const cors = require('cors');
 const db = require('./services/supabaseClient');
 const r2 = require('./services/cloudflareR2Client');
 const videos = require('./services/videoManager');
+const captcha = require('./services/openCaptcha');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,16 +17,46 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 2. Static Assets Serving
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 app.use('/assets/uploads', express.static(path.join(__dirname, '..', 'assets', 'uploads')));
 app.use('/css', express.static(path.join(__dirname, '..', 'css')));
 app.use('/js', express.static(path.join(__dirname, '..', 'js')));
+
+// ==============================================================================
+// PUBLIC API: OPEN-SOURCE VISUAL CAPTCHA GENERATION
+// ==============================================================================
+app.get('/api/captcha', (req, res) => {
+  try {
+    const challenge = captcha.generateCaptcha();
+    return res.json({
+      success: true,
+      token: challenge.token,
+      image: challenge.image
+    });
+  } catch (err) {
+    console.error('Error generating captcha:', err);
+    return res.status(500).json({ success: false, error: 'CAPTCHA_GENERATION_FAILED' });
+  }
+});
 
 // ==============================================================================
 // PUBLIC API: CONTACT FORM & RECRUITMENT INQUIRY SUBMISSIONS
 // ==============================================================================
 app.post('/api/submissions', async (req, res) => {
   try {
-    let { first_name, last_name, name, email, phone, service, target_role, message, company } = req.body;
+    let { first_name, last_name, name, email, phone, service, target_role, message, company, captcha_token, captcha_answer } = req.body;
+
+    // Verify Open-Source CAPTCHA if provided
+    if (captcha_token || captcha_answer) {
+      const isValidCaptcha = captcha.verifyCaptcha(captcha_token, captcha_answer);
+      if (!isValidCaptcha) {
+        return res.status(400).json({
+          success: false,
+          error: 'CAPTCHA_INVALID',
+          message: 'Security verification failed. Please enter the correct CAPTCHA code.'
+        });
+      }
+    }
 
     if (!first_name && name) {
       const parts = String(name).trim().split(/\s+/);
