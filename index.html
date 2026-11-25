@@ -113,302 +113,424 @@
     </section>
 
     <!-- =========================================================================
-         3. CYBERNETIC HOLOGRAPHIC HAND SHOWCASE (WORKS & CASE STUDIES DONE)
+         3. 8K PROCEDURAL VECTOR CYBERNETIC HAND HOLOGRAPHIC EXPERIENCE
+         All service cards and works are projected directly from the hand on scroll.
+         Zero raster images • 100% Mathematically Sharp 8K Vector Precision.
          ========================================================================= -->
-    <section class="works-showcase-section" id="works-showcase">
-      <div class="section-container">
+    <section class="hand-projection-experience" id="works-showcase">
+      <!-- High scroll runway allowing smooth, progressive card projection on scroll -->
+      <div class="hand-scroll-track" id="hand-scroll-track">
         
-        <!-- Section Header -->
-        <div class="section-header-center">
-          <div class="section-tag">✦ Proven Engineering Impact ✦</div>
-          <h2 class="section-heading">Works Done by Talentechno</h2>
-          <p class="section-subtext">
-            Our autonomous cybernetic recruitment engine projects verified engineering milestones across tier-1 enterprises and high-growth innovators.
-          </p>
-        </div>
+        <!-- Pinned Sticky Viewport: The Cybernetic Projector Stage -->
+        <div class="hand-sticky-stage" id="hand-sticky-stage">
 
-        <!-- Case Study Selector Tabs -->
-        <div class="works-tabs-cluster" role="tablist" aria-label="Talentechno Works Selection">
-          <button type="button" class="works-tab-btn active" role="tab" aria-selected="true" data-tab-index="0">
-            <span class="tab-dot"></span>
-            <span>GenAI Engineering Pod</span>
-          </button>
-          <button type="button" class="works-tab-btn" role="tab" aria-selected="false" data-tab-index="1">
-            <span class="tab-dot"></span>
-            <span>Cloud & DevOps Scale</span>
-          </button>
-          <button type="button" class="works-tab-btn" role="tab" aria-selected="false" data-tab-index="2">
-            <span class="tab-dot"></span>
-            <span>Hyderabad Leadership</span>
-          </button>
-          <button type="button" class="works-tab-btn" role="tab" aria-selected="false" data-tab-index="3">
-            <span class="tab-dot"></span>
-            <span>120-Engineer ODC Hub</span>
-          </button>
-        </div>
+          <!-- Top Stage HUD: Milestone Indicator & Quick-Jump Controls -->
+          <div class="projector-hud-header">
+            <div class="hud-badge">✦ 8K Cybernetic Engineering Projector ✦</div>
+            <h2 class="hud-title">Services & Works Projected from the Core</h2>
+            <div class="hud-subtext">Scroll down or click any milestone to project each capability directly from the palm.</div>
 
-        <!-- Cybernetic Hand Holographic Stage -->
-        <div class="cyber-hand-stage">
+            <!-- Clickable Milestone Tabs / Quick-Jump Buttons -->
+            <div class="hud-milestone-bar" role="tablist" aria-label="Projected Services Navigation">
+              <button type="button" class="hud-milestone-pill active" data-index="0" role="tab" aria-selected="true">
+                <span class="pill-num">01</span>
+                <span class="pill-txt">IT Staffing</span>
+              </button>
+              <button type="button" class="hud-milestone-pill" data-index="1" role="tab" aria-selected="false">
+                <span class="pill-num">02</span>
+                <span class="pill-txt">AI / ML Hub</span>
+              </button>
+              <button type="button" class="hud-milestone-pill" data-index="2" role="tab" aria-selected="false">
+                <span class="pill-num">03</span>
+                <span class="pill-txt">Leadership</span>
+              </button>
+              <button type="button" class="hud-milestone-pill" data-index="3" role="tab" aria-selected="false">
+                <span class="pill-num">04</span>
+                <span class="pill-txt">Cloud & SRE</span>
+              </button>
+              <button type="button" class="hud-milestone-pill" data-index="4" role="tab" aria-selected="false">
+                <span class="pill-num">05</span>
+                <span class="pill-txt">Contract Squads</span>
+              </button>
+              <button type="button" class="hud-milestone-pill" data-index="5" role="tab" aria-selected="false">
+                <span class="pill-num">06</span>
+                <span class="pill-txt">Hyderabad ODC</span>
+              </button>
+              <button type="button" class="hud-milestone-pill" data-index="6" role="tab" aria-selected="false">
+                <span class="pill-num">07</span>
+                <span class="pill-txt">Verified Works</span>
+              </button>
+            </div>
 
-          <!-- Holographic Floating Projection Card (Upper Level) -->
-          <div class="projected-card-anchor">
-            <div class="projected-hologram-card">
-              <!-- Hologram Top Bezel -->
-              <div class="hologram-card-header">
-                <span class="projected-badge">GenAI & Autonomous Engineering Pod</span>
-                <span class="hologram-live-badge"><span class="live-dot"></span> Verified Case</span>
+            <!-- Manual Stepper Navigation Arrows -->
+            <div class="hud-stepper-row">
+              <button type="button" class="hud-step-btn btn-prev" aria-label="Previous Projected Card" title="Previous Card">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span>Previous</span>
+              </button>
+              <div class="hud-step-counter"><span id="hud-current-step">1</span> of 7</div>
+              <button type="button" class="hud-step-btn btn-next" aria-label="Next Projected Card" title="Next Card">
+                <span>Next</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Middle Stage: Floating Holographic Card Deck (Elevated Directly Over the Palm) -->
+          <div class="holographic-deck-stage">
+
+            <!-- Card 0: Full-Lifecycle IT Staffing & Lateral Hiring -->
+            <article class="hologram-projected-card active-card" data-card-index="0">
+              <div class="hologram-card-topbar">
+                <span class="card-vertical-tag">Vertical 01 • Core Engineering</span>
+                <span class="card-status-badge"><span class="badge-dot"></span> 48h SLA</span>
               </div>
-
-              <!-- Main Case Title & Client -->
-              <h3 class="projected-title">24-Member Specialized LLM Team in 48 Hours</h3>
-              <div class="projected-client">Client: Silicon Valley AI Unicorn</div>
-
-              <!-- Metrics Ribbon -->
-              <div class="projected-metrics-grid">
-                <div class="projected-metric-item">
-                  <span class="projected-metric-val">48 Hours</span>
-                  <span class="projected-metric-label">Turnaround</span>
-                </div>
-                <div class="projected-metric-item">
-                  <span class="projected-metric-val">24 Engineers</span>
-                  <span class="projected-metric-label">Roles Vetted</span>
-                </div>
-                <div class="projected-metric-item">
-                  <span class="projected-metric-val">100%</span>
-                  <span class="projected-metric-label">Offer Acceptance</span>
-                </div>
-                <div class="projected-metric-item">
-                  <span class="projected-metric-val">98.5%</span>
-                  <span class="projected-metric-label">12M Retention</span>
-                </div>
-              </div>
-
-              <!-- Case Description -->
-              <p class="projected-desc">
-                Rapidly assembled a dedicated squad of PyTorch, Triton, LangChain, and Distributed Training specialists to build multi-agent enterprise workflows. Zero renege, fully integrated across global timezones.
+              <h3 class="card-headline">Full-Lifecycle IT Staffing & Lateral Hiring</h3>
+              <p class="card-description">
+                Curated mid-to-principal software engineers with thorough 4-tier live architecture vetting. Pre-screened for immediate deployment into high-velocity production squads.
               </p>
-            </div>
+              <div class="card-metrics-row">
+                <div class="c-metric"><span class="c-val">48 Hours</span><span class="c-lbl">Shortlist SLA</span></div>
+                <div class="c-metric"><span class="c-val">98%</span><span class="c-lbl">Stack Alignment</span></div>
+                <div class="c-metric"><span class="c-val">Top 2%</span><span class="c-lbl">Screening Pass</span></div>
+              </div>
+              <div class="card-tags-row">
+                <span class="c-tag">React / Next.js</span>
+                <span class="c-tag">Node.js / Go</span>
+                <span class="c-tag">Python / Rust</span>
+                <span class="c-tag">Microservices</span>
+              </div>
+              <div class="card-action-row">
+                <a href="services.html#service-staffing" class="btn-projected-action">
+                  <span>Explore IT Staffing Details</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
 
-            <!-- Holographic Emitter Beams & Ray Projection -->
-            <div class="hologram-light-cone" aria-hidden="true">
-              <div class="hologram-beam beam-left"></div>
-              <div class="hologram-beam beam-center"></div>
-              <div class="hologram-beam beam-right"></div>
-            </div>
+            <!-- Card 1: AI, ML & Data Science Talent Hub -->
+            <article class="hologram-projected-card" data-card-index="1">
+              <div class="hologram-card-topbar">
+                <span class="card-vertical-tag">Vertical 02 • Artificial Intelligence</span>
+                <span class="card-status-badge"><span class="badge-dot"></span> 99.1% Pass Rate</span>
+              </div>
+              <h3 class="card-headline">AI, ML & Data Science Talent Hub</h3>
+              <p class="card-description">
+                Elite engineering talent across large language models (LLMs), agentic pipelines, computer vision, and high-throughput GPU inference pipelines.
+              </p>
+              <div class="card-metrics-row">
+                <div class="c-metric"><span class="c-val">99.1%</span><span class="c-lbl">Interview Pass</span></div>
+                <div class="c-metric"><span class="c-val">PyTorch</span><span class="c-lbl">Deep Learning</span></div>
+                <div class="c-metric"><span class="c-val">Top 1.5%</span><span class="c-lbl">Math & Alg Vetting</span></div>
+              </div>
+              <div class="card-tags-row">
+                <span class="c-tag">LLM Fine-Tuning</span>
+                <span class="c-tag">LangChain & Agents</span>
+                <span class="c-tag">TensorRT Inference</span>
+                <span class="c-tag">MLOps</span>
+              </div>
+              <div class="card-action-row">
+                <a href="services.html#service-ai" class="btn-projected-action">
+                  <span>Explore AI / ML Hub</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 2: Executive Search & Technology Leadership -->
+            <article class="hologram-projected-card" data-card-index="2">
+              <div class="hologram-card-topbar">
+                <span class="card-vertical-tag">Vertical 03 • Technology Leadership</span>
+                <span class="card-status-badge"><span class="badge-dot"></span> 96.4% Retention</span>
+              </div>
+              <h3 class="card-headline">Executive Search & Technology Leadership</h3>
+              <p class="card-description">
+                High-touch, discreet retained search for CTOs, VPs of Engineering, and Principal Architects who build world-class engineering organizations.
+              </p>
+              <div class="card-metrics-row">
+                <div class="c-metric"><span class="c-val">100%</span><span class="c-lbl">Confidentiality</span></div>
+                <div class="c-metric"><span class="c-val">96.4%</span><span class="c-lbl">2-Year Tenure</span></div>
+                <div class="c-metric"><span class="c-val">Hyderabad Hub</span><span class="c-lbl">C-Level Network</span></div>
+              </div>
+              <div class="card-tags-row">
+                <span class="c-tag">CTO / VP Engineering</span>
+                <span class="c-tag">Head of AI</span>
+                <span class="c-tag">Chief Architect</span>
+                <span class="c-tag">Board Advisory</span>
+              </div>
+              <div class="card-action-row">
+                <a href="services.html#service-executive" class="btn-projected-action">
+                  <span>Explore Executive Search</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 3: Cloud Infrastructure, DevOps & SRE -->
+            <article class="hologram-projected-card" data-card-index="3">
+              <div class="hologram-card-topbar">
+                <span class="card-vertical-tag">Vertical 04 • Infrastructure</span>
+                <span class="card-status-badge"><span class="badge-dot"></span> Zero Downtime</span>
+              </div>
+              <h3 class="card-headline">Cloud Infrastructure, DevOps & SRE</h3>
+              <p class="card-description">
+                Certified cloud architects and Site Reliability Engineers (SREs) specialized in resilient multi-cloud, infrastructure-as-code, and automated CI/CD.
+              </p>
+              <div class="card-metrics-row">
+                <div class="c-metric"><span class="c-val">99.99%</span><span class="c-lbl">Uptime Record</span></div>
+                <div class="c-metric"><span class="c-val">100%</span><span class="c-lbl">Multi-Cloud Cert</span></div>
+                <div class="c-metric"><span class="c-val">40+</span><span class="c-lbl">Scale Projects</span></div>
+              </div>
+              <div class="card-tags-row">
+                <span class="c-tag">AWS / Azure / GCP</span>
+                <span class="c-tag">Kubernetes</span>
+                <span class="c-tag">Terraform (IaC)</span>
+                <span class="c-tag">Zero-Trust Sec</span>
+              </div>
+              <div class="card-action-row">
+                <a href="services.html#service-cloud" class="btn-projected-action">
+                  <span>Explore Cloud & SRE</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 4: Contract Staffing & Agile Squad Augmentation -->
+            <article class="hologram-projected-card" data-card-index="4">
+              <div class="hologram-card-topbar">
+                <span class="card-vertical-tag">Vertical 05 • Agile Flexibility</span>
+                <span class="card-status-badge"><span class="badge-dot"></span> 3-Day Onboarding</span>
+              </div>
+              <h3 class="card-headline">Contract Staffing & Agile Squad Augmentation</h3>
+              <p class="card-description">
+                Rapid capacity scaling without long-term overhead. Plug-and-play contract specialists for critical delivery sprints with full legal and tax compliance.
+              </p>
+              <div class="card-metrics-row">
+                <div class="c-metric"><span class="c-val">3-5 Days</span><span class="c-lbl">Rapid Onboarding</span></div>
+                <div class="c-metric"><span class="c-val">Zero</span><span class="c-lbl">Employer Burden</span></div>
+                <div class="c-metric"><span class="c-val">Flexible</span><span class="c-lbl">Sprint Contracts</span></div>
+              </div>
+              <div class="card-tags-row">
+                <span class="c-tag">Sprint Augmentation</span>
+                <span class="c-tag">Turnkey Squads</span>
+                <span class="c-tag">Contract-to-Hire</span>
+                <span class="c-tag">Zero Liability</span>
+              </div>
+              <div class="card-action-row">
+                <a href="services.html#service-contract" class="btn-projected-action">
+                  <span>Explore Agile Squads</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 5: Offshore Development Center (ODC) in Hyderabad -->
+            <article class="hologram-projected-card" data-card-index="5">
+              <div class="hologram-card-topbar">
+                <span class="card-vertical-tag">Vertical 06 • Global Offshore Hub</span>
+                <span class="card-status-badge"><span class="badge-dot"></span> 65% Cost Savings</span>
+              </div>
+              <h3 class="card-headline">Offshore Development Center (ODC) in Hyderabad</h3>
+              <p class="card-description">
+                Dedicated turnkey engineering pods in Hyderabad with ISO-certified infrastructure, intellectual property protection, and flexible BOT (Build-Operate-Transfer).
+              </p>
+              <div class="card-metrics-row">
+                <div class="c-metric"><span class="c-val">65%</span><span class="c-lbl">Cost Efficiency</span></div>
+                <div class="c-metric"><span class="c-val">BOT Model</span><span class="c-lbl">Full Transfer</span></div>
+                <div class="c-metric"><span class="c-val">Hyderabad Hub</span><span class="c-lbl">Prime Tech Center</span></div>
+              </div>
+              <div class="card-tags-row">
+                <span class="c-tag">Turnkey Engineering</span>
+                <span class="c-tag">ISO 27001 Security</span>
+                <span class="c-tag">Full IP Ringfence</span>
+                <span class="c-tag">Hardware & HR</span>
+              </div>
+              <div class="card-action-row">
+                <a href="services.html#service-odc" class="btn-projected-action">
+                  <span>Explore Hyderabad ODC</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 6: Enterprise Works & Grand Climax -->
+            <article class="hologram-projected-card" data-card-index="6">
+              <div class="hologram-card-topbar">
+                <span class="card-vertical-tag">Grand Showcase • Verified Delivery</span>
+                <span class="card-status-badge"><span class="badge-dot"></span> 500+ Placements</span>
+              </div>
+              <h3 class="card-headline">Enterprise Works & Verified Milestones</h3>
+              <p class="card-description">
+                From scaling a 24-member specialized GenAI squad in 48 hours to establishing 120-engineer turnkey ODCs in Hyderabad, Talentechno powers mission-critical pipelines with 96.4% retention.
+              </p>
+              <div class="card-metrics-row">
+                <div class="c-metric"><span class="c-val">500+</span><span class="c-lbl">Engineers Placed</span></div>
+                <div class="c-metric"><span class="c-val">48 Hours</span><span class="c-lbl">Rapid Shortlist</span></div>
+                <div class="c-metric"><span class="c-val">90 Days</span><span class="c-lbl">Replacement Warranty</span></div>
+              </div>
+              
+              <!-- The Requested "Explore Us More" Button Prominently Placed -->
+              <div class="card-action-row" style="margin-top: 14px;">
+                <a href="services.html" class="btn-explore-more">
+                  <div class="btn-glow-ring" aria-hidden="true"></div>
+                  <span>Explore Us More</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </article>
+
           </div>
 
-          <!-- Cybernetic Hand Image Base (Lower Level Projection Origin) -->
-          <div class="cyber-hand-wrapper" aria-hidden="true">
-            <img src="assets/images/cyber_hand_purple.png" class="cyber-hand-img hand-purple" alt="Talentechno Cybernetic Circuit Hand" loading="lazy">
-            <img src="assets/images/cyber_hand_gold.png" class="cyber-hand-img hand-gold" alt="Talentechno Cybernetic Circuit Hand" loading="lazy">
-            <div class="palm-energy-core"></div>
-          </div>
+          <!-- Bottom Stage: 8K PROCEDURAL VECTOR CYBERNETIC HAND SVG (Mathematically Sharp At Any Resolution) -->
+          <div class="procedural-8k-hand-container" aria-hidden="true">
+            <svg class="cyber-hand-8k-svg" viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Dynamic Neon Glow Filter for 8K Crispness -->
+                <filter id="cyberGlow8k" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="3" result="blur1" />
+                  <feGaussianBlur stdDeviation="8" result="blur2" />
+                  <feMerge>
+                    <feMergeNode in="blur2" />
+                    <feMergeNode in="blur1" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
 
-        </div>
+                <!-- Core Radial Emitter Gradient -->
+                <radialGradient id="palmEmitterGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="var(--accent-glow)" stop-opacity="1" />
+                  <stop offset="40%" stop-color="var(--accent-primary)" stop-opacity="0.6" />
+                  <stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0" />
+                </radialGradient>
 
-        <!-- The Requested "Explore Us More" Button -->
-        <div class="works-cta-wrap">
-          <a href="services.html" class="btn-explore-more" title="Explore Detailed Services Offered by Talentechno">
-            <div class="btn-glow-ring" aria-hidden="true"></div>
-            <span>Explore Us More</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
+                <!-- Vertical Beam Linear Gradient -->
+                <linearGradient id="verticalBeamGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="var(--accent-glow)" stop-opacity="0.9" />
+                  <stop offset="35%" stop-color="var(--accent-primary)" stop-opacity="0.45" />
+                  <stop offset="85%" stop-color="var(--accent-primary)" stop-opacity="0.1" />
+                  <stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0" />
+                </linearGradient>
+
+                <!-- Circuit Line Linear Gradient -->
+                <linearGradient id="circuitBusGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.4" />
+                  <stop offset="60%" stop-color="var(--accent-glow)" stop-opacity="0.9" />
+                  <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.95" />
+                </linearGradient>
+              </defs>
+
+              <!-- Layer 1: Holographic Vertical Light Cone & Emitter Beams (Rising from Palm up to Card) -->
+              <g class="hologram-emitter-rays">
+                <!-- Outer expanding light shroud -->
+                <polygon points="480,330 220,0 740,0" fill="url(#verticalBeamGrad)" opacity="0.12" />
+                <polygon points="480,330 330,0 630,0" fill="url(#verticalBeamGrad)" opacity="0.22" />
+                <!-- Center high-intensity laser beams -->
+                <line x1="480" y1="330" x2="480" y2="10" stroke="url(#verticalBeamGrad)" stroke-width="3" filter="url(#cyberGlow8k)" />
+                <line x1="480" y1="330" x2="380" y2="10" stroke="url(#verticalBeamGrad)" stroke-width="1.8" stroke-dasharray="8 6" opacity="0.75" />
+                <line x1="480" y1="330" x2="580" y2="10" stroke="url(#verticalBeamGrad)" stroke-width="1.8" stroke-dasharray="8 6" opacity="0.75" />
+                <line x1="480" y1="330" x2="280" y2="20" stroke="url(#verticalBeamGrad)" stroke-width="1.2" stroke-dasharray="5 5" opacity="0.5" />
+                <line x1="480" y1="330" x2="680" y2="20" stroke="url(#verticalBeamGrad)" stroke-width="1.2" stroke-dasharray="5 5" opacity="0.5" />
+              </g>
+
+              <!-- Layer 2: Main Cybernetic Hand Outer Silhouette (Mathematical Precision) -->
+              <path class="hand-outer-contour" d="M 10 395 C 80 375, 160 345, 240 320 C 255 290, 275 250, 305 195 C 320 170, 345 170, 360 190 C 380 220, 410 265, 435 280 C 475 260, 520 215, 580 160 C 600 140, 625 145, 630 170 C 635 195, 595 250, 565 278 C 605 255, 665 195, 715 148 C 735 130, 758 136, 762 162 C 766 188, 710 252, 672 288 C 710 265, 775 220, 815 190 C 835 175, 855 184, 855 208 C 855 232, 790 290, 740 325 C 770 310, 825 270, 860 248 C 880 236, 896 248, 892 270 C 885 302, 800 375, 720 410 C 620 455, 460 470, 340 460 C 230 450, 120 465, 10 510 Z" />
+
+              <!-- Layer 3: High-Tech Inset Double Outline (Neon Cyber Contour) -->
+              <path class="hand-inner-contour" d="M 25 410 C 90 390, 165 362, 235 335 C 255 305, 275 260, 302 205 C 315 185, 335 185, 348 200 C 368 230, 398 275, 425 290 C 465 270, 510 225, 570 175 C 588 158, 610 162, 615 180 C 618 205, 580 258, 550 286 C 590 265, 650 205, 700 160 C 718 145, 740 150, 742 172 C 746 198, 692 260, 658 296 C 695 275, 760 230, 800 202 C 818 188, 836 196, 836 216 C 836 238, 772 298, 725 335 C 755 320, 810 280, 845 258 C 862 248, 876 258, 872 278 C 865 308, 785 378, 710 415 C 615 455, 465 470, 345 460 C 240 450, 135 465, 25 505" />
+
+              <!-- Layer 4: Wrist Mechanical Actuators & Joint Collars -->
+              <g class="hand-wrist-mechanics">
+                <path d="M 220 325 C 235 365, 245 390, 255 435" stroke="var(--accent-primary)" stroke-width="2.5" opacity="0.85" />
+                <path d="M 235 315 C 250 355, 260 380, 270 425" stroke="var(--accent-glow)" stroke-width="1.8" stroke-dasharray="6 3" />
+                <path d="M 140 350 L 140 475" stroke="var(--accent-primary)" stroke-width="2" stroke-dasharray="10 5" opacity="0.6" />
+                <!-- Wrist Pivot Sockets -->
+                <circle cx="225" cy="340" r="5" class="circuit-node-dot" />
+                <circle cx="240" cy="380" r="6" class="circuit-node-dot" />
+                <circle cx="255" cy="425" r="5" class="circuit-node-dot" />
+              </g>
+
+              <!-- Layer 5: PCB Circuit Traces & 45-Degree Bus Lines -->
+              <g class="hand-circuit-traces" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Bus Trace A: Forearm to Thumb -->
+                <path d="M 30 400 L 95 400 L 125 370 L 190 370 L 220 340 L 275 340 L 305 295 L 320 240 L 340 195" stroke="url(#circuitBusGrad)" stroke-width="2" />
+                
+                <!-- Bus Trace B: Forearm to Center Emitter -->
+                <path d="M 30 425 L 125 425 L 155 395 L 215 395 L 245 365 L 315 365 L 350 330 L 460 330" stroke="url(#circuitBusGrad)" stroke-width="2.5" />
+                
+                <!-- Bus Trace C: Forearm to Index & Middle -->
+                <path d="M 30 450 L 145 450 L 175 420 L 235 420 L 265 390 L 345 390 L 380 355 L 475 355" stroke="url(#circuitBusGrad)" stroke-width="2" />
+                
+                <!-- Bus Trace D: Lower Forearm to Ring & Pinky -->
+                <path d="M 30 475 L 165 475 L 195 445 L 265 445 L 295 415 L 385 415 L 420 380 L 500 380" stroke="url(#circuitBusGrad)" stroke-width="2" />
+
+                <!-- Finger Traces originating from Palm Core -->
+                <!-- Index Finger -->
+                <path d="M 465 320 L 515 275 L 570 215 L 615 165" stroke="url(#circuitBusGrad)" stroke-width="1.8" />
+                <path d="M 475 310 L 525 265 L 580 205 L 625 155" stroke="var(--accent-glow)" stroke-width="1.2" stroke-dasharray="5 3" />
+
+                <!-- Middle Finger (Tallest) -->
+                <path d="M 490 325 L 555 270 L 640 200 L 700 150" stroke="url(#circuitBusGrad)" stroke-width="2" />
+                <path d="M 500 315 L 565 260 L 650 190 L 710 142" stroke="var(--accent-glow)" stroke-width="1.2" stroke-dasharray="6 4" />
+
+                <!-- Ring Finger -->
+                <path d="M 505 335 L 590 290 L 690 230 L 755 175" stroke="url(#circuitBusGrad)" stroke-width="1.8" />
+                <path d="M 515 330 L 600 285 L 700 225 L 765 170" stroke="var(--accent-glow)" stroke-width="1.2" stroke-dasharray="5 3" />
+
+                <!-- Pinky Finger -->
+                <path d="M 515 350 L 620 340 L 715 280 L 800 225" stroke="url(#circuitBusGrad)" stroke-width="1.8" />
+              </g>
+
+              <!-- Layer 6: Solder Junction Nodes & Micro Surface-Mount Components -->
+              <g class="hand-circuit-components">
+                <!-- Junction Nodes -->
+                <circle cx="95" cy="400" r="3.5" class="circuit-node-dot" />
+                <circle cx="125" cy="370" r="3.5" class="circuit-node-dot" />
+                <circle cx="190" cy="370" r="3.5" class="circuit-node-dot" />
+                <circle cx="220" cy="340" r="4" class="circuit-node-dot" />
+                <circle cx="275" cy="340" r="3.5" class="circuit-node-dot" />
+                <circle cx="125" cy="425" r="4" class="circuit-node-dot" />
+                <circle cx="155" cy="395" r="3.5" class="circuit-node-dot" />
+                <circle cx="215" cy="395" r="4" class="circuit-node-dot" />
+                <circle cx="245" cy="365" r="3.5" class="circuit-node-dot" />
+                <circle cx="315" cy="365" r="4" class="circuit-node-dot" />
+                <circle cx="145" cy="450" r="3.5" class="circuit-node-dot" />
+                <circle cx="175" cy="420" r="4" class="circuit-node-dot" />
+                <circle cx="235" cy="420" r="3.5" class="circuit-node-dot" />
+                <circle cx="265" cy="390" r="4" class="circuit-node-dot" />
+                <circle cx="345" cy="390" r="3.5" class="circuit-node-dot" />
+
+                <!-- Microchip IC Packages on Forearm & Palm -->
+                <rect x="70" y="415" width="24" height="20" rx="3" class="circuit-chip-body" />
+                <rect x="180" y="388" width="14" height="8" rx="2" class="circuit-chip-small" />
+                <rect x="235" y="413" width="14" height="8" rx="2" class="circuit-chip-small" />
+                <rect x="365" y="347" width="16" height="10" rx="2" class="circuit-chip-small" />
+
+                <!-- Finger Knuckle Nodes -->
+                <circle cx="320" cy="240" r="4" class="circuit-node-dot" />
+                <circle cx="565" cy="215" r="4" class="circuit-node-dot" />
+                <circle cx="640" cy="200" r="4.5" class="circuit-node-dot" />
+                <circle cx="690" cy="230" r="4" class="circuit-node-dot" />
+                <circle cx="715" cy="280" r="3.5" class="circuit-node-dot" />
+              </g>
+
+              <!-- Layer 7: Central Palm Holographic Emitter Core (Origin of Projected Cards) -->
+              <g class="palm-central-emitter">
+                <!-- Outer Gyro Rings -->
+                <circle cx="480" cy="330" r="48" stroke="var(--accent-primary)" stroke-width="1.2" stroke-dasharray="14 8" opacity="0.6" class="gyro-ring-1" />
+                <circle cx="480" cy="330" r="32" stroke="var(--accent-glow)" stroke-width="1.8" stroke-dasharray="8 4" opacity="0.85" class="gyro-ring-2" />
+                <!-- Core Radiance Fill -->
+                <circle cx="480" cy="330" r="22" fill="url(#palmEmitterGlow)" />
+                <circle cx="480" cy="330" r="14" fill="#FFFFFF" opacity="0.95" filter="url(#cyberGlow8k)" />
+                <!-- Central Emitter Node Pulse -->
+                <circle cx="480" cy="330" r="6" fill="var(--accent-glow)" />
+              </g>
             </svg>
-          </a>
-          <div class="explore-hint">Discover our 6 dedicated service pillars, performance guarantees, and Hyderabad ODC</div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         4. ON-SCROLL SERVICES REVEAL SECTION (ALL SERVICES OFFERED)
-         ========================================================================= -->
-    <section class="services-reveal-section" id="services-reveal">
-      <div class="section-container">
-        
-        <div class="section-header-center">
-          <div class="section-tag">✦ Comprehensive Technical Capabilities ✦</div>
-          <h2 class="section-heading">Services Offered by Talentechno</h2>
-          <p class="section-subtext">
-            Precision technical staffing engineered for velocity and quality. Scroll through our core service disciplines below.
-          </p>
-        </div>
-
-        <div class="services-reveal-grid">
-
-          <!-- Service 1: IT Staffing & Lateral Hiring -->
-          <article class="service-glass-card reveal-on-scroll" data-service="staffing">
-            <div class="card-accent-bar" aria-hidden="true"></div>
-            <div class="card-header-row">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-              </div>
-              <div class="service-metric-pill">48h SLA</div>
-            </div>
-            <h3 class="service-card-title">IT Staffing & Lateral Hiring</h3>
-            <p class="service-card-desc">
-              Curated mid-to-principal software engineers with thorough 4-tier live architecture vetting. Pre-screened for immediate deployment into high-velocity production squads.
-            </p>
-            <div class="service-tech-tags">
-              <span class="tech-tag">React / Next.js</span>
-              <span class="tech-tag">Node.js / Go</span>
-              <span class="tech-tag">Python / Rust</span>
-              <span class="tech-tag">Microservices</span>
-            </div>
-            <a href="services.html#service-staffing" class="service-card-link">
-              <span>View Full Details</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Service 2: AI, ML & Data Science Talent Hub -->
-          <article class="service-glass-card reveal-on-scroll" data-service="ai-ml">
-            <div class="card-accent-bar" aria-hidden="true"></div>
-            <div class="card-header-row">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
-                  <path d="M12 6a6 6 0 0 0-6 6c0 1.9.9 3.6 2.3 4.7L12 14V6z"></path>
-                </svg>
-              </div>
-              <div class="service-metric-pill">99.1% Pass Rate</div>
-            </div>
-            <h3 class="service-card-title">AI, ML & Data Science Hub</h3>
-            <p class="service-card-desc">
-              Elite engineering talent across large language models (LLMs), agentic pipelines, computer vision, and high-throughput GPU inference pipelines.
-            </p>
-            <div class="service-tech-tags">
-              <span class="tech-tag">PyTorch</span>
-              <span class="tech-tag">LLM Fine-Tuning</span>
-              <span class="tech-tag">MLOps / Kubeflow</span>
-              <span class="tech-tag">TensorRT</span>
-            </div>
-            <a href="services.html#service-ai" class="service-card-link">
-              <span>View Full Details</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Service 3: Executive Search & Leadership Hiring -->
-          <article class="service-glass-card reveal-on-scroll" data-service="executive">
-            <div class="card-accent-bar" aria-hidden="true"></div>
-            <div class="card-header-row">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-              </div>
-              <div class="service-metric-pill">96.4% Retention</div>
-            </div>
-            <h3 class="service-card-title">Executive Search & Leadership</h3>
-            <p class="service-card-desc">
-              High-touch, discreet retained search for CTOs, VPs of Engineering, and Principal Architects who build world-class engineering organizations.
-            </p>
-            <div class="service-tech-tags">
-              <span class="tech-tag">CTO / VP Engineering</span>
-              <span class="tech-tag">Head of Data & AI</span>
-              <span class="tech-tag">Chief Architects</span>
-              <span class="tech-tag">Hyderabad Hub</span>
-            </div>
-            <a href="services.html#service-executive" class="service-card-link">
-              <span>View Full Details</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Service 4: Cloud, DevOps & Distributed Systems -->
-          <article class="service-glass-card reveal-on-scroll" data-service="cloud">
-            <div class="card-accent-bar" aria-hidden="true"></div>
-            <div class="card-header-row">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
-                </svg>
-              </div>
-              <div class="service-metric-pill">Zero Downtime</div>
-            </div>
-            <h3 class="service-card-title">Cloud & DevOps Scaling</h3>
-            <p class="service-card-desc">
-              Certified cloud architects and Site Reliability Engineers (SREs) specialized in resilient multi-cloud, infrastructure-as-code, and automated CI/CD.
-            </p>
-            <div class="service-tech-tags">
-              <span class="tech-tag">AWS / Azure / GCP</span>
-              <span class="tech-tag">Kubernetes</span>
-              <span class="tech-tag">Terraform</span>
-              <span class="tech-tag">Zero-Trust Sec</span>
-            </div>
-            <a href="services.html#service-cloud" class="service-card-link">
-              <span>View Full Details</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Service 5: Contract Staffing & Agile Squads -->
-          <article class="service-glass-card reveal-on-scroll" data-service="contract">
-            <div class="card-accent-bar" aria-hidden="true"></div>
-            <div class="card-header-row">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                </svg>
-              </div>
-              <div class="service-metric-pill">3-Day Turnaround</div>
-            </div>
-            <h3 class="service-card-title">Contract Staffing & Agile Squads</h3>
-            <p class="service-card-desc">
-              Rapid capacity scaling without long-term overhead. Plug-and-play contract specialists for critical delivery sprints with full legal and tax compliance.
-            </p>
-            <div class="service-tech-tags">
-              <span class="tech-tag">Sprint Augmentation</span>
-              <span class="tech-tag">Contract-to-Hire</span>
-              <span class="tech-tag">Zero Compliance Risk</span>
-              <span class="tech-tag">Fast Onboarding</span>
-            </div>
-            <a href="services.html#service-contract" class="service-card-link">
-              <span>View Full Details</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Service 6: Offshore Development Center (ODC) in Hyderabad -->
-          <article class="service-glass-card reveal-on-scroll" data-service="odc">
-            <div class="card-accent-bar" aria-hidden="true"></div>
-            <div class="card-header-row">
-              <div class="service-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
-              </div>
-              <div class="service-metric-pill">65% Cost Savings</div>
-            </div>
-            <h3 class="service-card-title">Offshore Development Center (ODC)</h3>
-            <p class="service-card-desc">
-              Dedicated turnkey engineering pods in Hyderabad with ISO-certified infrastructure, intellectual property protection, and flexible BOT (Build-Operate-Transfer).
-            </p>
-            <div class="service-tech-tags">
-              <span class="tech-tag">Hyderabad Tech Center</span>
-              <span class="tech-tag">Turnkey Engineering</span>
-              <span class="tech-tag">BOT Model</span>
-              <span class="tech-tag">ISO 27001 Security</span>
-            </div>
-            <a href="services.html#service-odc" class="service-card-link">
-              <span>View Full Details</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
+          </div>
 
         </div>
-
       </div>
     </section>
 

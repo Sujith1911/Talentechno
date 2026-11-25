@@ -918,115 +918,133 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 7. CYBERNETIC HOLOGRAPHIC HAND WORKS SHOWCASE (CASE STUDIES PROJECTOR)
+  // 7. 8K PROCEDURAL CYBERNETIC HAND SCROLL PROJECTOR CONTROLLER
+  // All service cards & works are projected directly from the palm on scroll
   // ---------------------------------------------------------------------------
-  const caseStudies = [
-    {
-      id: 'genai',
-      badge: 'GenAI & Autonomous Engineering Pod',
-      title: '24-Member Specialized LLM Team in 48 Hours',
-      client: 'Silicon Valley AI Unicorn',
-      metrics: [
-        { label: 'Turnaround', value: '48 Hours' },
-        { label: 'Roles Vetted', value: '24 Engineers' },
-        { label: 'Offer Acceptance', value: '100%' },
-        { label: '12M Retention', value: '98.5%' }
-      ],
-      desc: 'Rapidly assembled a dedicated squad of PyTorch, Triton, LangChain, and Distributed Training specialists to build multi-agent enterprise workflows. Zero renege, fully integrated across global timezones.'
-    },
-    {
-      id: 'cloud',
-      badge: 'Cloud Modernization & DevOps Scale',
-      title: '40+ Certified Kubernetes & Cloud Architects',
-      client: 'Global FinTech Banking Infrastructure',
-      metrics: [
-        { label: 'Team Scaled', value: '42 Architects' },
-        { label: 'SLA Met', value: '99.99%' },
-        { label: 'Migration Speed', value: '3.5 Months' },
-        { label: 'Cost Savings', value: '38%' }
-      ],
-      desc: 'Sourced multi-cloud architects (AWS/GCP/Terraform) with strict zero-trust security clearance. Reduced legacy infrastructure downtime by 99.8% and streamlined automated CI/CD pipelines.'
-    },
-    {
-      id: 'leadership',
-      badge: 'Executive Technology Leadership',
-      title: 'VP of Engineering & Principal Data Scientists',
-      client: 'High-Growth Hyderabad Tech Center',
-      metrics: [
-        { label: 'Placements', value: '6 C-Level Leads' },
-        { label: 'Confidentiality', value: '100%' },
-        { label: 'Tenure Avg', value: '3.4 Years' },
-        { label: 'Talent Pool', value: 'Top 1.5%' }
-      ],
-      desc: 'Closed high-stakes executive leadership roles in Hyderabad. Curated candidates with proven experience leading 150+ engineer orgs and shipping mission-critical deep learning infrastructure.'
-    },
-    {
-      id: 'odc',
-      badge: 'Offshore Development Center (ODC)',
-      title: '120-Engineer Turnkey ODC & BOT Model',
-      client: 'European SaaS Enterprise',
-      metrics: [
-        { label: 'Pod Scale', value: '120 Developers' },
-        { label: 'Setup Time', value: '21 Days' },
-        { label: 'Cost Efficiency', value: '62%' },
-        { label: 'IP Protection', value: 'ISO 27001' }
-      ],
-      desc: 'Delivered a dedicated Offshore Development Center in Hyderabad with plug-and-play engineering pods, comprehensive IT security, HR infrastructure, and seamless BOT (Build-Operate-Transfer) execution.'
-    }
-  ];
+  function initHandScrollProjector() {
+    const handTrack = document.getElementById('hand-scroll-track');
+    const cards = document.querySelectorAll('.hologram-projected-card');
+    const pills = document.querySelectorAll('.hud-milestone-pill');
+    const stepCounter = document.getElementById('hud-current-step');
+    const prevBtn = document.querySelector('.hud-step-btn.btn-prev');
+    const nextBtn = document.querySelector('.hud-step-btn.btn-next');
+    const emitterRays = document.querySelector('.hologram-emitter-rays');
 
-  function initWorksShowcase() {
-    const container = document.getElementById('works-showcase');
-    if (!container) return;
+    if (!cards.length) return;
 
-    const tabs = container.querySelectorAll('.works-tab-btn');
-    const badgeEl = container.querySelector('.projected-badge');
-    const titleEl = container.querySelector('.projected-title');
-    const clientEl = container.querySelector('.projected-client');
-    const descEl = container.querySelector('.projected-desc');
-    const metricsGrid = container.querySelector('.projected-metrics-grid');
-    const hologramCard = container.querySelector('.projected-hologram-card');
+    let currentCardIndex = 0;
+    let isUserManualClick = false;
+    let manualTimeout = null;
 
-    function selectCase(index) {
-      const data = caseStudies[index];
-      if (!data) return;
+    function activateCard(index, triggerPulse = true) {
+      if (index < 0 || index >= cards.length) return;
+      if (index === currentCardIndex && cards[index].classList.contains('active-card')) return;
 
-      tabs.forEach((tab, idx) => {
-        tab.classList.toggle('active', idx === index);
+      currentCardIndex = index;
+
+      // Update card stack positions & 3D holographic elevation
+      cards.forEach((card, idx) => {
+        card.classList.remove('active-card', 'departed', 'dormant-card');
+        if (idx === index) {
+          card.classList.add('active-card');
+        } else if (idx < index) {
+          card.classList.add('departed');
+        } else {
+          card.classList.add('dormant-card');
+        }
       });
 
-      if (hologramCard) {
-        hologramCard.classList.add('switching');
-        setTimeout(() => {
-          if (badgeEl) badgeEl.textContent = data.badge;
-          if (titleEl) titleEl.textContent = data.title;
-          if (clientEl) clientEl.textContent = 'Client: ' + data.client;
-          if (descEl) descEl.textContent = data.desc;
-          if (metricsGrid) {
-            metricsGrid.innerHTML = data.metrics.map(m => `
-              <div class="projected-metric-item">
-                <span class="projected-metric-val">${m.value}</span>
-                <span class="projected-metric-label">${m.label}</span>
-              </div>
-            `).join('');
-          }
-          hologramCard.classList.remove('switching');
-        }, 160);
+      // Update HUD milestone pills
+      pills.forEach((pill, idx) => {
+        const isCurrent = idx === index;
+        pill.classList.toggle('active', isCurrent);
+        pill.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+      });
+
+      // Update HUD counter
+      if (stepCounter) {
+        stepCounter.textContent = (index + 1);
+      }
+
+      // Trigger holographic beam burst from the palm
+      if (triggerPulse && emitterRays) {
+        emitterRays.classList.add('beam-burst');
+        setTimeout(() => emitterRays.classList.remove('beam-burst'), 450);
       }
     }
 
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => selectCase(index));
+    function jumpToCard(index) {
+      isUserManualClick = true;
+      clearTimeout(manualTimeout);
+      activateCard(index, true);
+
+      if (handTrack) {
+        const trackTop = handTrack.offsetTop;
+        const scrollable = handTrack.offsetHeight - window.innerHeight;
+        const targetScroll = trackTop + (index / (cards.length - 1)) * scrollable;
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
+
+      manualTimeout = setTimeout(() => {
+        isUserManualClick = false;
+      }, 700);
+    }
+
+    // Scroll-driven dynamic card reveal from palm
+    function onScroll() {
+      if (!handTrack || isUserManualClick) return;
+
+      const rect = handTrack.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) return;
+
+      // Calculate progress 0.0 to 1.0 within track
+      const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+      const total = cards.length;
+      const targetIndex = Math.min(total - 1, Math.floor(progress * total));
+
+      activateCard(targetIndex, false);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Milestone pill clicks
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const idx = parseInt(pill.getAttribute('data-index'), 10);
+        if (!isNaN(idx)) {
+          jumpToCard(idx);
+        }
+      });
     });
 
-    // Auto rotate every 7 seconds when not hovered
-    let activeIdx = 0;
-    let autoInterval = setInterval(() => {
-      activeIdx = (activeIdx + 1) % caseStudies.length;
-      selectCase(activeIdx);
-    }, 7000);
+    // Arrow stepper controls
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        jumpToCard(Math.max(0, currentCardIndex - 1));
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        jumpToCard(Math.min(cards.length - 1, currentCardIndex + 1));
+      });
+    }
 
-    container.addEventListener('mouseenter', () => clearInterval(autoInterval));
+    // Keyboard Arrow keys support when focused in stage
+    window.addEventListener('keydown', (e) => {
+      if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+      const rect = handTrack.getBoundingClientRect();
+      if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          jumpToCard(Math.min(cards.length - 1, currentCardIndex + 1));
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          jumpToCard(Math.max(0, currentCardIndex - 1));
+        }
+      }
+    });
+
+    // Initialize Card 0
+    activateCard(0, false);
   }
 
   // ---------------------------------------------------------------------------
@@ -1157,7 +1175,7 @@
     initModal();
     initSynapticParticles();
     initCardGazeParallax();
-    initWorksShowcase();
+    initHandScrollProjector();
     initScrollReveal();
     initCaptchaWidget();
     initServicesContactForm();
