@@ -246,16 +246,16 @@
       author: "Talentechno Mission"
     },
     {
-      text: "Hyderabad's Premier IT Recruitment & Executive Search Partner.",
-      author: "Verified Industry Leadership"
+      text: "Precision IT Staffing & 48-Hour Shortlist Turnaround.",
+      author: "Guaranteed Hiring Turnaround"
     },
     {
-      text: "Precision Engineering Talent Delivered Within 48 Hours.",
-      author: "Guaranteed Turnaround"
+      text: "Executive Search Across AI, Cloud & Distributed Systems.",
+      author: "Specialized Engineering Hub"
     },
     {
       text: "Bridging High-Impact Tech Minds with Visionary Enterprises.",
-      author: "500+ Placed Tech Specialists"
+      author: "500+ Verified Placements"
     }
   ];
 
