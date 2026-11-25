@@ -336,13 +336,456 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 5. NATURAL PHYSICS GAZE ENGINE (LOW CPU • GPU ACCELERATED • AUTO-ADAPTABLE)
+  // 5. SYNAPTIC PARTICLE & STREAM PHYSICS ENGINE (CANVAS 2D • LOW-CPU)
+  // Ascending Fiber-Optic Beams • Digital Glyphs & Rings • Physical Wake
+  // Deflection on Cursor/Touch • Gyroscope Gravity Slant • Tab-Pause Zero CPU
   // ---------------------------------------------------------------------------
-  function initGazePhysics() {
-    const stage = document.getElementById('gaze-stage');
-    const nucleus = document.getElementById('tech-nucleus');
+  function initSynapticParticles() {
+    const canvas = document.getElementById('synaptic-particles-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let isRunning = true;
+    let isMobile = false;
+
+    // Theme palette definition
+    const THEMES = {
+      dark: {
+        primary: 'rgba(168, 85, 247, ',    // Purple
+        secondary: 'rgba(192, 132, 252, ',  // Light lavender
+        accent: 'rgba(56, 189, 248, ',     // Neon cyan
+        white: 'rgba(255, 255, 255, ',     // Diamond tip
+        deep: 'rgba(126, 34, 206, '        // Deep purple
+      },
+      light: {
+        primary: 'rgba(212, 175, 55, ',    // Champagne Gold
+        secondary: 'rgba(245, 222, 152, ', // Soft amber gold
+        accent: 'rgba(186, 133, 20, ',     // Deep rich bronze
+        white: 'rgba(255, 250, 240, ',     // Radiant ivory
+        deep: 'rgba(140, 101, 20, '        // Dark gold
+      }
+    };
+
+    function getPalette() {
+      const theme = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      return THEMES[theme];
+    }
+
+    // Physical Device & Interaction State
+    const mouse = {
+      x: -9999,
+      y: -9999,
+      vx: 0,
+      vy: 0,
+      radius: 130,
+      active: false
+    };
+
+    // Device Tilt Gravity (Mobile Gyroscope)
+    let gravityX = 0;
+
+    // Synaptic Ripples (Click / Tap shockwaves)
+    const shockwaves = [];
+
+    // Collections
+    let streams = [];
+    let particles = [];
+
+    function resize() {
+      const parent = canvas.parentElement || document.body;
+      width = parent.clientWidth || window.innerWidth;
+      height = parent.clientHeight || window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      isMobile = width <= 640;
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
+      initEntities();
+    }
+
+    function initEntities() {
+      streams = [];
+      particles = [];
+
+      const streamCount = isMobile ? 6 : 11;
+      const particleCount = isMobile ? 35 : 68;
+
+      // 1. Initialize Ascending Light Beams & Circuit Traces
+      for (let i = 0; i < streamCount; i++) {
+        const isCurved = i % 3 === 0; // Every 3rd stream has a smooth circuit bezier bend
+        streams.push({
+          x: Math.random() * width,
+          y: Math.random() * (height + 200),
+          length: 90 + Math.random() * 140,
+          speed: 1.3 + Math.random() * 1.5,
+          thickness: 1.1 + Math.random() * 1.2,
+          isCurved: isCurved,
+          curveDir: Math.random() > 0.5 ? 1 : -1,
+          curveAmount: 25 + Math.random() * 45,
+          colorType: (i % 4 === 0) ? 'accent' : (i % 2 === 0 ? 'primary' : 'secondary'),
+          headRadius: 2.2 + Math.random() * 2.0,
+          headGlow: 8 + Math.random() * 12,
+          forceX: 0,
+          pulsePhase: Math.random() * Math.PI * 2
+        });
+      }
+
+      // 2. Initialize Floating Data Particles & Micro-Glyphs
+      const types = ['dot', 'dot', 'ring', 'ring', 'square', 'bokeh'];
+      for (let i = 0; i < particleCount; i++) {
+        const type = types[Math.floor(Math.random() * types.length)];
+        const depth = 0.4 + Math.random() * 0.6;
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          baseVy: -(0.35 + Math.random() * 0.85) * depth,
+          vx: 0,
+          vy: 0,
+          forceX: 0,
+          forceY: 0,
+          type: type,
+          size: type === 'bokeh' ? (5 + Math.random() * 4) : (type === 'ring' ? (2.8 + Math.random() * 2.2) : (1.2 + Math.random() * 2.2)),
+          depth: depth,
+          alpha: type === 'bokeh' ? (0.12 + Math.random() * 0.22) : (0.4 + Math.random() * 0.55),
+          colorType: (i % 5 === 0) ? 'accent' : (i % 3 === 0 ? 'white' : 'primary'),
+          waveOffset: Math.random() * Math.PI * 2,
+          waveSpeed: 0.015 + Math.random() * 0.025,
+          waveAmp: 0.25 + Math.random() * 0.6
+        });
+      }
+    }
+
+    // Physical Interaction Event Listeners
+    window.addEventListener(
+      'mousemove',
+      (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const curX = e.clientX - rect.left;
+        const curY = e.clientY - rect.top;
+        if (mouse.x > -9000) {
+          mouse.vx = (curX - mouse.x) * 0.3;
+          mouse.vy = (curY - mouse.y) * 0.3;
+        }
+        mouse.x = curX;
+        mouse.y = curY;
+        mouse.active = true;
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'mouseleave',
+      () => {
+        mouse.active = false;
+        mouse.x = -9999;
+        mouse.y = -9999;
+      },
+      { passive: true }
+    );
+
+    // Touch Support
+    window.addEventListener(
+      'touchmove',
+      (e) => {
+        if (!e.touches.length) return;
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = touch.clientX - rect.left;
+        mouse.y = touch.clientY - rect.top;
+        mouse.active = true;
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'touchend',
+      () => {
+        mouse.active = false;
+        mouse.x = -9999;
+        mouse.y = -9999;
+      },
+      { passive: true }
+    );
+
+    // Click / Tap Synaptic Shockwave Ripple
+    window.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (x >= 0 && x <= width && y >= 0 && y <= height) {
+        shockwaves.push({
+          x: x,
+          y: y,
+          radius: 0,
+          maxRadius: 180 + Math.random() * 80,
+          opacity: 0.75,
+          speed: 5.5
+        });
+      }
+    });
+
+    // Device Orientation (Mobile Gyroscope Gravity Slant)
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener(
+        'deviceorientation',
+        (e) => {
+          if (e.gamma !== null && e.gamma !== undefined) {
+            const rad = (e.gamma * Math.PI) / 180;
+            gravityX = Math.sin(rad) * 0.45;
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    // Visibility Handling (Zero CPU when backgrounded)
+    document.addEventListener('visibilitychange', () => {
+      isRunning = !document.hidden;
+      if (isRunning) {
+        lastTime = performance.now();
+        requestAnimationFrame(render);
+      }
+    });
+
+    // Main Physics & Render Loop
+    let lastTime = performance.now();
+    function render(timestamp) {
+      if (!isRunning) return;
+
+      const dt = Math.min((timestamp - lastTime) / 16.67, 2.0); // normalized to 60fps
+      lastTime = timestamp;
+
+      const palette = getPalette();
+      ctx.clearRect(0, 0, width, height);
+
+      // Mouse velocity damping
+      mouse.vx *= 0.88;
+      mouse.vy *= 0.88;
+
+      // 1. Process Shockwaves
+      for (let s = shockwaves.length - 1; s >= 0; s--) {
+        const sw = shockwaves[s];
+        sw.radius += sw.speed * dt;
+        sw.opacity *= Math.pow(0.94, dt);
+
+        if (sw.opacity < 0.02 || sw.radius >= sw.maxRadius) {
+          shockwaves.splice(s, 1);
+          continue;
+        }
+
+        ctx.beginPath();
+        ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = palette.primary + sw.opacity * 0.45 + ')';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // 2. Update & Draw Ascending Light Beams & Circuit Traces
+      for (let i = 0; i < streams.length; i++) {
+        const st = streams[i];
+
+        // Physical deflection from cursor
+        if (mouse.active) {
+          const dx = st.x - mouse.x;
+          const dy = st.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius && dist > 1) {
+            const force = (1 - dist / mouse.radius) * 2.4;
+            st.forceX += (dx / dist) * force;
+          }
+        }
+
+        // Apply physical damping & gravity
+        st.forceX *= Math.pow(0.90, dt);
+        st.x += (st.forceX + gravityX * 0.6) * dt;
+        st.y -= st.speed * dt;
+
+        // Wrap around vertically
+        if (st.y < -st.length - 40) {
+          st.y = height + Math.random() * 80;
+          st.x = Math.random() * width;
+          st.forceX = 0;
+        }
+
+        const colorBase = palette[st.colorType] || palette.primary;
+        const headColor = palette.white;
+        const trailStartY = st.y + st.length;
+
+        // Draw Stream Trail
+        if (st.isCurved) {
+          // Smooth Bezier Circuit Trace Bend (as seen in reference image)
+          const bendX = st.x + st.curveDir * st.curveAmount;
+          const midY = st.y + st.length * 0.55;
+
+          const grad = ctx.createLinearGradient(st.x, trailStartY, st.x, st.y);
+          grad.addColorStop(0, colorBase + '0)');
+          grad.addColorStop(0.3, colorBase + '0.15)');
+          grad.addColorStop(0.85, colorBase + '0.65)');
+          grad.addColorStop(1, colorBase + '0.95)');
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = st.thickness;
+          ctx.beginPath();
+          ctx.moveTo(st.x, trailStartY);
+          ctx.quadraticCurveTo(bendX, midY, st.x, st.y);
+          ctx.stroke();
+        } else {
+          // Direct Vertical Fiber Stream
+          const grad = ctx.createLinearGradient(st.x, trailStartY, st.x, st.y);
+          grad.addColorStop(0, colorBase + '0)');
+          grad.addColorStop(0.35, colorBase + '0.12)');
+          grad.addColorStop(0.8, colorBase + '0.60)');
+          grad.addColorStop(1, colorBase + '0.95)');
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = st.thickness;
+          ctx.beginPath();
+          ctx.moveTo(st.x, trailStartY);
+          ctx.lineTo(st.x, st.y);
+          ctx.stroke();
+        }
+
+        // Draw Glowing Stream Head Particle
+        const pulse = 1 + Math.sin(timestamp * 0.004 + st.pulsePhase) * 0.25;
+        const currentHeadR = st.headRadius * pulse;
+
+        // Radial Halo
+        const glowGrad = ctx.createRadialGradient(st.x, st.y, 0, st.x, st.y, st.headGlow * pulse);
+        glowGrad.addColorStop(0, colorBase + '0.8)');
+        glowGrad.addColorStop(0.4, colorBase + '0.3)');
+        glowGrad.addColorStop(1, colorBase + '0)');
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.headGlow * pulse, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Solid Radiant Core
+        ctx.fillStyle = headColor + '0.95)';
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, currentHeadR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 3. Update & Draw Digital Micro-Particles (Dots, Rings, Squares, Bokeh)
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // Natural laminar ascent + harmonic oscillation
+        p.waveOffset += p.waveSpeed * dt;
+        p.vx = Math.sin(p.waveOffset) * p.waveAmp + gravityX * p.depth;
+        p.vy = p.baseVy;
+
+        // Physical repulsion force from mouse cursor
+        if (mouse.active) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius && dist > 1) {
+            const force = Math.pow(1 - dist / mouse.radius, 2) * 3.5 * p.depth;
+            p.forceX += (dx / dist) * force;
+            p.forceY += (dy / dist) * force;
+          }
+        }
+
+        // Physical interaction with Shockwaves
+        for (let s = 0; s < shockwaves.length; s++) {
+          const sw = shockwaves[s];
+          const dx = p.x - sw.x;
+          const dy = p.y - sw.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const diff = Math.abs(dist - sw.radius);
+          if (diff < 35) {
+            const impulse = (1 - diff / 35) * sw.opacity * 2.8;
+            p.forceX += (dx / (dist || 1)) * impulse;
+            p.forceY += (dy / (dist || 1)) * impulse;
+          }
+        }
+
+        // Inertia damping
+        p.forceX *= Math.pow(0.91, dt);
+        p.forceY *= Math.pow(0.91, dt);
+
+        p.x += (p.vx + p.forceX) * dt;
+        p.y += (p.vy + p.forceY) * dt;
+
+        // Wrap around edges
+        if (p.y < -20) {
+          p.y = height + 15;
+          p.x = Math.random() * width;
+          p.forceX = 0;
+          p.forceY = 0;
+        }
+        if (p.x < -20) p.x = width + 20;
+        if (p.x > width + 20) p.x = -20;
+
+        const colorBase = palette[p.colorType] || palette.primary;
+        const currentAlpha = Math.min(Math.max(p.alpha + Math.sin(p.waveOffset * 1.5) * 0.15, 0.05), 1.0);
+
+        // Render based on particle type matching reference image
+        if (p.type === 'ring') {
+          // Hollow Digital Byte Ring (from reference image)
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.strokeStyle = colorBase + currentAlpha + ')';
+          ctx.lineWidth = 1.0;
+          ctx.stroke();
+        } else if (p.type === 'square') {
+          // Digital Micro-Square (from reference image)
+          ctx.fillStyle = colorBase + currentAlpha + ')';
+          ctx.fillRect(p.x - p.size * 0.5, p.y - p.size * 0.5, p.size, p.size);
+        } else if (p.type === 'bokeh') {
+          // Soft Out-of-Focus Bokeh Glow
+          const bokehGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+          bokehGrad.addColorStop(0, colorBase + (currentAlpha * 0.9) + ')');
+          bokehGrad.addColorStop(0.5, colorBase + (currentAlpha * 0.3) + ')');
+          bokehGrad.addColorStop(1, colorBase + '0)');
+          ctx.fillStyle = bokehGrad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          // Standard Radiant Data Dot
+          ctx.fillStyle = colorBase + currentAlpha + ')';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    // Initialize and start
+    resize();
+    let resizeTimer = null;
+    window.addEventListener(
+      'resize',
+      () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 120);
+      },
+      { passive: true }
+    );
+
+    requestAnimationFrame(render);
+  }
+
+  // ---------------------------------------------------------------------------
+  // 6. CARD GAZE PARALLAX ENGINE (FOREGROUND COUNTER-TILT • ZERO CPU)
+  // ---------------------------------------------------------------------------
+  function initCardGazeParallax() {
     const card = document.getElementById('gaze-card');
-    if (!stage || !nucleus || !card) return;
+    if (!card) return;
 
     let targetX = 0;
     let targetY = 0;
@@ -352,21 +795,19 @@
     let lastInteractionTime = 0;
     let isRunning = true;
 
-    // Track cursor gaze on desktop
     window.addEventListener(
       'mousemove',
       (e) => {
         const halfW = window.innerWidth / 2;
         const halfH = window.innerHeight / 2;
-        targetX = (e.clientX - halfW) / halfW; // -1 to +1
-        targetY = (e.clientY - halfH) / halfH; // -1 to +1
+        targetX = (e.clientX - halfW) / halfW;
+        targetY = (e.clientY - halfH) / halfH;
         isMouseActive = true;
         lastInteractionTime = performance.now();
       },
       { passive: true }
     );
 
-    // Track touch gaze on mobile / tablet
     window.addEventListener(
       'touchmove',
       (e) => {
@@ -382,7 +823,6 @@
       { passive: true }
     );
 
-    // Pause physics calculations when the browser tab is hidden (Zero CPU wasted)
     document.addEventListener('visibilitychange', () => {
       isRunning = !document.hidden;
       if (isRunning) {
@@ -393,30 +833,20 @@
     function physicsStep(timestamp) {
       if (!isRunning) return;
 
-      // When mouse is idle for > 2.2s, blend into natural organic sine wave drift
-      const elapsedSinceInteraction = timestamp - lastInteractionTime;
-      if (!isMouseActive || elapsedSinceInteraction > 2200) {
+      const elapsed = timestamp - lastInteractionTime;
+      if (!isMouseActive || elapsed > 2200) {
         const t = timestamp * 0.0012;
-        targetX = Math.sin(t) * 0.35 + Math.cos(t * 0.7) * 0.15;
-        targetY = Math.cos(t * 0.85) * 0.25 + Math.sin(t * 0.5) * 0.1;
+        targetX = Math.sin(t) * 0.25;
+        targetY = Math.cos(t * 0.85) * 0.2;
       }
 
-      // Smooth inertia spring damping (lerp)
       currentX += (targetX - currentX) * 0.055;
       currentY += (targetY - currentY) * 0.055;
 
-      // 1. Physical Tech Nucleus (Background: stronger parallax shift & tilt)
-      const nucX = (currentX * 20).toFixed(2);
-      const nucY = (currentY * 15).toFixed(2);
-      const nucRotX = (-currentY * 8.5).toFixed(2);
-      const nucRotY = (currentX * 10.5).toFixed(2);
-      nucleus.style.transform = `translate(-50%, -50%) translate3d(${nucX}px, ${nucY}px, 0) rotateX(${nucRotX}deg) rotateY(${nucRotY}deg)`;
-
-      // 2. Front Transparent Glass Card (Foreground: subtle counter-parallax & gaze tilt)
-      const cardX = (-currentX * 5).toFixed(2);
-      const cardY = (-currentY * 3.5).toFixed(2);
-      const cardRotX = (-currentY * 4).toFixed(2);
-      const cardRotY = (currentX * 5).toFixed(2);
+      const cardX = (-currentX * 4.5).toFixed(2);
+      const cardY = (-currentY * 3.2).toFixed(2);
+      const cardRotX = (-currentY * 3.5).toFixed(2);
+      const cardRotY = (currentX * 4.5).toFixed(2);
       card.style.transform = `translate3d(${cardX}px, ${cardY}px, 0) rotateX(${cardRotX}deg) rotateY(${cardRotY}deg)`;
 
       requestAnimationFrame(physicsStep);
@@ -433,6 +863,7 @@
     initTypewriterAnimation();
     initNavbar();
     initModal();
-    initGazePhysics();
+    initSynapticParticles();
+    initCardGazeParallax();
   });
 })();
