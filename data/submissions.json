@@ -1,5 +1,21 @@
 [
   {
+    "id": "88ae0cc2-35f5-44eb-a1bc-b3459f678809",
+    "created_at": "2026-11-25T09:08:06.238Z",
+    "updated_at": "2026-11-25T09:08:06.238Z",
+    "first_name": "Suresh",
+    "last_name": "Krishna",
+    "email": "suresh@fintech-hyderabad.com",
+    "phone": "+91 9030888469",
+    "service": "AI / ML Hub",
+    "target_role": "",
+    "message": "Seeking 3 senior deep learning engineers for inference optimization.",
+    "status": "new",
+    "ip_address": "::1",
+    "user_agent": "",
+    "source": "website_portal"
+  },
+  {
     "id": "b5e493e7-95d1-455d-85af-6dea36024f4f",
     "created_at": "2026-11-23T02:52:47.006Z",
     "updated_at": "2026-11-23T02:52:47.006Z",

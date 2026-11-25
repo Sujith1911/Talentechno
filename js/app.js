@@ -1154,53 +1154,72 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 10. SERVICES PAGE CONTACT FORM HANDLER
+  // 10. ENTERPRISE REQUISITION CONTACT FORM HANDLERS (Services & Contact Hub)
   // ---------------------------------------------------------------------------
-  function initServicesContactForm() {
-    const form = document.getElementById('services-contact-form');
-    if (!form) return;
+  function initContactForms() {
+    const forms = document.querySelectorAll('#services-contact-form, #contact-requisition-form');
+    forms.forEach((form) => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const origText = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<span>Verifying & Submitting...</span>`;
+        }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const origText = submitBtn ? submitBtn.innerHTML : '';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span>Verifying & Submitting...</span>`;
-      }
+        const formData = new FormData(form);
+        const payload = {};
+        formData.forEach((value, key) => { payload[key] = value; });
 
-      const formData = new FormData(form);
-      const payload = {};
-      formData.forEach((value, key) => { payload[key] = value; });
+        try {
+          const resp = await fetch('/api/submissions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await resp.json();
 
-      try {
-        const resp = await fetch('/api/submissions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const result = await resp.json();
-
-        if (result.success) {
-          showToast('✅ Inquiry received! Our Hyderabad team will contact you within 24 hours.');
-          form.reset();
-          const wrap = form.querySelector('.captcha-widget-wrap');
-          if (wrap) fetchCaptcha(wrap);
-        } else {
-          showToast(`⚠️ ${result.message || 'Submission failed. Please check inputs.'}`);
-          if (result.error === 'CAPTCHA_INVALID') {
+          if (result.success) {
+            showToast('✅ Requisition received! Our Hyderabad tech directors will reach out within 2 hours.');
+            form.reset();
             const wrap = form.querySelector('.captcha-widget-wrap');
             if (wrap) fetchCaptcha(wrap);
+          } else {
+            showToast(`⚠️ ${result.message || 'Submission failed. Please check inputs.'}`);
+            if (result.error === 'CAPTCHA_INVALID') {
+              const wrap = form.querySelector('.captcha-widget-wrap');
+              if (wrap) fetchCaptcha(wrap);
+            }
+          }
+        } catch (err) {
+          showToast('❌ Network error. Please try again or WhatsApp +91 9030888469.');
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = origText;
           }
         }
-      } catch (err) {
-        showToast('❌ Network error. Please try again or WhatsApp +91 9030888469.');
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = origText;
-        }
-      }
+      });
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // 11. FAQ ACCORDION INTERACTIVITY
+  // ---------------------------------------------------------------------------
+  function initFaqAccordion() {
+    const headers = document.querySelectorAll('.faq-accordion-header');
+    headers.forEach((header) => {
+      header.addEventListener('click', () => {
+        const item = header.closest('.faq-accordion-item');
+        if (!item) return;
+        const isActive = item.classList.contains('active');
+        // Close siblings
+        document.querySelectorAll('.faq-accordion-item').forEach((sibling) => {
+          if (sibling !== item) sibling.classList.remove('active');
+        });
+        item.classList.toggle('active', !isActive);
+      });
     });
   }
 
@@ -1217,6 +1236,7 @@
     initHandScrollProjector();
     initScrollReveal();
     initCaptchaWidget();
-    initServicesContactForm();
+    initContactForms();
+    initFaqAccordion();
   });
 })();

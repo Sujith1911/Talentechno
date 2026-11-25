@@ -21,3 +21,5 @@ desktop.ini
 # Temporary and cache files
 .cache/
 .temp/
+scratch/
+

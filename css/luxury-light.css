@@ -3092,3 +3092,602 @@ body {
   color: var(--text-main);
 }
 
+
+
+/* ==========================================================================
+   PROCEDURAL CYBERNETIC PCB CIRCUITRY & TRAVELING PULSES
+   ========================================================================== */
+.cyber-pcb-trace {
+  fill: none;
+  stroke-width: 1.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+
+[data-theme="dark"] .cyber-pcb-trace {
+  stroke: #C084FC;
+  filter: drop-shadow(0 0 4px rgba(168, 85, 247, 0.7));
+}
+
+[data-theme="light"] .cyber-pcb-trace {
+  stroke: #D4AF37;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
+}
+
+.cyber-pcb-subtrace {
+  fill: none;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .cyber-pcb-subtrace {
+  stroke: #E9D5FF;
+}
+
+[data-theme="light"] .cyber-pcb-subtrace {
+  stroke: #F5DE98;
+}
+
+.cyber-pcb-pulse {
+  fill: none;
+  stroke-width: 2.2px;
+  stroke-linecap: round;
+  stroke-dasharray: 25 180;
+  animation: pcbPulseMove 2.8s linear infinite;
+}
+
+[data-theme="dark"] .cyber-pcb-pulse {
+  stroke: #FFFFFF;
+  filter: drop-shadow(0 0 6px #A855F7) drop-shadow(0 0 12px #C084FC);
+}
+
+[data-theme="light"] .cyber-pcb-pulse {
+  stroke: #FFFFFF;
+  filter: drop-shadow(0 0 6px #D4AF37) drop-shadow(0 0 12px #B45309);
+}
+
+@keyframes pcbPulseMove {
+  0% { stroke-dashoffset: 205; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.cyber-pcb-node {
+  transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .cyber-pcb-node {
+  fill: #FFFFFF;
+  stroke: #A855F7;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 4px #A855F7);
+}
+
+[data-theme="light"] .cyber-pcb-node {
+  fill: #FFFFFF;
+  stroke: #D4AF37;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 4px #D4AF37);
+}
+
+.cyber-ic-chip {
+  rx: 2px;
+}
+
+[data-theme="dark"] .cyber-ic-chip {
+  fill: #1E0E38;
+  stroke: #C084FC;
+  stroke-width: 1.2px;
+}
+
+[data-theme="light"] .cyber-ic-chip {
+  fill: #FFF9E6;
+  stroke: #C5A059;
+  stroke-width: 1.2px;
+}
+
+/* ==========================================================================
+   GOOGLE REVIEWS SHOWCASE (LOCAL INDIAN TECH ENTERPRISES)
+   10+ Real Local Indian Reviews, 5★ and 4.5★, Dual-Row Infinite Marquee
+   ========================================================================== */
+.google-reviews-section {
+  position: relative;
+  z-index: 10;
+  padding: 85px 0 100px;
+  overflow: hidden;
+}
+
+.reviews-header-block {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 48px;
+  padding: 0 20px;
+}
+
+.google-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--text-main);
+  backdrop-filter: blur(12px);
+}
+
+.google-score-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.google-score-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.google-stars-display {
+  display: flex;
+  gap: 4px;
+  color: #FBBC05;
+}
+
+.google-reviews-marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.marquee-track-row {
+  display: flex;
+  width: max-content;
+  gap: 22px;
+}
+
+.marquee-track-row:hover {
+  animation-play-state: paused !important;
+}
+
+.marquee-row-left {
+  animation: scrollMarqueeLeft 50s linear infinite;
+}
+
+.marquee-row-right {
+  animation: scrollMarqueeRight 52s linear infinite;
+}
+
+@keyframes scrollMarqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollMarqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Individual Google Review Card */
+.google-review-card {
+  width: 380px;
+  min-width: 380px;
+  max-width: 380px;
+  border-radius: 18px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.google-review-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+[data-theme="dark"] .google-review-card {
+  background: rgba(14, 6, 26, 0.78);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(168, 85, 247, 0.08);
+}
+
+[data-theme="dark"] .google-review-card:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.2);
+}
+
+[data-theme="light"] .google-review-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06), 0 0 18px rgba(212, 175, 55, 0.12);
+}
+
+[data-theme="light"] .google-review-card:hover {
+  border-color: rgba(197, 160, 89, 0.7);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.1), 0 0 25px rgba(212, 175, 55, 0.25);
+}
+
+.review-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.reviewer-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewer-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #FFFFFF;
+}
+
+.reviewer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewer-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.verified-badge-icon {
+  color: #38BDF8;
+}
+
+.reviewer-role {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.reviewer-city-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--text-muted);
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.review-stars-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.stars-gold {
+  display: flex;
+  gap: 3px;
+  color: #FBBC05;
+}
+
+.review-time {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.review-body-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.review-card-footer {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.google-source-tag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ==========================================================================
+   ABOUT PAGE STYLES (TIMELINE, VETTING TIERS, MISSION & VALUES)
+   ========================================================================== */
+.about-hero-section {
+  position: relative;
+  z-index: 10;
+  padding: 130px 0 60px;
+  text-align: center;
+}
+
+.story-narrative-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  margin: 60px 0;
+}
+
+@media (max-width: 900px) {
+  .story-narrative-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.story-glass-card {
+  border-radius: 24px;
+  padding: 36px 40px;
+  backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .story-glass-card {
+  background: rgba(14, 6, 26, 0.7);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .story-glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+}
+
+.vetting-tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 40px 0;
+}
+
+@media (max-width: 1080px) {
+  .vetting-tiers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .vetting-tiers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vetting-tier-card {
+  border-radius: 20px;
+  padding: 28px 24px;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.vetting-tier-card:hover {
+  transform: translateY(-5px);
+}
+
+[data-theme="dark"] .vetting-tier-card {
+  background: rgba(15, 7, 28, 0.75);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+[data-theme="dark"] .vetting-tier-card:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+[data-theme="light"] .vetting-tier-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+[data-theme="light"] .vetting-tier-card:hover {
+  border-color: rgba(197, 160, 89, 0.7);
+}
+
+.tier-number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 16px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   CONTACT PAGE STYLES (DUAL-COLUMN HUB, CHANNELS, CAPTCHA & FAQ)
+   ========================================================================== */
+.contact-hub-section {
+  position: relative;
+  z-index: 10;
+  padding: 130px 0 80px;
+}
+
+.contact-layout-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 36px;
+}
+
+@media (max-width: 960px) {
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.contact-form-glass-card {
+  border-radius: 24px;
+  padding: 38px 42px;
+  backdrop-filter: blur(20px);
+}
+
+@media (max-width: 600px) {
+  .contact-form-glass-card {
+    padding: 24px 20px;
+  }
+}
+
+[data-theme="dark"] .contact-form-glass-card {
+  background: rgba(14, 6, 26, 0.85);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75), 0 0 30px rgba(168, 85, 247, 0.15);
+}
+
+[data-theme="light"] .contact-form-glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 0 25px rgba(212, 175, 55, 0.18);
+}
+
+.channels-side-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.channel-card-link {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+  border-radius: 18px;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.channel-card-link:hover {
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .channel-card-link {
+  background: rgba(14, 6, 26, 0.75);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: var(--text-main);
+}
+[data-theme="dark"] .channel-card-link:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .channel-card-link {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(197, 160, 89, 0.32);
+  color: var(--text-main);
+}
+[data-theme="light"] .channel-card-link:hover {
+  border-color: rgba(197, 160, 89, 0.65);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.channel-icon-box {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--accent-glow);
+}
+
+.faq-accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 860px;
+  margin: 36px auto 0;
+}
+
+.faq-accordion-item {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+[data-theme="dark"] .faq-accordion-item {
+  background: rgba(14, 6, 26, 0.7);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+}
+[data-theme="light"] .faq-accordion-item {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+}
+
+.faq-accordion-header {
+  width: 100%;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.faq-accordion-body {
+  padding: 0 24px 20px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  display: none;
+}
+
+.faq-accordion-item.active .faq-accordion-body {
+  display: block;
+}
+
+.faq-accordion-item.active .faq-chevron-icon {
+  transform: rotate(180deg);
+}
+
+.faq-chevron-icon {
+  transition: transform 0.25s ease;
+}
