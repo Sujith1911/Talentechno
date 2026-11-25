@@ -74,19 +74,19 @@
   // ---------------------------------------------------------------------------
   const quotes = [
     {
-      text: "BE THE CHANGE YOU WISH TO SEE IN THE WORLD.",
-      author: "Mahatma Gandhi • Talentechno Guiding Spirit"
+      text: "Connecting Tech Talent with Tomorrow's Innovations.",
+      author: "Talentechno Mission"
     },
     {
-      text: "CONNECTING TECH TALENT WITH TOMORROW'S INNOVATIONS.",
-      author: "Talentechno Core Mission"
+      text: "Precision IT Staffing & 48-Hour Shortlist Turnaround.",
+      author: "Guaranteed Hiring Turnaround"
     },
     {
-      text: "PRECISION IT STAFFING & 48-HOUR SHORTLIST TURNAROUND.",
-      author: "Guaranteed Talent Turnaround"
+      text: "Executive Search Across AI, Cloud & Distributed Systems.",
+      author: "Specialized Engineering Hub"
     },
     {
-      text: "BRIDGING HIGH-IMPACT TECH MINDS WITH VISIONARY ENTERPRISES.",
+      text: "Bridging High-Impact Tech Minds with Visionary Enterprises.",
       author: "500+ Verified Placements"
     }
   ];
@@ -336,17 +336,13 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 5. NATURAL PHYSICS GAZE ENGINE (LOW CPU • 3D NUCLEUS & DISPERSED SATELLITES)
+  // 5. NATURAL PHYSICS GAZE ENGINE (LOW CPU • GPU ACCELERATED • AUTO-ADAPTABLE)
   // ---------------------------------------------------------------------------
   function initGazePhysics() {
     const stage = document.getElementById('gaze-stage');
-    const nucleus = document.getElementById('organic-nucleus');
-    const dispersedContainer = document.getElementById('dispersed-stage');
-    const sparkleStar = document.getElementById('sparkle-star');
+    const nucleus = document.getElementById('tech-nucleus');
     const card = document.getElementById('gaze-card');
-    if (!stage || !card) return;
-
-    const satelliteNodes = dispersedContainer ? Array.from(dispersedContainer.querySelectorAll('[data-depth]')) : [];
+    if (!stage || !nucleus || !card) return;
 
     let targetX = 0;
     let targetY = 0;
@@ -397,9 +393,9 @@
     function physicsStep(timestamp) {
       if (!isRunning) return;
 
-      // When mouse is idle for > 2s, blend into natural organic sine wave drift
+      // When mouse is idle for > 2.2s, blend into natural organic sine wave drift
       const elapsedSinceInteraction = timestamp - lastInteractionTime;
-      if (!isMouseActive || elapsedSinceInteraction > 2000) {
+      if (!isMouseActive || elapsedSinceInteraction > 2200) {
         const t = timestamp * 0.0012;
         targetX = Math.sin(t) * 0.35 + Math.cos(t * 0.7) * 0.15;
         targetY = Math.cos(t * 0.85) * 0.25 + Math.sin(t * 0.5) * 0.1;
@@ -409,41 +405,18 @@
       currentX += (targetX - currentX) * 0.055;
       currentY += (targetY - currentY) * 0.055;
 
-      // 1. Move 3D Liquid Glass Nucleus (Matches Reference Image at Depth 0.04)
-      if (nucleus) {
-        const nX = (currentX * 18).toFixed(2);
-        const nY = (currentY * 14).toFixed(2);
-        nucleus.style.transform = `translate(-50%, -50%) translate3d(${nX}px, ${nY}px, 0)`;
-      }
+      // 1. Physical Tech Nucleus (Background: stronger parallax shift & tilt)
+      const nucX = (currentX * 20).toFixed(2);
+      const nucY = (currentY * 15).toFixed(2);
+      const nucRotX = (-currentY * 8.5).toFixed(2);
+      const nucRotY = (currentX * 10.5).toFixed(2);
+      nucleus.style.transform = `translate(-50%, -50%) translate3d(${nucX}px, ${nucY}px, 0) rotateX(${nucRotX}deg) rotateY(${nucRotY}deg)`;
 
-      // 2. Move Dispersed Satellite Glass Droplets & Celestial Filaments
-      for (let i = 0; i < satelliteNodes.length; i++) {
-        const node = satelliteNodes[i];
-        const depth = parseFloat(node.getAttribute('data-depth')) || 0.05;
-        const moveX = (currentX * depth * 340).toFixed(2);
-        const moveY = (currentY * depth * 240).toFixed(2);
-
-        if (node.classList.contains('ring-alpha')) {
-          node.style.transform = `translate(-50%, -50%) translate3d(${moveX}px, ${moveY}px, 0) rotate(-12deg)`;
-        } else if (node.classList.contains('ring-beta')) {
-          node.style.transform = `translate(-50%, -50%) translate3d(${moveX}px, ${moveY}px, 0) rotate(18deg)`;
-        } else {
-          node.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-        }
-      }
-
-      // 3. Move Reference 4-Point Diamond Sparkle Star (Depth 0.09)
-      if (sparkleStar) {
-        const sX = (currentX * 24).toFixed(2);
-        const sY = (currentY * 18).toFixed(2);
-        sparkleStar.style.transform = `translate3d(${sX}px, ${sY}px, 0)`;
-      }
-
-      // 4. Foreground Frosted Card: subtle gentle counter-tilt for optical gaze lock
-      const cardX = (-currentX * 4).toFixed(2);
-      const cardY = (-currentY * 3).toFixed(2);
-      const cardRotX = (-currentY * 3.5).toFixed(2);
-      const cardRotY = (currentX * 4.5).toFixed(2);
+      // 2. Front Transparent Glass Card (Foreground: subtle counter-parallax & gaze tilt)
+      const cardX = (-currentX * 5).toFixed(2);
+      const cardY = (-currentY * 3.5).toFixed(2);
+      const cardRotX = (-currentY * 4).toFixed(2);
+      const cardRotY = (currentX * 5).toFixed(2);
       card.style.transform = `translate3d(${cardX}px, ${cardY}px, 0) rotateX(${cardRotX}deg) rotateY(${cardRotY}deg)`;
 
       requestAnimationFrame(physicsStep);
