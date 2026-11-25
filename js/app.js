@@ -363,11 +363,11 @@
         deep: 'rgba(126, 34, 206, '        // Deep purple
       },
       light: {
-        primary: 'rgba(212, 175, 55, ',    // Champagne Gold
-        secondary: 'rgba(245, 222, 152, ', // Soft amber gold
-        accent: 'rgba(186, 133, 20, ',     // Deep rich bronze
-        white: 'rgba(255, 250, 240, ',     // Radiant ivory
-        deep: 'rgba(140, 101, 20, '        // Dark gold
+        primary: 'rgba(180, 115, 15, ',    // Rich warm amber gold
+        secondary: 'rgba(212, 160, 45, ',  // Soft champagne gold
+        accent: 'rgba(146, 64, 14, ',      // Deep rich bronze
+        white: 'rgba(255, 255, 255, ',     // Crisp white tips
+        deep: 'rgba(120, 53, 15, '         // Dark amber
       }
     };
 
@@ -397,9 +397,8 @@
     let particles = [];
 
     function resize() {
-      const parent = canvas.parentElement || document.body;
-      width = parent.clientWidth || window.innerWidth;
-      height = parent.clientHeight || window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       isMobile = width <= 640;
 
@@ -417,14 +416,17 @@
       streams = [];
       particles = [];
 
-      const streamCount = isMobile ? 6 : 11;
-      const particleCount = isMobile ? 35 : 68;
+      // Scale stream count and particle count across entire screen boundaries (boundary-to-boundary)
+      const streamCount = Math.max(7, Math.min(Math.round(width / 125), 18));
+      const particleCount = Math.max(38, Math.min(Math.round(width / 20), 95));
 
-      // 1. Initialize Ascending Light Beams & Circuit Traces
+      // 1. Initialize Ascending Light Beams & Circuit Traces (Distributed across full width)
+      const slotW = width / streamCount;
       for (let i = 0; i < streamCount; i++) {
         const isCurved = i % 3 === 0; // Every 3rd stream has a smooth circuit bezier bend
+        const streamX = i * slotW + Math.random() * slotW; // Even distribution from left to right boundaries
         streams.push({
-          x: Math.random() * width,
+          x: streamX,
           y: Math.random() * (height + 200),
           length: 90 + Math.random() * 140,
           speed: 1.3 + Math.random() * 1.5,
@@ -440,7 +442,7 @@
         });
       }
 
-      // 2. Initialize Floating Data Particles & Micro-Glyphs
+      // 2. Initialize Floating Data Particles & Micro-Glyphs (Full boundary coverage)
       const types = ['dot', 'dot', 'ring', 'ring', 'square', 'bokeh'];
       for (let i = 0; i < particleCount; i++) {
         const type = types[Math.floor(Math.random() * types.length)];
@@ -465,13 +467,12 @@
       }
     }
 
-    // Physical Interaction Event Listeners
+    // Physical Interaction Event Listeners (Fixed Viewport Coordinates)
     window.addEventListener(
       'mousemove',
       (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const curX = e.clientX - rect.left;
-        const curY = e.clientY - rect.top;
+        const curX = e.clientX;
+        const curY = e.clientY;
         if (mouse.x > -9000) {
           mouse.vx = (curX - mouse.x) * 0.3;
           mouse.vy = (curY - mouse.y) * 0.3;
@@ -493,15 +494,14 @@
       { passive: true }
     );
 
-    // Touch Support
+    // Touch Support (Fixed Viewport Coordinates)
     window.addEventListener(
       'touchmove',
       (e) => {
         if (!e.touches.length) return;
         const touch = e.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = touch.clientX - rect.left;
-        mouse.y = touch.clientY - rect.top;
+        mouse.x = touch.clientX;
+        mouse.y = touch.clientY;
         mouse.active = true;
       },
       { passive: true }
@@ -519,9 +519,8 @@
 
     // Click / Tap Synaptic Shockwave Ripple
     window.addEventListener('click', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = e.clientX;
+      const y = e.clientY;
       if (x >= 0 && x <= width && y >= 0 && y <= height) {
         shockwaves.push({
           x: x,

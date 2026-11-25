@@ -66,13 +66,13 @@
 }
 
 [data-theme="light"] {
-  /* Warm Luxury Champagne Gold & Alabaster Base */
-  --bg-canvas: #FAF8F5;
-  --bg-secondary: #F3EFE6;
-  --bg-nav: rgba(255, 255, 255, 0.85);
-  --bg-card: rgba(255, 255, 255, 0.55);
-  --bg-card-hover: rgba(255, 255, 255, 0.75);
-  --bg-card-solid: #FFFFFF;
+  /* Toned-Down Luxury Muted Alabaster & Warm Champagne Stone (Reduced Brightness) */
+  --bg-canvas: #EAE6DF;
+  --bg-secondary: #DFDAD1;
+  --bg-nav: rgba(234, 230, 223, 0.88);
+  --bg-card: rgba(255, 255, 255, 0.45);
+  --bg-card-hover: rgba(255, 255, 255, 0.65);
+  --bg-card-solid: #F2EFEB;
 
   /* Preserved Luxury Gold Hierarchy */
   --accent-primary: #C5A059;
@@ -95,28 +95,28 @@
   --text-accent: #8C6514;
 
   /* Borders & Glows */
-  --border-glass: rgba(212, 175, 55, 0.35);
-  --border-glass-glow: rgba(212, 175, 55, 0.75);
-  --border-subtle: rgba(212, 175, 55, 0.15);
+  --border-glass: rgba(180, 130, 20, 0.28);
+  --border-glass-glow: rgba(212, 175, 55, 0.70);
+  --border-subtle: rgba(180, 130, 20, 0.14);
 
   /* Shadows */
-  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.10);
-  --shadow-glass: 0 16px 40px rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.12);
+  --shadow-glass: 0 16px 40px rgba(0, 0, 0, 0.05);
 
-  /* Subdued Controlled Ambient Mesh (Low Lighting) */
-  --ambient-mesh: radial-gradient(ellipse 70% 50% at 50% 60%, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+  /* Subdued Controlled Ambient Mesh (Soft Warm Low Lighting) */
+  --ambient-mesh: radial-gradient(ellipse 70% 50% at 50% 60%, rgba(202, 138, 4, 0.05) 0%, transparent 70%);
 
   /* Synaptic Particles & Streams Palette */
-  --stream-primary: #D4AF37;
-  --stream-glow: #F5DE98;
-  --stream-accent: #BA8514;
-  --stream-tip: #FFFDF5;
+  --stream-primary: #B45309;
+  --stream-glow: #D97706;
+  --stream-accent: #92400E;
+  --stream-tip: #78350F;
 
   --btn-text-color: #FFFFFF;
-  --badge-bg: rgba(212, 175, 55, 0.08);
-  --badge-border: rgba(212, 175, 55, 0.30);
+  --badge-bg: rgba(180, 130, 20, 0.08);
+  --badge-border: rgba(180, 130, 20, 0.30);
   --badge-text: #0B1329;
 }
 /* Common Design Rules */
@@ -169,18 +169,18 @@ body {
   position: relative;
   z-index: 10;
   padding: 20px 16px 30px;
-  overflow: hidden;
+  overflow: visible;
 }
 
-/* Full Viewport Synaptic Particle & Stream Canvas (Low-CPU GPU Accelerated) */
+/* Full Viewport Synaptic Particle & Stream Canvas (Boundary-to-Boundary Edge-to-Edge) */
 .synaptic-particles-canvas {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
   display: block;
 }
 
