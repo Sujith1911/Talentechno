@@ -127,20 +127,23 @@ app.get('/api/media/showcase', async (req, res) => {
 });
 
 // ==============================================================================
-// PUBLIC MULTI-PAGE WEBSITE ROUTES
+// PUBLIC MULTI-PAGE WEBSITE ROUTES (Supports clean URLs & direct .html extensions)
 // ==============================================================================
-app.get('/', (req, res) => {
+app.get(['/', '/index', '/index.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
-app.get('/about', (req, res) => {
+app.get(['/about', '/about.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'about.html'));
 });
-app.get('/services', (req, res) => {
+app.get(['/services', '/services.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'services.html'));
 });
-app.get('/contact', (req, res) => {
+app.get(['/contact', '/contact.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'contact.html'));
 });
+
+// Fallback static serving for root directory files
+app.use(express.static(path.join(__dirname, '..')));
 
 // 3. Start Server
 app.listen(PORT, () => {
