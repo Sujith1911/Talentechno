@@ -920,6 +920,7 @@
   // ---------------------------------------------------------------------------
   // 7. 8K PROCEDURAL CYBERNETIC HAND SCROLL PROJECTOR CONTROLLER
   // All service cards & works are projected directly from the palm on scroll
+  // Smooth, resilient physics-lerped projection with zero layout thrashing
   // ---------------------------------------------------------------------------
   function initHandScrollProjector() {
     const handTrack = document.getElementById('hand-scroll-track');
@@ -929,12 +930,16 @@
     const prevBtn = document.querySelector('.hud-step-btn.btn-prev');
     const nextBtn = document.querySelector('.hud-step-btn.btn-next');
     const emitterRays = document.querySelector('.hologram-emitter-rays');
+    const progressBar = document.getElementById('hud-progress-bar');
 
     if (!cards.length) return;
 
     let currentCardIndex = 0;
+    let targetProgress = 0;
+    let smoothProgress = 0;
     let isUserManualClick = false;
     let manualTimeout = null;
+    let isRafRunning = false;
 
     function activateCard(index, triggerPulse = true) {
       if (index < 0 || index >= cards.length) return;
@@ -987,7 +992,35 @@
 
       manualTimeout = setTimeout(() => {
         isUserManualClick = false;
-      }, 700);
+      }, 750);
+    }
+
+    // Buttery-smooth RAF lerp step for scroll damping
+    function onFrame() {
+      // Smoothly interpolate current towards target
+      const delta = targetProgress - smoothProgress;
+      if (Math.abs(delta) > 0.0006) {
+        smoothProgress += delta * 0.14; // Buttery-smooth physics damping
+      } else {
+        smoothProgress = targetProgress;
+      }
+
+      // Update continuous HUD progress bar
+      if (progressBar) {
+        progressBar.style.width = Math.min(100, Math.max(0, smoothProgress * 100)).toFixed(1) + '%';
+      }
+
+      // Map smoothed progress to card index with resilient hysteresis
+      if (!isUserManualClick) {
+        const total = cards.length;
+        const rawStep = smoothProgress * (total - 1);
+        const cardIndex = Math.min(total - 1, Math.max(0, Math.round(rawStep)));
+        activateCard(cardIndex, false);
+      }
+
+      if (Math.abs(delta) > 0.0006 || isRafRunning) {
+        requestAnimationFrame(onFrame);
+      }
     }
 
     // Scroll-driven dynamic card reveal from palm
@@ -999,11 +1032,12 @@
       if (scrollable <= 0) return;
 
       // Calculate progress 0.0 to 1.0 within track
-      const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
-      const total = cards.length;
-      const targetIndex = Math.min(total - 1, Math.floor(progress * total));
+      targetProgress = Math.max(0, Math.min(1, -rect.top / scrollable));
 
-      activateCard(targetIndex, false);
+      if (!isRafRunning) {
+        isRafRunning = true;
+        requestAnimationFrame(onFrame);
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -1036,15 +1070,20 @@
       const rect = handTrack.getBoundingClientRect();
       if (rect.top <= window.innerHeight && rect.bottom >= 0) {
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
           jumpToCard(Math.min(cards.length - 1, currentCardIndex + 1));
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
           jumpToCard(Math.max(0, currentCardIndex - 1));
         }
       }
     });
 
-    // Initialize Card 0
+    // Initial positioning
+    onScroll();
     activateCard(0, false);
+    isRafRunning = true;
+    requestAnimationFrame(onFrame);
   }
 
   // ---------------------------------------------------------------------------
